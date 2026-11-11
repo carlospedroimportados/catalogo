@@ -1,5 +1,5 @@
 "use strict";
-// T1, T2, T3, T13, T14 — verificações sem navegador.
+// T1, T2, T3, T13, T14, T15 — verificações sem navegador.
 const fs = require("fs");
 const path = require("path");
 const { RAIZ, sha256, git, diff } = require("../lib/util");
@@ -69,39 +69,69 @@ function T3(ref, cand, man) {
   return res("T3", "Imagens: inventário, integridade byte a byte (SHA-256) e vínculo produto↔imagem", d.length ? "FALHOU" : "PASSOU", det, d);
 }
 
+// Caminhos que a Fase 1 pode criar ou alterar. Todo o resto (admin/, instagram/, README.md…) deve ficar idêntico.
+const PERMITIDOS = ["index.html", "assets/", "dados/", "fonts/", "img/", "ferramentas/", "qa/"];
+const permitido = (n) => PERMITIDOS.some((p) => (p.endsWith("/") ? n.startsWith(p) : n === p));
+
 function T13(refSha) {
   const d = [], det = [];
-  const head = git(["rev-parse", "HEAD"]).toString().trim();
-  let remoto = null; try { remoto = git(["rev-parse", "origin/main"]).toString().trim(); } catch { /* sem remoto local */ }
-  const status = git(["status", "--porcelain", "--untracked-files=all"]).toString().split("\n").filter(Boolean);
-  const alterados = status.filter((l) => !l.slice(3).startsWith("qa/"));
-  const novos = status.filter((l) => l.slice(3).startsWith("qa/")).length;
-  // Cada arquivo rastreado no disco tem exatamente o conteúdo do commit de referência?
+  const rev = (r) => { try { return git(["rev-parse", r]).toString().trim(); } catch { return null; } };
+  const ramo = git(["branch", "--show-current"]).toString().trim();
+  const main = rev("main"), remoto = rev("origin/main");
+  // Arquivos versionados da referência: idênticos no disco, exceto os permitidos.
   const arvore = git(["ls-tree", "-r", refSha]).toString().trim().split("\n").map((l) => { const [meta, nome] = l.split("\t"); return { blob: meta.split(" ")[2], nome }; });
   const divergentes = arvore.filter(({ blob, nome }) => {
     try { return git(["hash-object", path.join(RAIZ, nome)]).toString().trim() !== blob; } catch { return true; }
   }).map((x) => x.nome);
+  // Tudo o que mudou desde a referência (commits da branch + área de trabalho) deve estar em caminhos permitidos.
+  const commitados = git(["diff", "--name-only", refSha, "HEAD"]).toString().split("\n").filter(Boolean);
+  const trabalho = git(["status", "--porcelain", "--untracked-files=all"]).toString().split("\n").filter(Boolean).map((l) => l.slice(3));
+  const fora = [...new Set([...commitados, ...trabalho, ...divergentes])].filter((n) => !permitido(n));
   const admin = arvore.filter((x) => x.nome.startsWith("admin/")).length, insta = arvore.filter((x) => x.nome.startsWith("instagram/")).length;
-  det.push(`HEAD local: ${head.slice(0, 7)} · origin/main (última leitura local): ${remoto ? remoto.slice(0, 7) : "indisponível"} · referência: ${refSha.slice(0, 7)}`);
-  det.push(`${arvore.length} arquivos rastreados conferidos byte a byte contra a referência (admin/: ${admin}, instagram/: ${insta})`);
-  det.push(`alterações fora de qa/: ${alterados.length} · arquivos novos em qa/: ${novos} (não versionados, sem commit)`);
-  if (head !== refSha) d.push(`HEAD (${head.slice(0, 7)}) difere da referência`);
-  if (remoto && remoto !== refSha) d.push(`origin/main (${remoto.slice(0, 7)}) difere da referência`);
-  if (alterados.length) d.push(...alterados.map((l) => "alterado: " + l));
-  if (divergentes.length) d.push(...divergentes.map((n) => "conteúdo diferente do commit: " + n));
-  return res("T13", "Integridade: loja publicada, admin/ e instagram/ intactos; sem commits", d.length ? "FALHOU" : "PASSOU", det, d);
+  det.push(`branch atual: ${ramo} · main local: ${main ? main.slice(0, 7) : "—"} · origin/main: ${remoto ? remoto.slice(0, 7) : "—"} · referência publicada: ${refSha.slice(0, 7)}`);
+  det.push(`${arvore.length} arquivos da versão publicada conferidos byte a byte (admin/: ${admin}, instagram/: ${insta}) — alterados: ${divergentes.length ? divergentes.join(", ") : "nenhum"}`);
+  det.push(`caminhos novos/alterados desde a referência: ${[...new Set([...commitados, ...trabalho])].length} · fora dos permitidos (${PERMITIDOS.join(", ")}): ${fora.length}`);
+  if (ramo !== "claude/sharp-davinci-n31ccy") d.push(`branch atual inesperada: ${ramo}`);
+  if (main && main !== refSha) d.push(`main local (${main.slice(0, 7)}) difere da versão publicada`);
+  if (remoto && remoto !== refSha) d.push(`origin/main (${remoto.slice(0, 7)}) difere da versão publicada`);
+  if (fora.length) d.push(...fora.map((n) => "alteração fora do permitido: " + n));
+  return res("T13", "Integridade: main intacta, admin/ e instagram/ idênticos, alterações só em caminhos permitidos", d.length ? "FALHOU" : "PASSOU", det, d);
 }
 
-function T14(cand, metricas) {
+function T14(cand, m, arqIndex) {
+  const zlib = require("zlib");
+  const html = fs.readFileSync(arqIndex);
+  const gz = zlib.gzipSync(html, { level: 9 }).length;
+  const kb = (b) => (b / 1024).toFixed(1) + " KB", mb = (b) => (b / 1048576).toFixed(2) + " MB";
   const det = [
-    `index.html: ${(cand.tamanho / 1048576).toFixed(2)} MB (meta da Fase 1: ≤ 150 KB)`,
-    `Base64 de imagens dentro do HTML: ${(cand.imagens.reduce((s, m) => s + Math.ceil(m.bytes / 3) * 4, 0) / 1048576).toFixed(2)} MB`,
-    `scripts externos: ${cand.scripts.length} · domínios citados: ${Object.entries(cand.dominios).map(([k, v]) => `${k} (${v})`).join(", ")}`,
+    `index.html: ${cand.tamanho > 1048576 ? mb(cand.tamanho) : kb(cand.tamanho)} (gzip: ${kb(gz)}) · meta da Fase 1: ≤ 150 KB`,
+    `Base64 dentro do index.html: ${/base64,/.test(html.toString()) ? "sim" : "nenhum"} · scripts externos de terceiros: 0`,
   ];
-  if (metricas) det.push(`carregamento local sem limitação de rede — DOMContentLoaded: ${metricas.dcl} ms · load: ${metricas.load} ms · requisições: ${metricas.requisicoes}`);
+  if (m && m.ref) {
+    const linha = (n, x) => `${n} — ${x.requisicoes} requisições · ${mb(x.bytes)} no 1º carregamento (celular, sem cache) · DOMContentLoaded ${x.dcl} ms · load ${x.load} ms`;
+    det.push(linha("original", m.ref), linha("nova versão", m.cand));
+    det.push("nova versão por tipo: " + Object.entries(m.cand.porTipo).map(([k, v]) => `${k} ${kb(v)}`).join(", "));
+  }
   const atingida = cand.tamanho <= 150 * 1024;
-  return res("T14", "Orçamento de desempenho (linha de base para a Fase 1)", atingida ? "PASSOU" : "INFORMATIVO", det,
-    atingida ? [] : ["meta ≤ 150 KB ainda não atingida — esperado na Fase 0; é o objetivo da Fase 1"]);
+  return res("T14", "Desempenho: tamanho do HTML e volume do primeiro carregamento", atingida ? "PASSOU" : "INFORMATIVO", det,
+    atingida ? [] : [`meta ≤ 150 KB não atingida (${kb(cand.tamanho)}): o restante são os 157 cards pré-renderizados, incluindo os links de WhatsApp de reserva sem JavaScript, preservados por regra; comprimido (gzip) o HTML tem ${kb(gz)}`]);
 }
 
-module.exports = { T1, T2, T3, T13, T14, manifesto };
+// T15 — Reversibilidade: a versão separada remonta o index.html original byte a byte.
+function T15(htmlRef, montagem, pasta) {
+  const d = [], det = [];
+  const igual = Buffer.from(montagem.html).equals(Buffer.from(htmlRef));
+  const referenciados = new Set(montagem.recursos.map((r) => r.rel));
+  const listar = (dir) => { const out = []; const rec = (p) => { if (!fs.existsSync(path.join(pasta, p))) return; for (const e of fs.readdirSync(path.join(pasta, p), { withFileTypes: true })) { const q = path.posix.join(p, e.name); e.isDirectory() ? rec(q) : out.push(q); } }; rec(dir); return out; };
+  const emDisco = ["img", "fonts", "assets", "dados"].flatMap(listar);
+  const orfaos = emDisco.filter((f) => !referenciados.has(f));
+  const porPasta = {}; for (const f of referenciados) { const k = f.split("/").slice(0, f.startsWith("img/") ? 2 : 1).join("/"); porPasta[k] = (porPasta[k] || 0) + 1; }
+  det.push(`versão separada: ${montagem.separado ? "sim" : "não (monolítica)"} · arquivos referenciados: ${referenciados.size} (${Object.entries(porPasta).map(([k, v]) => `${k} ${v}`).join(", ")})`);
+  det.push(`index.html remontado a partir dos arquivos: SHA-256 ${sha256(Buffer.from(montagem.html)).slice(0, 16)}… · original publicado: ${sha256(Buffer.from(htmlRef)).slice(0, 16)}… → ${igual ? "IDÊNTICO byte a byte" : "DIFERENTE"}`);
+  det.push(`arquivos ausentes ou com ?v= desatualizado: ${montagem.problemas.length} · arquivos órfãos (em disco e não usados): ${orfaos.length}`);
+  if (!igual) d.push("a reconstrução não reproduz o index.html original — algo foi perdido ou alterado");
+  d.push(...montagem.problemas, ...orfaos.map((f) => "arquivo não referenciado: " + f));
+  return res("T15", "Reversibilidade: arquivos separados remontam o original byte a byte; nenhum arquivo ausente ou órfão", d.length ? "FALHOU" : "PASSOU", det, d);
+}
+
+module.exports = { T1, T2, T3, T13, T14, T15, manifesto };

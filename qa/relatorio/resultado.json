@@ -1,8 +1,8 @@
 {
  "referencia": "89ef168bd1304769d1eeabdb88ddea6724839995",
  "candidato": ".",
- "quando": "2026-11-11T17:45:01.386Z",
- "duracaoS": 100,
+ "quando": "2026-11-11T19:34:39.339Z",
+ "duracaoS": 105,
  "manifesto": true,
  "resultados": [
   {
@@ -162,28 +162,40 @@
   },
   {
    "id": "T13",
-   "titulo": "Integridade: loja publicada, admin/ e instagram/ intactos; sem commits",
+   "titulo": "Integridade: main intacta, admin/ e instagram/ idênticos, alterações só em caminhos permitidos",
    "status": "PASSOU",
    "detalhes": [
-    "HEAD local: 89ef168 · origin/main (última leitura local): 89ef168 · referência: 89ef168",
-    "47 arquivos rastreados conferidos byte a byte contra a referência (admin/: 6, instagram/: 39)",
-    "alterações fora de qa/: 0 · arquivos novos em qa/: 10 (não versionados, sem commit)"
+    "branch atual: claude/sharp-davinci-n31ccy · main local: 89ef168 · origin/main: 89ef168 · referência publicada: 89ef168",
+    "47 arquivos da versão publicada conferidos byte a byte (admin/: 6, instagram/: 39) — alterados: index.html",
+    "caminhos novos/alterados desde a referência: 211 · fora dos permitidos (index.html, assets/, dados/, fonts/, img/, ferramentas/, qa/): 0"
    ],
    "divergencias": []
   },
   {
    "id": "T14",
-   "titulo": "Orçamento de desempenho (linha de base para a Fase 1)",
+   "titulo": "Desempenho: tamanho do HTML e volume do primeiro carregamento",
    "status": "INFORMATIVO",
    "detalhes": [
-    "index.html: 6.42 MB (meta da Fase 1: ≤ 150 KB)",
-    "Base64 de imagens dentro do HTML: 5.86 MB",
-    "scripts externos: 0 · domínios citados: wa.me (317), www.w3.org (2), script.google.com (1)",
-    "carregamento local sem limitação de rede — DOMContentLoaded: 290 ms · load: 297 ms · requisições: 1"
+    "index.html: 231.8 KB (gzip: 22.5 KB) · meta da Fase 1: ≤ 150 KB",
+    "Base64 dentro do index.html: nenhum · scripts externos de terceiros: 0",
+    "original — 1 requisições · 6.42 MB no 1º carregamento (celular, sem cache) · DOMContentLoaded 487 ms · load 494 ms",
+    "nova versão — 104 requisições · 2.85 MB no 1º carregamento (celular, sem cache) · DOMContentLoaded 280 ms · load 373 ms",
+    "nova versão por tipo: document 231.8 KB, stylesheet 27.6 KB, image 2412.3 KB, script 130.0 KB, font 121.4 KB"
    ],
    "divergencias": [
-    "meta ≤ 150 KB ainda não atingida — esperado na Fase 0; é o objetivo da Fase 1"
+    "meta ≤ 150 KB não atingida (231.8 KB): o restante são os 157 cards pré-renderizados, incluindo os links de WhatsApp de reserva sem JavaScript, preservados por regra; comprimido (gzip) o HTML tem 22.5 KB"
    ]
+  },
+  {
+   "id": "T15",
+   "titulo": "Reversibilidade: arquivos separados remontam o original byte a byte; nenhum arquivo ausente ou órfão",
+   "status": "PASSOU",
+   "detalhes": [
+    "versão separada: sim · arquivos referenciados: 180 (assets 4, fonts 8, dados 1, img/marca 1, img/banners 6, img/categorias 3, img/produtos 157)",
+    "index.html remontado a partir dos arquivos: SHA-256 d70b8243f62681e6… · original publicado: d70b8243f62681e6… → IDÊNTICO byte a byte",
+    "arquivos ausentes ou com ?v= desatualizado: 0 · arquivos órfãos (em disco e não usados): 0"
+   ],
+   "divergencias": []
   }
  ]
 }

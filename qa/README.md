@@ -1,4 +1,4 @@
-# QA — Bateria de testes T1–T14 (Fase 0)
+# QA — Bateria de testes T1–T15 (Fases 0 e 1)
 
 Bateria independente que compara a **loja publicada** (referência) com uma **versão candidata**, sem tocar na loja,
 no painel administrativo, no Google Apps Script, nas planilhas ou nos pagamentos.
@@ -18,6 +18,13 @@ node qa/executar.js
 - Requisitos: Node 18+ e Playwright com Chromium (já disponíveis no ambiente). Nenhuma dependência é instalada.
 - Saídas: `qa/relatorio/resultado.md`, `qa/relatorio/resultado.json` e `qa/relatorio/capturas/*.png`.
 - Código de saída: `0` se nada falhou, `1` se algum teste falhou.
+
+## Versão separada (Fase 1)
+
+`ferramentas/separar-index.js` gera a versão separada a partir do `index.html` original do commit publicado,
+sem alterar nenhum byte de conteúdo. `qa/lib/montar.js` faz o caminho inverso, com código independente, e o T15
+exige que o resultado seja idêntico ao original. As verificações estáticas (T1–T3) rodam sobre essa remontagem;
+as de navegador (T4–T12) rodam sobre os arquivos separados, servidos de verdade.
 
 ## Prévia local
 
@@ -53,8 +60,10 @@ Nenhum pedido, cupom, pagamento ou mensagem real é criado.
 | T10 | Checkout simulado em 16 cenários; o corpo enviado ao Apps Script deve ser idêntico |
 | T11 | Retorno da InfinitePay: chamada `confirm`, mensagens, limpeza da URL, sacola |
 | T12 | Todas as imagens decodificam; detalhe, sacola e rotinas; capturas celular/desktop; zero erros e zero rede externa |
-| T13 | Arquivos versionados (incl. `admin/` e `instagram/`) idênticos ao commit publicado; sem alterações fora de `qa/` |
-| T14 | Linha de base de desempenho (informativo na Fase 0; meta ≤ 150 KB na Fase 1) |
+| T13 | Arquivos versionados (incl. `admin/` e `instagram/`) idênticos ao commit publicado |
+| T13 | (Fase 1) `main` intacta; alterações apenas em `index.html`, `assets/`, `dados/`, `fonts/`, `img/`, `ferramentas/`, `qa/` |
+| T14 | Tamanho do HTML (bruto e gzip) e volume do primeiro carregamento: original × nova versão |
+| T15 | Reversibilidade: o `index.html` remontado a partir dos arquivos separados é idêntico byte a byte ao original; nenhum arquivo ausente, órfão ou com `?v=` desatualizado |
 
 ## Limites conhecidos
 

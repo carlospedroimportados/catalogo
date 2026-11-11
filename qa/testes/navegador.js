@@ -6,7 +6,11 @@ const { novoContexto, abrirLoja, HOST_PAGAMENTO_SIMULADO } = require("../lib/nav
 const URL_PAG = `https://${HOST_PAGAMENTO_SIMULADO}/checkout?nsu=CP-SIM-0001`;
 const CLIENTE = { nome: "Cliente Teste Simulado", cpf: "52998224725", tel: "14999990000", email: "teste@exemplo.invalid" };
 
-const fechar = (p) => p.evaluate(() => document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" })));
+// A loja aplica a classe "on" do painel no próximo quadro (requestAnimationFrame); espera dois quadros antes de
+// fechar para que o fechamento não aconteça antes da abertura (corrida que tornava o T9 intermitente).
+const fechar = (p) => p.evaluate(() => new Promise((ok) => requestAnimationFrame(() => requestAnimationFrame(() => {
+  document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" })); ok();
+}))));
 const normalizar = (s, origem) => (typeof s === "string" ? s.split(origem).join("<origem>/") : s);
 
 // ---------- T4: cards ----------
@@ -18,8 +22,14 @@ async function cards(browser, url) {
     spec: c.querySelector(".s")?.textContent, de: c.querySelector(".pr s")?.textContent ?? null,
     preco: c.querySelector(".pr strong")?.textContent, tag: c.querySelector(".tags")?.textContent || null,
     parcelas: c.querySelector(".inst")?.textContent, acao: c.querySelector(".act")?.textContent.trim(),
-    alt: c.querySelector("img")?.alt, srcTam: c.querySelector("img")?.getAttribute("src").length,
+    alt: c.querySelector("img")?.alt, src: c.querySelector("img")?.src,
   })); });
+  // Hash SHA-256 dos bytes efetivamente entregues ao navegador (data: URI ou arquivo).
+  for (const k of r) {
+    k.imagemSha256 = await p.evaluate(async (u) => { const b = await (await fetch(u)).arrayBuffer();
+      return [...new Uint8Array(await crypto.subtle.digest("SHA-256", b))].map((x) => x.toString(16).padStart(2, "0")).join(""); }, k.src);
+    delete k.src;
+  }
   await ctx.close(); return { saida: r, erros: ctx.registro.erros, bloqueadas: ctx.registro.bloqueadas };
 }
 
@@ -237,7 +247,12 @@ async function visual(browser, url, prefixo, pastaCapturas) {
     const q = await c2.newPage(); await q.goto(url, { waitUntil: "load" });
     await q.evaluate(() => localStorage.clear()); await q.reload({ waitUntil: "load" });
     await q.addStyleTag({ content: "*{caret-color:transparent!important}" });
-    const shot = async (sufixo) => { const f = `${pastaCapturas}/${prefixo}-${nome}-${sufixo}.png`; const b = await q.screenshot({ path: f }); capturas[`${nome}-${sufixo}`] = require("crypto").createHash("sha256").update(b).digest("hex"); };
+    const pronto = () => q.evaluate(async () => {
+      await document.fonts.ready;
+      const vis = [...document.images].filter((i) => { const r = i.getBoundingClientRect(); return r.width > 0 && r.bottom > 0 && r.top < innerHeight; });
+      await Promise.all(vis.map((i) => (i.complete ? i.decode().catch(() => {}) : new Promise((ok) => { i.onload = i.onerror = ok; }))));
+    });
+    const shot = async (sufixo) => { await pronto(); await q.waitForTimeout(150); const f = `${pastaCapturas}/${prefixo}-${nome}-${sufixo}.png`; const b = await q.screenshot({ path: f }); capturas[`${nome}-${sufixo}`] = require("crypto").createHash("sha256").update(b).digest("hex"); };
     await shot("1-topo");
     await q.evaluate(() => document.getElementById("catalogo").scrollIntoView()); await q.waitForTimeout(800); await shot("2-catalogo");
     await q.evaluate(() => { window.scrollTo(0, 0); document.querySelector('#grid .pc[data-i="1"] .ph').click(); }); await q.waitForTimeout(500); await shot("3-produto");
@@ -269,10 +284,14 @@ async function compararCapturas(browser, arqA, arqB) {
 // ---------- métricas para T14 ----------
 async function metricas(browser, url) {
   const ctx = await novoContexto(browser); const p = await ctx.newPage();
-  let req = 0; p.on("request", () => req++);
+  const reqs = []; p.on("response", async (r) => { try { const b = await r.body(); reqs.push({ url: r.url(), bytes: b.length, tipo: r.request().resourceType() }); } catch { /* sem corpo */ } });
   await p.goto(url, { waitUntil: "load" });
-  const t = await p.evaluate(() => { const n = performance.getEntriesByType("navigation")[0]; return { dcl: Math.round(n.domContentLoadedEventEnd), load: Math.round(n.loadEventEnd) }; });
-  await ctx.close(); return { ...t, requisicoes: req };
+  await p.waitForLoadState("networkidle");
+  const t = await p.evaluate(() => { const n = performance.getEntriesByType("navigation")[0];
+    return { dcl: Math.round(n.domContentLoadedEventEnd), load: Math.round(n.loadEventEnd) }; });
+  await ctx.close();
+  const porTipo = {}; for (const r of reqs) porTipo[r.tipo] = (porTipo[r.tipo] || 0) + r.bytes;
+  return { ...t, requisicoes: reqs.length, bytes: reqs.reduce((s, r) => s + r.bytes, 0), porTipo };
 }
 
 module.exports = { compararCapturas, cards, navegacao, parcelamento, sacola, checkout, retorno, visual, metricas, CENARIOS, RETORNOS };

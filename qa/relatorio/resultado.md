@@ -1,6 +1,6 @@
-# Resultado da bateria T1–T14
+# Resultado da bateria T1–T15
 
-- Referência (publicada): `89ef168` · Candidato: `.` · 2026-11-11T17:45:01.386Z · 100s
+- Referência (publicada): `89ef168` · Candidato: `.` · 2026-11-11T19:34:39.339Z · 105s
 - Manifesto de referência: usado · Checkout e pagamentos: **simulados** (nenhuma requisição externa real)
 
 | Teste | Status | Descrição |
@@ -17,8 +17,9 @@
 | T10 | ✅ PASSOU | Checkout simulado: 16 cenários (Pix, cartão 1/6/12x, cupons, erros, sem rede, validação) |
 | T11 | ✅ PASSOU | Retorno da InfinitePay (confirm, limpeza da URL, sacola) — simulado |
 | T12 | ✅ PASSOU | Imagens renderizadas (grade, detalhe, sacola, rotinas) e capturas celular/desktop |
-| T13 | ✅ PASSOU | Integridade: loja publicada, admin/ e instagram/ intactos; sem commits |
-| T14 | ℹ️ INFORMATIVO | Orçamento de desempenho (linha de base para a Fase 1) |
+| T13 | ✅ PASSOU | Integridade: main intacta, admin/ e instagram/ idênticos, alterações só em caminhos permitidos |
+| T14 | ℹ️ INFORMATIVO | Desempenho: tamanho do HTML e volume do primeiro carregamento |
+| T15 | ✅ PASSOU | Reversibilidade: arquivos separados remontam o original byte a byte; nenhum arquivo ausente ou órfão |
 
 ## T1 — Catálogo: 157 itens, marcas, contatos e rotinas idênticos
 
@@ -139,23 +140,32 @@
 - capturas idênticas byte a byte à referência: 6/8 · demais dentro da tolerância de 0,5%: celular-2-catalogo: 0.000% dos pixels, desktop-2-catalogo: 0.000% dos pixels (em qa/relatorio/capturas/)
 - requisições externas bloqueadas em toda a bateria: 0 · erros de JavaScript/console: 0
 
-## T13 — Integridade: loja publicada, admin/ e instagram/ intactos; sem commits
+## T13 — Integridade: main intacta, admin/ e instagram/ idênticos, alterações só em caminhos permitidos
 
 **✅ PASSOU**
 
-- HEAD local: 89ef168 · origin/main (última leitura local): 89ef168 · referência: 89ef168
-- 47 arquivos rastreados conferidos byte a byte contra a referência (admin/: 6, instagram/: 39)
-- alterações fora de qa/: 0 · arquivos novos em qa/: 10 (não versionados, sem commit)
+- branch atual: claude/sharp-davinci-n31ccy · main local: 89ef168 · origin/main: 89ef168 · referência publicada: 89ef168
+- 47 arquivos da versão publicada conferidos byte a byte (admin/: 6, instagram/: 39) — alterados: index.html
+- caminhos novos/alterados desde a referência: 211 · fora dos permitidos (index.html, assets/, dados/, fonts/, img/, ferramentas/, qa/): 0
 
-## T14 — Orçamento de desempenho (linha de base para a Fase 1)
+## T14 — Desempenho: tamanho do HTML e volume do primeiro carregamento
 
 **ℹ️ INFORMATIVO**
 
-- index.html: 6.42 MB (meta da Fase 1: ≤ 150 KB)
-- Base64 de imagens dentro do HTML: 5.86 MB
-- scripts externos: 0 · domínios citados: wa.me (317), www.w3.org (2), script.google.com (1)
-- carregamento local sem limitação de rede — DOMContentLoaded: 290 ms · load: 297 ms · requisições: 1
+- index.html: 231.8 KB (gzip: 22.5 KB) · meta da Fase 1: ≤ 150 KB
+- Base64 dentro do index.html: nenhum · scripts externos de terceiros: 0
+- original — 1 requisições · 6.42 MB no 1º carregamento (celular, sem cache) · DOMContentLoaded 487 ms · load 494 ms
+- nova versão — 104 requisições · 2.85 MB no 1º carregamento (celular, sem cache) · DOMContentLoaded 280 ms · load 373 ms
+- nova versão por tipo: document 231.8 KB, stylesheet 27.6 KB, image 2412.3 KB, script 130.0 KB, font 121.4 KB
 
 Divergências / observações:
 
-- meta ≤ 150 KB ainda não atingida — esperado na Fase 0; é o objetivo da Fase 1
+- meta ≤ 150 KB não atingida (231.8 KB): o restante são os 157 cards pré-renderizados, incluindo os links de WhatsApp de reserva sem JavaScript, preservados por regra; comprimido (gzip) o HTML tem 22.5 KB
+
+## T15 — Reversibilidade: arquivos separados remontam o original byte a byte; nenhum arquivo ausente ou órfão
+
+**✅ PASSOU**
+
+- versão separada: sim · arquivos referenciados: 180 (assets 4, fonts 8, dados 1, img/marca 1, img/banners 6, img/categorias 3, img/produtos 157)
+- index.html remontado a partir dos arquivos: SHA-256 d70b8243f62681e6… · original publicado: d70b8243f62681e6… → IDÊNTICO byte a byte
+- arquivos ausentes ou com ?v= desatualizado: 0 · arquivos órfãos (em disco e não usados): 0

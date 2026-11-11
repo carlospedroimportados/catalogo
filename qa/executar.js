@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 "use strict";
-// Bateria T1–T14 — Fase 0. Uso:  node qa/executar.js [--ref <commit>] [--candidato <pasta>] [--gravar-manifesto]
+// Bateria T1–T15 (criada na Fase 0, estendida na Fase 1). Uso:  node qa/executar.js [--ref <commit>] [--candidato <pasta>] [--gravar-manifesto]
 // REFERÊNCIA = index.html do commit publicado (extraído do git para qa/.trabalho/, sem tocar no repositório).
 // CANDIDATO  = pasta a validar (padrão: a raiz do repositório). Nenhuma requisição externa real é feita.
 const fs = require("fs");
 const path = require("path");
 const { RAIZ, git, diff, brl } = require("./lib/util");
 const { extrair } = require("./lib/extrair");
+const { montar } = require("./lib/montar");
 const { iniciar } = require("./lib/servidor");
 const { abrirNavegador } = require("./lib/navegador");
 const E = require("./testes/estaticos");
@@ -39,8 +40,11 @@ async function main() {
   fs.writeFileSync(path.join(refDir, "index.html"), git(["show", `${REF}:index.html`]));
 
   const htmlRef = fs.readFileSync(path.join(refDir, "index.html"), "utf8");
-  const htmlCand = fs.readFileSync(path.join(CAND_DIR, "index.html"), "utf8");
+  // Versões separadas (Fase 1) são remontadas em memória para as verificações estáticas T1–T3.
+  const montagem = montar(CAND_DIR);
+  const htmlCand = montagem.html;
   const ref = extrair(htmlRef), cand = extrair(htmlCand);
+  cand.tamanho = montagem.indexBytes; cand.separado = montagem.separado;
 
   if (process.argv.includes("--gravar-manifesto")) {
     fs.mkdirSync(path.dirname(MANIFESTO), { recursive: true });
@@ -190,8 +194,8 @@ async function main() {
     if (bloqueadasTotal.length) { t12.divergencias.push("requisições externas inesperadas: " + [...new Set(bloqueadasTotal)].slice(0, 5).join(", ")); t12.status = "FALHOU"; }
     if (errosReais.length) { t12.divergencias.push(...[...new Set(errosReais)].slice(0, 10)); t12.status = "FALHOU"; }
 
-    const met = await N.metricas(browser, sCand.url);
-    R.push(E.T13(REF), E.T14(cand, met));
+    const met = { ref: await N.metricas(browser, sRef.url), cand: await N.metricas(browser, sCand.url) };
+    R.push(E.T13(REF, CAND_DIR, montagem), E.T14(cand, met, path.join(CAND_DIR, "index.html")), E.T15(htmlRef, montagem, CAND_DIR));
   } finally { await browser.close(); sRef.fechar(); sCand.fechar(); }
 
   R.sort((a, b) => +a.id.slice(1) - +b.id.slice(1));
@@ -206,7 +210,7 @@ async function main() {
 
 function markdown(s) {
   const ic = { PASSOU: "✅ PASSOU", FALHOU: "❌ FALHOU", INFORMATIVO: "ℹ️ INFORMATIVO" };
-  let m = `# Resultado da bateria T1–T14\n\n- Referência (publicada): \`${s.referencia.slice(0, 7)}\` · Candidato: \`${s.candidato}\` · ${s.quando} · ${s.duracaoS}s\n- Manifesto de referência: ${s.manifesto ? "usado" : "ausente"} · Checkout e pagamentos: **simulados** (nenhuma requisição externa real)\n\n| Teste | Status | Descrição |\n|---|---|---|\n`;
+  let m = `# Resultado da bateria T1–T15\n\n- Referência (publicada): \`${s.referencia.slice(0, 7)}\` · Candidato: \`${s.candidato}\` · ${s.quando} · ${s.duracaoS}s\n- Manifesto de referência: ${s.manifesto ? "usado" : "ausente"} · Checkout e pagamentos: **simulados** (nenhuma requisição externa real)\n\n| Teste | Status | Descrição |\n|---|---|---|\n`;
   m += s.resultados.map((r) => `| ${r.id} | ${ic[r.status]} | ${r.titulo} |`).join("\n") + "\n";
   for (const r of s.resultados) {
     m += `\n## ${r.id} — ${r.titulo}\n\n**${ic[r.status]}**\n\n` + r.detalhes.map((x) => `- ${x}`).join("\n") + "\n";
