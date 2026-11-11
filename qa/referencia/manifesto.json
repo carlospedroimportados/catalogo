@@ -1,0 +1,2136 @@
+{
+ "commit": "89ef168bd1304769d1eeabdb88ddea6724839995",
+ "gerado": "2026-11-11T17:37:25.694Z",
+ "produtos": [
+  {
+   "i": 0,
+   "nome": "Club de Nuit Woman",
+   "registro": "3f6006e73f2da317c80723cb940385321d89cceb67606b0d70a8f5f323737565",
+   "imagem": "3fad17fb69d70cb0c30f4a4a49853710b8302f8d25386a3c7633e27ab1f947da"
+  },
+  {
+   "i": 1,
+   "nome": "Club de Nuit Woman Extrait",
+   "registro": "fa0b8e0024e946710752be2e14f7aff4bfe5c09a03603bce74c3d52841483286",
+   "imagem": "0f34a42b0bbc03cf48df715af0d41e407fa85645cfce4b88c0ad1b45d6fdf273"
+  },
+  {
+   "i": 2,
+   "nome": "Club de Nuit Woman Body Spray",
+   "registro": "52c47db15b3ed3e3fd2c4112212860bb37b777350cbfb9797e0f408a975f58b9",
+   "imagem": "52de15b2e8eb50affe2cdd93fd8de40cca13516e85da1c1a9071e591db5b0e7e"
+  },
+  {
+   "i": 3,
+   "nome": "Club de Nuit Maleka",
+   "registro": "b460bf09191c174c4c4b056fc7d2dfdad62db191af06ebeb4d244d0c9c2a466f",
+   "imagem": "e683dcfbbb84596e96b5a348d645009c98c55c9038b1c6333fdcfba25000612a"
+  },
+  {
+   "i": 4,
+   "nome": "Club de Nuit Intense Woman",
+   "registro": "13e59bee721f880af75661f1719789cb2cb16c6c01ae9eed62fa084b3a9c2a6e",
+   "imagem": "54b78e917155c559c500b3258842ac7e847ca76a8c5d80d20629b6969e9e4557"
+  },
+  {
+   "i": 5,
+   "nome": "Club de Nuit Milestone",
+   "registro": "45e589c32f59bacdfe1b5fd5a88a8062be445c90324f2c5d10c9d5368bd3ae30",
+   "imagem": "14dfcc336a39f2f7eb86190ffabc11e226b3c008edd31d1d8fd69c6a2dfb721c"
+  },
+  {
+   "i": 6,
+   "nome": "Kit Club de Nuit Woman",
+   "registro": "046ac451247bb1a56a7224b64c1e70a2be3fd77ba5f11fb67b932da5a2138f89",
+   "imagem": "1a7bcd1bd2f4ce0f5056ced8e545ef41c273e647148e1bb22f3cc07595cf1aed"
+  },
+  {
+   "i": 7,
+   "nome": "Club de Nuit Untold",
+   "registro": "76921d62d0b06bf74b1ab9473ed8229ede941c319710a7e83490443a298b2ccb",
+   "imagem": "5e23710a8335942fb0f66964987df3f2f52c0b83ebe0620a91fe3461e6816462"
+  },
+  {
+   "i": 8,
+   "nome": "212 VIP Rosé Elixir",
+   "registro": "cacad198c5a575fe7c4e080683433f66d32438c3b65f355bb8cd49572cc4ac08",
+   "imagem": "2bf8d919bd6ed2f8fb989c2a37143932d8e403bfb6554a131c165fed1be4ff14"
+  },
+  {
+   "i": 9,
+   "nome": "Good Girl",
+   "registro": "971b871d13d8e11751c827d15b64d18711e2fb0f76099d921d47835b417a1e09",
+   "imagem": "bf677a2c5f0cbb17cb49977a8499d99af416c163abcead99654ecbf8f08d1f67"
+  },
+  {
+   "i": 10,
+   "nome": "Good Girl Very Good Girl",
+   "registro": "adfff6184186b80d8b9365efa008e82afd825a9159fd693aeb45fbd6403aca68",
+   "imagem": "77c2b2335f568944976e0876253a5c014576580c42d2377ff876bf6a83750560"
+  },
+  {
+   "i": 11,
+   "nome": "CH Feminino",
+   "registro": "ede1cbe5be60a6860653a7beb9892655cbb390c82be60501ad71e45931cac3d5",
+   "imagem": "40d7635f100b5c017e28e85ecbcecc0bfa0044cc957281f706e8fc0f4d915d74"
+  },
+  {
+   "i": 12,
+   "nome": "Good Girl Blush",
+   "registro": "821b156e7a01677af4a0798c5c68fb4b83c17a3e33dc2db958ddbda66ea46aa6",
+   "imagem": "afca2cbc1972e0351c815cb7d9aca972b0903751ef1ed80914ad789c2bbaf9be"
+  },
+  {
+   "i": 13,
+   "nome": "La Bomba",
+   "registro": "ddca9e950edd8f80ad742aeb41098ab6c0a5eb66622134ea0deecc2151b00195",
+   "imagem": "01ebfe50c1ac478a35be3723c16707c458d0c97846a3674ec293e79b446948d5"
+  },
+  {
+   "i": 14,
+   "nome": "212 VIP Wild Party",
+   "registro": "d71e5270d35833a6bb28851c4b84115b0c604ac9da8f0f22dc073711438469ad",
+   "imagem": "998272e355505cb3fd76a8de7db84da094b3e5dc2e44a090f7197c050073e34d"
+  },
+  {
+   "i": 15,
+   "nome": "212 VIP Rosé Ready to Party",
+   "registro": "28e8f606e3d7adfaa704b3072dcf17a9ab630f4f4da0e3c0890dfe3d4e22c3b5",
+   "imagem": "5264b25548c159e7b0a20e828ef6da7d2f0142d753dc24efbdb1a48bcfcafc1a"
+  },
+  {
+   "i": 16,
+   "nome": "212 VIP Are You On The List?",
+   "registro": "ab6823db7741ecb4436b1da751ee27c6ec56df01db74ffeb62c58aeb2bd3aa3c",
+   "imagem": "688a1e5c2bac386c3fd5c040c9e2a01edcddb2bf9aa83a5066de52e5f80b292b"
+  },
+  {
+   "i": 17,
+   "nome": "212 VIP Black Men",
+   "registro": "6e9c551fe755ff54be096f33081b88f4b11be3570848c45bb24652f5aa54611f",
+   "imagem": "f53e1fe5e2b5a48351c188f128833b6ebf0654bec71d04e678351832b394ee5a"
+  },
+  {
+   "i": 18,
+   "nome": "212 VIP Rosé",
+   "registro": "1674eb00d985f809d5544224b86ba70a426f0ac7227c75189835b5cf4dbc75fb",
+   "imagem": "f818d7284ecd461854bca7f1950480f81e5a19a0733a32971fb41968617561a6"
+  },
+  {
+   "i": 19,
+   "nome": "212 Heroes Forever Young Men",
+   "registro": "162dfd2d69aa07de0680ad71caf604e7d18719f7f34c065298ceda6200338fe3",
+   "imagem": "83e325645a00561ab9daacdbc9ca15a3767fe553a7068d94f380d53d399b4dac"
+  },
+  {
+   "i": 20,
+   "nome": "212 VIP Black Elixir Men",
+   "registro": "f70c88a85adba5b083930c54fa9807943184401e245dc805df934f14ecfe22f4",
+   "imagem": "4185e5d96596e7ab9a4f9599ec681111be39550e30fa8e0ae48c84bdc3256523"
+  },
+  {
+   "i": 21,
+   "nome": "Olympéa Parfum",
+   "registro": "5ebc18d2b975605bf74d38ba8a5af9ade9cafaf4264396ba2a7212d8d7cf8324",
+   "imagem": "e5ba8b25c2bef66f7387f1735af54e6f0f1b7ccc78584e8d38dbc842e68c9833"
+  },
+  {
+   "i": 22,
+   "nome": "Lady Million",
+   "registro": "3effbfe8c79abcc09d674b4d31baf6ebebe21a7b198d58e47ef80f335423cd11",
+   "imagem": "007e0699dc0d4cf9fe6a63b72751a7c63826802c71281b766a182b2c92efe28c"
+  },
+  {
+   "i": 23,
+   "nome": "Olympéa Absolu",
+   "registro": "a3bfa9a3dd33c5516f205b9bd93de4e047a17d29fdec62665105d3a241997d3b",
+   "imagem": "0d952abf627debbf04c5be0aabbab88c81d3c2a5a1cfc0f9cc14fd7b9f056dfb"
+  },
+  {
+   "i": 24,
+   "nome": "Lady Million Royal",
+   "registro": "ecb5622eef0d0030017aa4391f62df5687c500b24f82bbd7cb890f700b96dbac",
+   "imagem": "bf6ad87de4d7a071e67a736d38a803169c1c3b83866b0fc51c2445f03345c26e"
+  },
+  {
+   "i": 25,
+   "nome": "Paco Rose",
+   "registro": "09611d592107b1c6586f2b32e57c796b075faa42adbaf53189e4c88daa0662fd",
+   "imagem": "45ac9185a7a8e3f5f3903501109d566177eb2055b34f98dbc571ba425dc7d37b"
+  },
+  {
+   "i": 26,
+   "nome": "Olympéa",
+   "registro": "3ec5ca4a1a939953ca3dba34c3286a689bd4148b01997ffa9621e48cd1b10223",
+   "imagem": "a8502d42ac204be020ddf272db3f12909f9451651f0678f1c33d9afe69ee2910"
+  },
+  {
+   "i": 27,
+   "nome": "Fame Parfum",
+   "registro": "32b432b0761e1c44a08760d823c14db766a684a3c2a214f37c8369503df74f5e",
+   "imagem": "938734a917506992d029792f51487cbeb565e2c237310cd0e86a3f98e2c6e3c7"
+  },
+  {
+   "i": 28,
+   "nome": "Fame",
+   "registro": "b5eb5ffebdf07bbc425312a13d0565683c3cd67687be8cab8eff27112901cc4f",
+   "imagem": "222c5a7b5016f6ad72f7816560182a6353acbf52d9dda91076916360b1bc8e7e"
+  },
+  {
+   "i": 29,
+   "nome": "Invictus Victory Extreme",
+   "registro": "6d3acbcfde7185ab2730fb1e51227bb077878352fcbf636f9ccf74953c3453eb",
+   "imagem": "8ab83d5491ec66f16b2bd621ad4d5118ec133fa22c3f29460da1c143c8a904ef"
+  },
+  {
+   "i": 30,
+   "nome": "Invictus Aqua Travel Exclusive",
+   "registro": "7dc2a61a40b65fc0f5319330c3bb8a343e34a8a3c836e839b5602f90c23b0294",
+   "imagem": "aacc00ed661e256ecc0878b2e7d4ad43ad3684bd747c577aa18b083035208b85"
+  },
+  {
+   "i": 31,
+   "nome": "Invictus Victory Elixir Intense",
+   "registro": "8e5db7fb715e405f7d34ab01f5aa32444c12619d2a77589fabdf141436feb0e5",
+   "imagem": "73889a905fbb60de53c90819b0a50b0723def6baccd5a0151eea3efde46f41a7"
+  },
+  {
+   "i": 32,
+   "nome": "Invictus Parfum",
+   "registro": "3e06cc565a0beafe7c208dc158682e2e7a8b69d1cf23ab44f0e8c33ef3ab244a",
+   "imagem": "168b0513bac319e9777d2e49774d49a3364a57e713e0248c59be6b1147f00be0"
+  },
+  {
+   "i": 33,
+   "nome": "Invictus",
+   "registro": "bc88ae9068c1432bc219d286588a1c600ad00c2b9e26ae78bf97b52a734b9f97",
+   "imagem": "2bf6556f4b9a84c2335d3755a266c2f6e39d85017e995f180c029e869177181c"
+  },
+  {
+   "i": 34,
+   "nome": "Invictus Parfum",
+   "registro": "9a639412d3aa9e20fe6b791d0e2347522c7281d5241b52466b7660a63efc8d6c",
+   "imagem": "d2ce4e84294813144b0cc0224e6754985c2dac57ebdf70570d1adf33faedbfd5"
+  },
+  {
+   "i": 35,
+   "nome": "Invictus Victory Absolu",
+   "registro": "ac490fbd2d4562fecc0c5b9dd8867cf5c291ded4b5abe2d64d9211473df6f7ef",
+   "imagem": "545c42b7e192b191821ba9c07368859404c3a2acd548ec8697ff2e92ebfb8c14"
+  },
+  {
+   "i": 36,
+   "nome": "9PM Kit Men",
+   "registro": "137360fb4692a3ab5bc0f5ba10670eb376cd3a7a0c3501391b0178e956741741",
+   "imagem": "5162eec4cb02afe441a5f8ef88272600946527d7cb88444f08e635eeba09e85a"
+  },
+  {
+   "i": 37,
+   "nome": "9PM Rebel",
+   "registro": "e9bf05488bb489edb0bc32d3c775ec3b4d4e312ec9c17a79bf252f11f7a2e747",
+   "imagem": "756ef3e6f1a70ff9cdbf9f3d102832bc26ca47e0c53696616ce281303340fe4f"
+  },
+  {
+   "i": 38,
+   "nome": "Isabelle La Belle 9PM Rebel",
+   "registro": "f75c34a4811b026cd4d125dd85022a03d0746ca71334d8d2f5e295b6b1f0dd67",
+   "imagem": "44a9e09b8e3134f692e57f80fd9c4496029ca8748c0bf25ac84bbc810eb3264a"
+  },
+  {
+   "i": 39,
+   "nome": "9PM Men",
+   "registro": "f5f8490318d77ad49ced5529e6043dfe9b4e9e4b20ef1818ed3ca3e77ee56466",
+   "imagem": "94e370432a2298947d7aee79fa7ef4f7642c89223e4fdfc0eae08ec62cdaaa88"
+  },
+  {
+   "i": 40,
+   "nome": "9PM Fem",
+   "registro": "05389d5294164dd82fc6e051b53974cab7c2482a9157d5ac4e86a9258cb3680c",
+   "imagem": "2b810ed54960ba32e64913acfee8471745e35b38c3b14055e2f6552bce2d0f4d"
+  },
+  {
+   "i": 41,
+   "nome": "9PM Night Out",
+   "registro": "975573bfb37b4a6b68e8e6443033e793cfdae6c35b3f8f2701dcabf2989f56db",
+   "imagem": "96c5ffe315e575c4bc0055a0945dfe7ae3d0bf3246e9bde8fb7a754be8024077"
+  },
+  {
+   "i": 42,
+   "nome": "9PM Rebel Kit",
+   "registro": "cd028083471676452cf003216631e36f016565c362f653cb687eae736118f081",
+   "imagem": "fcd95be18f49384b3e1792aca3fd2f7a6e29fbd2f4f6b2d142461bf4c707c5bf"
+  },
+  {
+   "i": 43,
+   "nome": "9PM Elixir",
+   "registro": "c21bda88c4197fe3ed7ca4e46ecd7cdbf47e39f500f31d231d16a2bb9c3acc07",
+   "imagem": "87c4e9973ba705627a83abdb2e1b68a95283ee5a44a2fd8fedf37771483f9551"
+  },
+  {
+   "i": 44,
+   "nome": "Vulcan Feu",
+   "registro": "2faa87d204968f918c9ee8e2068eb0851162a11f671884f8a60723d4d880f5ce",
+   "imagem": "5b5954b0bf2a52c947d21c731d8c470a0e56c58de0357bde48199acef25f1bdb"
+  },
+  {
+   "i": 45,
+   "nome": "Vulcan Black Friday",
+   "registro": "ac6d0be89d97c12670f445623686de32f442cdcdbfc570bd911c38da39416afe",
+   "imagem": "35b9122fec9ec4142055a98db616b1f7dfbb3f6ef4b378f64beef73e33bc880b"
+  },
+  {
+   "i": 46,
+   "nome": "Liquid Brun",
+   "registro": "69f408c84da860b04e76f55638fbf59cd68d099be8baf1a8ecd63d47e282bb0b",
+   "imagem": "fdbe81ef86044895fcb2c446f99fc56c80c0d0468528819d387f73ae5be59abe"
+  },
+  {
+   "i": 47,
+   "nome": "Vulcan Sable",
+   "registro": "0e1526b51b13a40185ff00491bc315f0de2e6118784b68c162a465ec10a6ab8e",
+   "imagem": "b397089abfa7d8e89671d92752d0132117ca166094c3f0adfb82b8da8fd179e8"
+  },
+  {
+   "i": 48,
+   "nome": "Veneno Scarlet",
+   "registro": "1cafec7b3a82d13bef9d9434759d9bb7b330954b8276e000a125db34a7d9f46d",
+   "imagem": "51cc53c292b962c6d8cd6315d0fcc3f79d69aa022e05c6f2a9d703a125d36518"
+  },
+  {
+   "i": 49,
+   "nome": "Attar Al Wesal Elixir",
+   "registro": "c7b5b53f1ff9cb36e3e9994c4b06a0a9e05d8488f89bcae5e34ae570cf10873b",
+   "imagem": "ff317f706e2f7f5edcc65f034e2424d3dda55c05b385f0f1057613702fbe3d3f"
+  },
+  {
+   "i": 50,
+   "nome": "Attar Al Wesal Gold",
+   "registro": "034a49b2b64fbcdbe4cb0b29e8e0db7e4c3a51a61b0a4ba822663acd793bc9ea",
+   "imagem": "ec22fa5a640ede1ec30c159e8c9c6115e4b499da6701b5de572ef072c6120e84"
+  },
+  {
+   "i": 51,
+   "nome": "TXA Niacinamide Capsule Cream 5%",
+   "registro": "c9083e8dd148481278499df3117e7ec11a24ef009d25dfafc22cdf09acd6ddb0",
+   "imagem": "618ff138fe387c1a46afdbd96e15cccbce80a9d2aca933a6d5d5f912e295a35c"
+  },
+  {
+   "i": 52,
+   "nome": "TXA Niacinamide 15% Serum",
+   "registro": "6f3636cf42c76c5650af070fff5ec396131f5a609dbb5680e38146833be8eb71",
+   "imagem": "e059bc2dc3ac57af16b4d56455822b97a85a91cb0f0740a40a7c141d510279bd"
+  },
+  {
+   "i": 53,
+   "nome": "AGE-R Glutathione Glow Capsule Cream",
+   "registro": "fed56e60a40e4da28ccf290f16b419332185329031c616d194ec28c2700608f5",
+   "imagem": "277a130f3a836bae14286c52ae0dade8aa09d35bca51d2e8603d0badbb60b9e7"
+  },
+  {
+   "i": 54,
+   "nome": "AGE-R Vita C Pro Ampoule",
+   "registro": "37223c730babf61fba4d9ab576b549918ad8509be33bfd2f8c911a9b4019ce55",
+   "imagem": "e479f9576944c4a86019d549647c08596454890eda21e8ee5496e00129046cee"
+  },
+  {
+   "i": 55,
+   "nome": "AGE-R Glutathione Glow Capsule Mask",
+   "registro": "8681d8619756687d61f409b6db70d1d955dc0cc3ef7014dd8bf0354a40c16822",
+   "imagem": "e4b9183296e76e315517a3cf8abb005f43ddb46fd7700f2eaa2f117d6569245b"
+  },
+  {
+   "i": 56,
+   "nome": "Deep Vita C Capsule Serum",
+   "registro": "d0810549cad2761ca519972fb816ad7f312ed114bd1282339f09b08a1a4cd213",
+   "imagem": "4dee8500087c1238c31b06be719d35b8791dccd6d06eef5fc1b841203968b985"
+  },
+  {
+   "i": 57,
+   "nome": "Zero Pore Pad",
+   "registro": "5e6f39f908f7fd3722f710df4a39af1dc8483d7d0397ccca97b4bd64d54d0ad0",
+   "imagem": "f461cca10b5ca9ea013b1ee93f094314a82dd0aa7cf4ffab85e2a91642b5cfea"
+  },
+  {
+   "i": 58,
+   "nome": "Niacinamide 10% + TXA 4% Dark Spot Serum",
+   "registro": "d656f73bdb50223dfc212a7cd95d3db384ab869af2e61d94b17a714fbfe43d14",
+   "imagem": "dc914f26524f7320bcd55ff76d252859f281b39a9abb17f7f423461a1e1fbe44"
+  },
+  {
+   "i": 59,
+   "nome": "Retinal Shot Tightening Booster",
+   "registro": "c149fc254c1fbf20237ab7bd64bafc7b019b52f438deee61614df1ae21936982",
+   "imagem": "d8b4e9c3110beec3818f74a4d8597a69c3a1fb2a5aabd90ddfb8faedf5d732a3"
+  },
+  {
+   "i": 60,
+   "nome": "Retinal Shot Tightening Dual Cream",
+   "registro": "af674389aad4cc3d5e7785ec6dee2b7f24787f41e821e22aa74f1217f3ef11cb",
+   "imagem": "7e3154f8feed17887d88683a04a0ccb4472953fa5ed224b3b293ed3bab9a63f3"
+  },
+  {
+   "i": 61,
+   "nome": "GHK-Cu Glow Dual Regenerative Capsule Cream",
+   "registro": "9856d531f074498ff6286b1461a0d07fd11e969021a0ac4094b9e01e6ebc2c20",
+   "imagem": "7de363e7c7e93193ccf1d205e9349f66f3f39cd9adbcdc39b5d8e91aad33e999"
+  },
+  {
+   "i": 62,
+   "nome": "Silk Peptide Intensive Lifting Ampoule",
+   "registro": "375527968f7647c4a00cab80a2b79d0b7b64516858550ae69e2e0a2efac1c451",
+   "imagem": "3ebd28d0daed6aa72c1c60dd4844935ea9ee4e363b5f0ca219e2b3c926b77be3"
+  },
+  {
+   "i": 63,
+   "nome": "Madagascar Centella Ampoule Foam",
+   "registro": "9804e166e3ff88efeb7654060d9d93e62896b5cc7e605db8e5686a7bcb13bbc4",
+   "imagem": "2e1a9cf7da77c1e53540eb4e3dba7138a7b48a0a95a3a9cb61e12a7711ce3bac"
+  },
+  {
+   "i": 64,
+   "nome": "Madagascar Centella Poreminizing Travel Kit",
+   "registro": "a5f9390572f3b231e2982024b3a1ff0e7aea2afad654add7da56fced3ebbf2b9",
+   "imagem": "ffe3bf54f50f93a8c15f7fea5f39d5d52e8cc7f7ddec099fa4ddd90c99dd3e83"
+  },
+  {
+   "i": 65,
+   "nome": "No.9 NAD+ Retinal Eye Cream",
+   "registro": "66fb9994709d51993aba96de8e16cba09d501a285beffb63fd7421e95ae7245b",
+   "imagem": "76e06dfa4a0cbea29445631248e1f407e5a7417ab33f8d77bfc2d3258d383b43"
+  },
+  {
+   "i": 66,
+   "nome": "No.9 Eye Cream NAD+ Retinol",
+   "registro": "2e9036aa024b04cc65ca4f09def32075bb3a339f20f634e87cd0d06995a179f5",
+   "imagem": "b548053cb15b8bc8471f1c73e348695d59f4a6395608e52343886e2662a0a026"
+  },
+  {
+   "i": 67,
+   "nome": "Fakhar Elixir",
+   "registro": "5b8a7541fb955d656dac5ba1f55c8d3ad4168d1f81399d999306d1c926b4f1ed",
+   "imagem": "877d93af1016cd0f33c2953ec268afd9ac1f58ad009e25e5e2e32127da490232"
+  },
+  {
+   "i": 68,
+   "nome": "Fakhar Black",
+   "registro": "73f2ebc99bdb811fe0b2e62923abf2b798e6d469818e77dd931bf704195db0e4",
+   "imagem": "86a2401134581e025471ce1d0959f4dea747411c5f3ca66b088837f0fbea7d82"
+  },
+  {
+   "i": 69,
+   "nome": "Fakhar Men Kit Completo",
+   "registro": "2e55f1bfe1710046b208cdbbe7a97532fcd217c103c4745013e6fa0518df9db7",
+   "imagem": "0c0e3b4790e25a6671582ff257a3603ffc12728749289aab9c0712a26d58199d"
+  },
+  {
+   "i": 70,
+   "nome": "Ameerati Al Arab",
+   "registro": "af98b941547c2c13b937adfcd2b003077155d87c6647d6b2a6d00e58cd5ac2ee",
+   "imagem": "e7d89648ebf56c9b3315ed553933ee5cccdef2c4d534ae5667152c8e2b3218da"
+  },
+  {
+   "i": 71,
+   "nome": "345 Relief Serum",
+   "registro": "808f6a3a09725a1a4be20b6da27d835df2949e313b5776ade4c9adf3b0b1edd6",
+   "imagem": "f8bd05fc3333b61524069ba422853088d0ccfce42b56db26dc19bb7912b595b9"
+  },
+  {
+   "i": 72,
+   "nome": "345 Relief Cream",
+   "registro": "d0aed44d8dc689f8225583f13164b7d937271fe92e082b68b58a0ee6be90aaa9",
+   "imagem": "4e3e216301b7d8aee3b6945a83be60cbd7073c97696a26f7eb0bab100cd35c6d"
+  },
+  {
+   "i": 73,
+   "nome": "Kit Completo 345",
+   "registro": "a9fe8ce8fadc25955ce9122f1eb276b6f00b247e0a907e4973c3346f4d8957a7",
+   "imagem": "a3a244520031d17e74924d1be28974472cc2fcc593c890972ee7edda27340a9a"
+  },
+  {
+   "i": 74,
+   "nome": "PDRN Pink Peptide Serum",
+   "registro": "7f0615a216faee182ffb7da1ea7fa75d9e7f71af364dd67b6f092534343a8aa9",
+   "imagem": "36aebf5915743f52a29601e256ad5b0a8011707f97b5b431da91790da02a2ad0"
+  },
+  {
+   "i": 75,
+   "nome": "Deep Vita C Pad",
+   "registro": "7c9c126a6cb1876dd973c179da27ad605c0657dac018ff6debaeebffd92173fa",
+   "imagem": "c3c15979645e2d02af0a340320f1605004885f96b94de95e9950fe7c2b9f79f0"
+  },
+  {
+   "i": 76,
+   "nome": "Red Succinic Acid Peeling Pad",
+   "registro": "a0b86b487577eb75ca18d354aee116bd500bc5c9bb23f586e959655e3c7341f2",
+   "imagem": "860e9f52444ba69f5810ab53c2db41959dac7895add15c2ec623d70a7c3e018e"
+  },
+  {
+   "i": 77,
+   "nome": "Kit Pads Zero Pore + Red Succinic",
+   "registro": "a21bf94a10bde3b793d84ed7f9b6dd47c20f65b1c1415bea50f7b383311f9bb8",
+   "imagem": "9f184f06e06f88b92714b89599ff3736bd8efafc6135a02c4ae3719a61bfa245"
+  },
+  {
+   "i": 78,
+   "nome": "Kit Rotina Coreana · 4 passos",
+   "registro": "63321f800ee4e074d3f809d034831c81efcbe15c1e1d743947bb4815a6a51d2b",
+   "imagem": "da71768bbcb2650d39477110700fc7465d623952367265c1ba3234752311772f"
+  },
+  {
+   "i": 79,
+   "nome": "Angelica Zapata Cabernet Sauvignon",
+   "registro": "3ddcc984f0bea715683eda1c755c4af769acf3c71e060fbab2b1f9d5271adcdd",
+   "imagem": "e5665c5cd4d2c5f104d1c09ba351041b22ddece04abc92d833cb699c88d10285"
+  },
+  {
+   "i": 80,
+   "nome": "D.V. Catena Cabernet Malbec",
+   "registro": "c518c84f002d6374f53404d45466dc27c118cbfaade8eaf27372076f19454dd0",
+   "imagem": "95d11ffd0a9865c79babf528fef3e74c0be79ec3cdd8179f02c2f2b008c2c163"
+  },
+  {
+   "i": 81,
+   "nome": "Original",
+   "registro": "a3b263603b03065401ee862b87ea918a058b7db5f4634b3aa7c87aa72e195429",
+   "imagem": "e5e1848e7818cb9bb14bff8ba701934f3d11f7cd12f5cf42ce061b9f34f0a718"
+  },
+  {
+   "i": 82,
+   "nome": "Original",
+   "registro": "7f5a1cfe7413d1a1dccd13767a817f3ec42a43b61e476ff2ebc7ba4125d8a8b2",
+   "imagem": "16f2248587734325af2f94e57e93956b37e55c512ebcb23911d9fb2cea4ef192"
+  },
+  {
+   "i": 83,
+   "nome": "Crème Brûlée",
+   "registro": "a713e4037e921593a895cb01dafd0351b3829c976a449a87642a30fed637529d",
+   "imagem": "675542d5e77e9761521dc1b1dc47ff73549486c500c3582638f08ba4bbaacd68"
+  },
+  {
+   "i": 84,
+   "nome": "Chocolate",
+   "registro": "16b145bc5ef2f6c15963561861d9f7f99e81fcda925563fb0db6428844316748",
+   "imagem": "7204f9a892cd7e08bccacd88d858fbbac3a093b5c1c15ee1e2e591fb5d404354"
+  },
+  {
+   "i": 85,
+   "nome": "Orochata",
+   "registro": "8d0b095eb47326bfbb4f542678faf6cfe0b021a0be7b150f733cc3c4fcf5e494",
+   "imagem": "a77e0eccef4f4fa084aad2bbd6c0f363df1b160a780cbb29cb54496cc79193ca"
+  },
+  {
+   "i": 86,
+   "nome": "Cloudhorizon Waterproof",
+   "registro": "5415fe08e6a9dd2e93a5819c959a7b2aa8e792d168776459a25332283975101a",
+   "imagem": "8426c6acd8e4297ce448a1fa643a7109d905ba5482dad6e1896e7405fa8afa65"
+  },
+  {
+   "i": 87,
+   "nome": "T900 Mini Preto",
+   "registro": "834e6dca62f583ba979fd153c8b3729c0679e42c1b30768c0313aa2d5a83f4df",
+   "imagem": "e48faca1a30aa55fb068005c33c5aaa8475b42e77feb114df8d19b0ac295d0d8"
+  },
+  {
+   "i": 88,
+   "nome": "Propolis Kit Energy+ & Shine",
+   "registro": "aa05f7acbca0f7b62ada3fcb10087cf9a234acf10e098b3177bc91f36de4986b",
+   "imagem": "80001b7ea50a351779965cb2cc6b3fb63c0e510dfffa0a62d710f75ec78b0d1c"
+  },
+  {
+   "i": 89,
+   "nome": "Propolis Kit Shampoo + Tratamento",
+   "registro": "4641635ed59dc20c4b2f5fc786b80178d96f70a8c695e0538fbf2fa0f2b6c9b1",
+   "imagem": "c4c1b59d1c518f02daac1675492feabc7d6a8e3b395ddc3290b69bc9a352438a"
+  },
+  {
+   "i": 90,
+   "nome": "Oriental Premium Shampoo Reparação Profunda",
+   "registro": "a421311b31f3bba028846eac83ef86e405241101246f172e41eddd431b8dab42",
+   "imagem": "3b32cff56e10bcf0c59f344f6736bbedc88db482bc2a24bdc1afd727fec3478b"
+  },
+  {
+   "i": 91,
+   "nome": "Oriental Premium Shampoo Volume e Reparação",
+   "registro": "88f457fcdab60d5c5100ac2a5531c3bdf3e5ccf0d5ee50b676391aec7ca114c8",
+   "imagem": "fef475b0c528fdda263939ad9bbd1eada5e4505487f55923329f9f7268d41c4e"
+  },
+  {
+   "i": 92,
+   "nome": "Perfume Lovely Romantic Shampoo + Condicionador",
+   "registro": "7f8a404ae521e823ea799d5b2e9dff7469e078e2212d31d444199f6da91f7179",
+   "imagem": "091ec5231351733f967df08ba0c5c69184ebd4d48ece3fb63aa22f0472c49140"
+  },
+  {
+   "i": 93,
+   "nome": "Keratin Bond Hair Mask Deep Repair",
+   "registro": "d02a14600661284460677274defd714902686e66d1a1b6ccb1f3005b3e8270cb",
+   "imagem": "d7c0e60975d35bb05e9300e8812ae27760c10860620cd5e5594327c0bf43e580"
+  },
+  {
+   "i": 94,
+   "nome": "Keratin Bond Hair Mask Silky Moisture",
+   "registro": "e001a3a921e887e25b5f07b52d0581bc17841d2dff4c6693683de1af05ed64b4",
+   "imagem": "a1b20d5443d152d31baa6a6551fd9640e71dac49742db05ff62b25ce84deb583"
+  },
+  {
+   "i": 95,
+   "nome": "Keramide Ampoule Heat Protection Treatment",
+   "registro": "9705288fc54aabaa30de6fa85a54484a0b24a3f7247875d27b39bc71bf854a57",
+   "imagem": "ac5302e3aea5390b907c37a9ea18a2fa50364be4a07fe6dba25acd64a280dd7e"
+  },
+  {
+   "i": 96,
+   "nome": "Oriental Premium Kit Shampoo + Condicionador",
+   "registro": "2495502a9a5b1463dc8c9c37edd9dbd7a1a6e3db5712cd7c23060dd5b5a5c566",
+   "imagem": "fa7356b880aff3a7e3252683544f5cd86a944db19c6eb3dc9d2ad1edd4bfd23d"
+  },
+  {
+   "i": 97,
+   "nome": "Premium Treatment Water",
+   "registro": "f036c25a34391217740f958a4c6d25f4e371e5ac4ee446f2ff2a05995727a851",
+   "imagem": "7aa06567a41e4d5faf70f913f44b0e721fa7597161c819a45f41a8f225f6726a"
+  },
+  {
+   "i": 98,
+   "nome": "Premium Moist & Repair Treatment",
+   "registro": "d4a99bddbd240b9778bdf9a2cff3306503e0d3350ebdcf8d73d8c39b357bc69b",
+   "imagem": "09bc85cba99cfceb001f83fbfa67646ccfca41bbbe5e595e9f6e3dfc37d5c63d"
+  },
+  {
+   "i": 99,
+   "nome": "Premium Volume & Repair Treatment",
+   "registro": "ceee53562604c412d293c785ca41925614bfb3c2b0de01fd872d305d35617a71",
+   "imagem": "2009921e1aa8479a43f725482b9dd0324702be2391cbed2096860e4f9a9eb76e"
+  },
+  {
+   "i": 100,
+   "nome": "Premium EX Kit Shampoo + Condicionador",
+   "registro": "0699e0dd7950c610248ab7013ddd9f5423da44c7d56ca274fe801bf34f0adb17",
+   "imagem": "9145b34964dadeaf144f3d98931dcfae1a6147c57eba2f9f685d7c3c303803f7"
+  },
+  {
+   "i": 101,
+   "nome": "Premium Touch Kit Shampoo + Condicionador",
+   "registro": "7c9d64f3be0eccea172782f53b35c69b98d29141f2b1f87519646cc6fe6f8e6e",
+   "imagem": "8bf555556aea0bfe0fddeed60b31ae1b022766f5ef27432f9d1dbd4e55d20822"
+  },
+  {
+   "i": 102,
+   "nome": "Premium Touch Hair Mask",
+   "registro": "2678781f83bcd1f412dc77115d541d07b8f18c29bc06b7c454df13068c78826a",
+   "imagem": "d58b26bd856321786b2ed15b435e2231f35c251dd6d96952a25cd56f4cb490d0"
+  },
+  {
+   "i": 103,
+   "nome": "Premium Touch Hair Oil",
+   "registro": "c928276073bf8277d12c7d178ac8642566ebe9a9b3d346ff9102306f53c29441",
+   "imagem": "c1fa6f66f00d38e00475606bdce64b605992d957dcb95c208180f1b2cdab6c75"
+  },
+  {
+   "i": 104,
+   "nome": "Premium Touch Kit Completo",
+   "registro": "f37143233c7b99b89e2e1f2007b928174f34a59fb8d9acb22de6d3d011dcc5cb",
+   "imagem": "3516baf7ffb8221e8436b99d95d260aa40b5b9a524274d69e7f0574b8615501a"
+  },
+  {
+   "i": 105,
+   "nome": "Grow:Turn Brush Steam Booster + Tratamento grátis",
+   "registro": "b6787c54b77dfc06c3de427a30cb81edaaa68f9a4e95b27d5c1a8c5252f30ee6",
+   "imagem": "921a7e19afada09fccf7f283c4a4cb7768876c4fbdb673c89837dc7cb53651a1"
+  },
+  {
+   "i": 106,
+   "nome": "Afeef",
+   "registro": "296d71f372aa556abe9a26c7866c6fa97cd48b2bc66fe587243ae54140d47b99",
+   "imagem": "db8d4163f35c964ffece0e9fe40d08b47470c3ab063d8bef65fb62a242610943"
+  },
+  {
+   "i": 107,
+   "nome": "Passion Fruit Caipirinha",
+   "registro": "f2b8d1c7b0f0fafb83f7767116ab3d4eebe791e19034c9ebcf1b9347642b6c3f",
+   "imagem": "7114b1cbe71f440c8ba1ef99819f82f213e593813c486b7d26f1fedfd198dd60"
+  },
+  {
+   "i": 108,
+   "nome": "Kit Combinação Perfeita",
+   "registro": "cc81d1e8664090f2c4ab80cdeb36df9d9f28f56a97d77d9e3b6a3b4e6ab565e7",
+   "imagem": "53d04088a94519958140854db5696981ab0d0c0732e4d27329042a0d7e13247d"
+  },
+  {
+   "i": 109,
+   "nome": "Kit Make Up Unicorn",
+   "registro": "0fd8a94397967f00cb274f78b7f435ef5a8bc1b7ec1b2fc6699cd684d71e81c9",
+   "imagem": "5e8070bea0a6444a0e73d7f6dd85e2a15927f09843c86da15a841ea5ba491b31"
+  },
+  {
+   "i": 110,
+   "nome": "Maleta de Maquiagem 46 itens",
+   "registro": "0eef6089323d8a7027c42fc5b478b113ecd3d592a97663c64911245dd77d67c5",
+   "imagem": "a6d238bfb3e91fbac1b19804137f81fd47c0e91cb95cc101957d3ee61fc3f092"
+  },
+  {
+   "i": 111,
+   "nome": "Kit de Miçangas",
+   "registro": "f006c36ee857b9c863d8fa824c171a49cfea9a8ce5d1d1bb0dc5853bfbbc16a3",
+   "imagem": "ccf26feb4a28d9a7836623aca604535ebff771842433f93c8ef41c4e63289d90"
+  },
+  {
+   "i": 112,
+   "nome": "Makeup Handbag",
+   "registro": "33413154343c2d6df94d11c3b8268b927f1b9ef739d3252aa8e0ca2254b28165",
+   "imagem": "74820f635da788e03db3799cdbae36694fa495959adc2a7316ccb754169e0cdc"
+  },
+  {
+   "i": 113,
+   "nome": "Cloudboom Echo 3",
+   "registro": "370d20686f0ad1a11323fcd41132d15c5afc98ce161accd9a51c87a6a4541af7",
+   "imagem": "6b98b7f839d8ff1a2e80d167c1a611eb3a3c13ceb867eabba26f44041a0332af"
+  },
+  {
+   "i": 114,
+   "nome": "Cloudmonster",
+   "registro": "8e59524b4ee17be97081f93096c9e503765b87dad9b823afe3dc9590a3c077f7",
+   "imagem": "faadae78dacd3c94530689402544eebae83d30a4b2ed4cb906b37cd3c2b0028e"
+  },
+  {
+   "i": 115,
+   "nome": "Tharwah Gold Gift Set",
+   "registro": "3f0c9139cf358f133922f1b901fa8b40b43ee99a526fb6c97d7171d1bc28ba27",
+   "imagem": "d26ce28c4ef0f03404a59473c2da1c271157048c2e012a194d1027d5ada69ce9"
+  },
+  {
+   "i": 116,
+   "nome": "Queen of Arabia Gift Set",
+   "registro": "4a4f239e31ace14c0bb1a5ca9626a5e2ef3f892b6dffb38b78bbb4792c9a8eed",
+   "imagem": "1483d751660e2a824eb1f3fd97afa0a4395aabe21a69aaa2d421fcd2484ba087"
+  },
+  {
+   "i": 117,
+   "nome": "Maahir Black Men Kit",
+   "registro": "0ee1d26b1d8c52730dacec54bbb62e06387202dd813b34fe87e907ab3523ba94",
+   "imagem": "fa3f75e3d4716290fe8ba81720d909bc02ff99af10d782465d4dfcd3f8506a05"
+  },
+  {
+   "i": 118,
+   "nome": "Opulent Dubai",
+   "registro": "e9ec2fd1bcb6860553155b5a3f8615fdf216e63fdcbb34eb1ccbd329a83567ea",
+   "imagem": "59e5c4c40552288a4a1784024f08526568bb21bf01f71f6088645f4257bd162b"
+  },
+  {
+   "i": 119,
+   "nome": "Club de Nuit Woman Kit",
+   "registro": "668757fb8eb350a19d55956f52b4fb7564f3e2a741b25847b0e19194dc27968e",
+   "imagem": "69432c951c981411167604c52dc31a6178c06cade8d7f9ae81867f7155502a63"
+  },
+  {
+   "i": 120,
+   "nome": "Club de Nuit Intense Man Kit",
+   "registro": "8af39ca05105b19b81fe4a931101e7f9452afd4da41c1c4a9cd5bdb00562c982",
+   "imagem": "5583a158e0cf89878ecf90b090f4013add3855d30ba39fdaeea8dac57c4ac1ac"
+  },
+  {
+   "i": 121,
+   "nome": "Devotion",
+   "registro": "d587bffa3b40af4e5f822fdd3262738a4cf8a8596d471ebff858aa73c4d2b7cf",
+   "imagem": "68b00a38cdeb11fb86c120edf13744f7d40b0dd9021a93bb962775c23499b37e"
+  },
+  {
+   "i": 122,
+   "nome": "Queen Kit",
+   "registro": "39c40f40c7b0829f765589cacb528f9a9c5ee7b4157dc9a3bb30d984ab60abe2",
+   "imagem": "d2b2cb99faad92cf0f86768cbf367341a5168fb28857c40da65c7b2d865cc159"
+  },
+  {
+   "i": 123,
+   "nome": "Cherry",
+   "registro": "55d3db17b69bb493b6906482ef5a2c255ac5b19d71ab1d6480494036c5134289",
+   "imagem": "b13c1b5c347002ce51c56e511c33dbc7d2f4ef0d5e01296d70bbaf7735a48512"
+  },
+  {
+   "i": 124,
+   "nome": "Legend",
+   "registro": "28a153bc70dad8b36de1906f7261bf21a5b9f647933a052023a8784a8347b33c",
+   "imagem": "8d8b267f7e3d1141cca118a3c3a3e2ca32f7a9e50ecf9d19d07453a263583303"
+  },
+  {
+   "i": 125,
+   "nome": "Kit Completo Queda Capilar",
+   "registro": "d09dc2a6c95683e2c2b12abad2d731c1160573281fb4bf28ab651848b9a87a0d",
+   "imagem": "6bcded77ae5a91090359ea23379e1c061dfbeb764a6df489289a25da3560af65"
+  },
+  {
+   "i": 126,
+   "nome": "Loção Capilar Minoxidil 5%",
+   "registro": "5b243ac0733e04bd62d290019ba7f94899b7aa2bfa8e55398eab18c37316467b",
+   "imagem": "91fb56b719e53de2e92a4b3825c1af8ba9e3c490ae1e3fd3f889d152010a21e6"
+  },
+  {
+   "i": 127,
+   "nome": "Tiramisù Coco",
+   "registro": "a07a6ec077d331eae9ae7c5d4d62f0d3711099e03a4a32404569b53f3008cf43",
+   "imagem": "17436cbff8d06e69623909799b09aa41e6dc831c1d9911a452042b6e791b44fa"
+  },
+  {
+   "i": 128,
+   "nome": "Indulge",
+   "registro": "d05350fb9e4fc081134b8399e51c47538f40e8045815e49fabc7351c4cff3974",
+   "imagem": "153ee26e67073086f82cccfad2e16a08df16f189007bc0fd98ab482cfc0b9607"
+  },
+  {
+   "i": 129,
+   "nome": "Cloudrock Bota Feminina · Marrom",
+   "registro": "8614e7899287e010db828eb0b7076a56f725744fd349ab5096f3e20fa0f22f9f",
+   "imagem": "2ac5e7527c6a18734cac42cc4da3d8ce8b9b5e5017a1ba42d4662b640c3aaf4a"
+  },
+  {
+   "i": 130,
+   "nome": "Cloudrock Bota Feminina · Bege",
+   "registro": "07d485a62f5762fac37f684ad1f18f1331f8f4211263bba501398444af7d653a",
+   "imagem": "d26129f4a244bfeac61fd049a924b5741918061742d88600856186afbb64f9a0"
+  },
+  {
+   "i": 131,
+   "nome": "Cloud 6 Feminino Waterproof",
+   "registro": "ac3b32a9d01156f6cefd72ab3d52faf21da541d95a72c7a9c1a27a299cc38e05",
+   "imagem": "0ab014e6005e96bce590c15b198c47b74c0c839b6899b6ece1f20a57e7f30344"
+  },
+  {
+   "i": 132,
+   "nome": "Kit Skincare Pele +30",
+   "registro": "636623fe323062a193876069a153baa35b780c3adf89c50449c30998cbae32e8",
+   "imagem": "6c3a1474ac71932be1b00fa2cc6740674657fac7f3dedb43af3827be64781a0d"
+  },
+  {
+   "i": 133,
+   "nome": "Item teste (não enviar)",
+   "registro": "b79aa0357014c8fdcc512cd906d51c9c20a208ef1d4ee4d564cdd683111f8c37",
+   "imagem": "9e55b3305317b7b491530cea464df5cd2b526d39d92b69960ff642ee41cfabdd"
+  },
+  {
+   "i": 134,
+   "nome": "No.9 NAD+ Retinal Volumetox Eye Cream",
+   "registro": "17f9dc9ae6c68962e2761903d37c2bcc901677e055b49cbf910e585d4d9ed0ef",
+   "imagem": "9ba9ad247da83d97721aa2ba6aa5a876037844ca6a501ba49f2f00ca86d8423c"
+  },
+  {
+   "i": 135,
+   "nome": "No.9 NAD+ Bio Lifting-sil Essence",
+   "registro": "1d4e5e61c7ed7b790e3843f22fba30535b8c9cdeacb6610b8511bbddf57ea6c4",
+   "imagem": "42a2a1232b1259a4901d66b7d038d2863756db68009433a78cb265daabd8732d"
+  },
+  {
+   "i": 136,
+   "nome": "Kit Shampoo + Condicionador · Linha Amarela",
+   "registro": "1862d8f01c7946b80ebfa3034d93d6f395dde457fb2aed63eb0a0a9285f6684d",
+   "imagem": "8d72e767c3d0a476e925cfe89f844afd0912382b159aec6ece8b4620e8a0c534"
+  },
+  {
+   "i": 137,
+   "nome": "Kit Shampoo + Condicionador · Linha Vermelha",
+   "registro": "f16825b88c3cfa83cd6724c2ebfa7e9e0f175cad1da625f15671a7f8d7edb87b",
+   "imagem": "b7922373d58819807ff7a3b7e9bdce35b8e111753700ba8a2519ce4e33c60f58"
+  },
+  {
+   "i": 138,
+   "nome": "Kit Shampoo + Condicionador · Linha Azul",
+   "registro": "73714ec25e5804c27a24c571d64a2dbd28e9cefa4769ded1acc3db379e445857",
+   "imagem": "9dd8572dd24c5c27db9ec571dfd80fe77a0d6f3ee38b0284e549ed3f5788d701"
+  },
+  {
+   "i": 139,
+   "nome": "Kit Shampoo + Condicionador · Linha Preta",
+   "registro": "d0104dee8f32a9716d6e1ae0b70c82702eb136a5cc88297474accff820e6e76c",
+   "imagem": "5ffac88fbf5305cc3e4994fce67f43e066050bfbc5efbedd22578039ff5186bb"
+  },
+  {
+   "i": 140,
+   "nome": "Premium Repair Mask",
+   "registro": "14bec52b02b615897dfb3463914beb6fb8eb7035b830bfadc721e1c8b501a6b9",
+   "imagem": "0a4c5bc622a4045b68aa6f9d1af58a34c12f12bf3a430e55c0e1dd6b401043db"
+  },
+  {
+   "i": 141,
+   "nome": "Premium EX Repair Mask",
+   "registro": "ab41a7aa537e971c204aaca11ba86b6876805584ad668128c5735ce3375f2391",
+   "imagem": "41e6f0d786d05c11f2a2038d016fbad3ac7fa47ba9611206a31d41bda8c2261d"
+  },
+  {
+   "i": 142,
+   "nome": "CER-100 Collagen Ceramide Coating Protein Treatment",
+   "registro": "ca227cc997a365846c16db9dfdf28f46299ecfbe86b9975dad6ea6e892a25d1a",
+   "imagem": "55308966c8258d1a2a69cab4d00334428ffcefc8da2feed27e19c79ca1e649a8"
+  },
+  {
+   "i": 143,
+   "nome": "Premium Touch Hair Oil Serum Airy Smooth",
+   "registro": "919adb455621bde7af6fb02d7f021e462b9f6aac9394ec4ab286bff7e3c0b0eb",
+   "imagem": "7597c37c55263145f02f88d241445ad6067bef20887103265dfdb55b10aaf1ab"
+  },
+  {
+   "i": 144,
+   "nome": "Kit Presente 7 Itens",
+   "registro": "52a2bd9c83d46efd8f723676684c7b31c0cfa7893adc73ed851b0eb995039a76",
+   "imagem": "b1cdfdbdd90c08d28dfaf5589005222b6961212aefbe0a0a346d628e0ef8aec4"
+  },
+  {
+   "i": 145,
+   "nome": "Yara",
+   "registro": "99515c2d78d6345efa65fb49fed1e1b058a55186db1da07b44d3f8764d4d22fa",
+   "imagem": "ebf8919f71b1b1a48aedb69da19a1cd1257570a24f239d0f9f1c9d2b1fbb7782"
+  },
+  {
+   "i": 146,
+   "nome": "Kit Yara Collection",
+   "registro": "fa1bf0a37995a80f74e011e02a6ff8919321e533a956e40b16ff2e2bf4716d66",
+   "imagem": "5ecf9292f8f9fba888aba7ec64f4a83a7c84b7b2419e7cf96dff379107507019"
+  },
+  {
+   "i": 147,
+   "nome": "Kit Asad Collection",
+   "registro": "df5e2bc883872577e7b45235bef16941e5a7b95eb749c90a1d4194df87f532fa",
+   "imagem": "452ef5c152578b6da3f738ce1c5bc296b1fb688ea840b3875cce778805371178"
+  },
+  {
+   "i": 148,
+   "nome": "Azelaic Acid 10+ Hyaluron Soothing Serum",
+   "registro": "399a59a3a88579133c1e028bb3d5541459587b859fd8c932446877c4d69ab271",
+   "imagem": "decad2d8cf4e35499acf214f0169d83c327aecc655aafa2b076a3a2bec153963"
+  },
+  {
+   "i": 149,
+   "nome": "Deep Moist Shampoo 1.0",
+   "registro": "8fd1a548f2b5e9b7411766937144c835030384769a56b79899b215a6169c3c26",
+   "imagem": "0d676484076272f0e9dae57ac1eb300760246eccedec150d7a169a2246198db4"
+  },
+  {
+   "i": 150,
+   "nome": "Deep Moist Treatment 2.0",
+   "registro": "0f713db2106f6c9ded78b3e507b95535428b187f73ed7463b1ab8f8d6954def4",
+   "imagem": "f4a86768c3048f7f6b9945718666b090614446b92131da11f7a0b8354db20316"
+  },
+  {
+   "i": 151,
+   "nome": "AGE-R Booster Pro X2 White",
+   "registro": "442e3f4080436bf1f5e8f1fa28d68e8a493da7cb6438ffea12ffcdaaa6a10784",
+   "imagem": "f7518331be891d7885956c0d1f7989fe27424cb22f276b0f8e0ce668cd7e2d62"
+  },
+  {
+   "i": 152,
+   "nome": "AGE-R Booster Pro Black",
+   "registro": "5fff46b1ece6c3e7dedfacc04dccbc8dea5f695bb4621108bb28afc05353d407",
+   "imagem": "5a34375b373a8068220730452d3a8b9095bd4290bcaa0e5a726d229bb35e6e9b"
+  },
+  {
+   "i": 153,
+   "nome": "PDRN Collagen Gua Sha Neck Wrinkle Cream",
+   "registro": "05cdd6ca56581a59621cbfa7b659173437e1b4604660c4f67f26b53c0bdf0cd3",
+   "imagem": "c0d8d09ad0e08d8781baebb3062390a767474ad46242bcba5e2d78966aabc3f2"
+  },
+  {
+   "i": 154,
+   "nome": "Airwrap HS08",
+   "registro": "97749a2d2f7abf0f45f9d96c0ffc2f870b042329ec5112c8a9c3ca52624c67a8",
+   "imagem": "adcd635e43cdb5b51052e51c5f0da9e4843961a6f3a18671a57efde54f63dd1f"
+  },
+  {
+   "i": 155,
+   "nome": "Airstrait",
+   "registro": "9b8ddc0278b372e271b16daa33da0206bd39e8ecd0bf27546265fdde304684f1",
+   "imagem": "2dd6c3b26568c96bed1dc611975a57ea95fdb5b24454aa4792ce16e00508b844"
+  },
+  {
+   "i": 156,
+   "nome": "Supersonic Nural",
+   "registro": "4228f3baa12cb183586989b52b28799afcb25534fbae32557e68c7bf912edfa5",
+   "imagem": "270708ea75116c1e6aa7cc9c278ffed78cdb2914109b92db2dbc80fc4c2e746d"
+  }
+ ],
+ "marcas": "7c2a432670ad36c67f620c850d1f7d25b746b830eb1494789e7831a323d0415b",
+ "contatos": "2f1a70ef11d2e23f1565dcfb482f95402ca67077ddfe43841ff9656f5c1292af",
+ "rotinas": "262358abd3e982111c1d34363e7c6f1c4dcd03218c2bc20c39e696068728f96e",
+ "cfg": "ab390305ebd01534625d82aa9ee7f724b31e6b5fe6339415065502d8091b67bb",
+ "imagens": [
+  {
+   "tipo": "logo-topo",
+   "alt": "CP Imports",
+   "bytes": 73034,
+   "sha256": "7b5612abc57ec1c1e5694b8896dfd6d78b7c47aecf6cbab6c897ecbe03dbab58"
+  },
+  {
+   "tipo": "banner",
+   "alt": "Fino Hair Mask",
+   "bytes": 8306,
+   "sha256": "949724fe21377c76a5008287be9917a613d3515f4c18bb1611edfac157c59274"
+  },
+  {
+   "tipo": "banner",
+   "alt": "Zero Pore Pad",
+   "bytes": 8078,
+   "sha256": "2849b112c1aad10e75b31c0a013f0eb1d09cef7736900d609f9fe3fe425acf81"
+  },
+  {
+   "tipo": "banner",
+   "alt": "GHK-Cu",
+   "bytes": 12188,
+   "sha256": "ec1a59232fe74d86aefb152078d3d7e0d9c278ec220e3f24634c2beeb5e6a1f9"
+  },
+  {
+   "tipo": "banner",
+   "alt": "Good Girl",
+   "bytes": 7268,
+   "sha256": "a47db895f007560099ba4e7ae336897aab02cdb78b4d4a134c95ac68f34dca45"
+  },
+  {
+   "tipo": "banner",
+   "alt": "Club de Nuit Woman",
+   "bytes": 7934,
+   "sha256": "13909dd9fc0c19586552aeffe4afa06278be29642c3c8c4141bcb301ca6996d8"
+  },
+  {
+   "tipo": "banner",
+   "alt": "Invictus",
+   "bytes": 8944,
+   "sha256": "3a470e694d99c8bbea8a772c1e4a1c76a6a2c77b8fd65d030fe3d852d97d4ac9"
+  },
+  {
+   "tipo": "categoria",
+   "cat": "perfume",
+   "alt": "",
+   "bytes": 7268,
+   "sha256": "a47db895f007560099ba4e7ae336897aab02cdb78b4d4a134c95ac68f34dca45"
+  },
+  {
+   "tipo": "categoria",
+   "cat": "skincare",
+   "alt": "",
+   "bytes": 16010,
+   "sha256": "c5d618408dc171a335e7b1bd36d2c99ea403e11c902d0867cd574198c8a897b1"
+  },
+  {
+   "tipo": "categoria",
+   "cat": "cabelo",
+   "alt": "",
+   "bytes": 8306,
+   "sha256": "949724fe21377c76a5008287be9917a613d3515f4c18bb1611edfac157c59274"
+  },
+  {
+   "tipo": "categoria",
+   "cat": "bebida",
+   "alt": "",
+   "bytes": 9916,
+   "sha256": "fe7faf5212b9ef905b755ee696e6fe026a0ec54fc3706237817c65f3c113190b"
+  },
+  {
+   "tipo": "categoria",
+   "cat": "outros",
+   "alt": "",
+   "bytes": 5584,
+   "sha256": "97be7e122aceb30e694ef05b821d4f3fd77551cb392a0264024c46f8a700ddd3"
+  },
+  {
+   "tipo": "produto",
+   "i": 0,
+   "alt": "Armaf Club de Nuit Woman",
+   "bytes": 16006,
+   "sha256": "3fad17fb69d70cb0c30f4a4a49853710b8302f8d25386a3c7633e27ab1f947da"
+  },
+  {
+   "tipo": "produto",
+   "i": 1,
+   "alt": "Armaf Club de Nuit Woman Extrait",
+   "bytes": 13478,
+   "sha256": "0f34a42b0bbc03cf48df715af0d41e407fa85645cfce4b88c0ad1b45d6fdf273"
+  },
+  {
+   "tipo": "produto",
+   "i": 2,
+   "alt": "Armaf Club de Nuit Woman Body Spray",
+   "bytes": 13810,
+   "sha256": "52de15b2e8eb50affe2cdd93fd8de40cca13516e85da1c1a9071e591db5b0e7e"
+  },
+  {
+   "tipo": "produto",
+   "i": 3,
+   "alt": "Armaf Club de Nuit Maleka",
+   "bytes": 21658,
+   "sha256": "e683dcfbbb84596e96b5a348d645009c98c55c9038b1c6333fdcfba25000612a"
+  },
+  {
+   "tipo": "produto",
+   "i": 4,
+   "alt": "Armaf Club de Nuit Intense Woman",
+   "bytes": 13108,
+   "sha256": "54b78e917155c559c500b3258842ac7e847ca76a8c5d80d20629b6969e9e4557"
+  },
+  {
+   "tipo": "produto",
+   "i": 5,
+   "alt": "Armaf Club de Nuit Milestone",
+   "bytes": 16844,
+   "sha256": "14dfcc336a39f2f7eb86190ffabc11e226b3c008edd31d1d8fd69c6a2dfb721c"
+  },
+  {
+   "tipo": "produto",
+   "i": 6,
+   "alt": "Armaf Kit Club de Nuit Woman",
+   "bytes": 13676,
+   "sha256": "1a7bcd1bd2f4ce0f5056ced8e545ef41c273e647148e1bb22f3cc07595cf1aed"
+  },
+  {
+   "tipo": "produto",
+   "i": 7,
+   "alt": "Armaf Club de Nuit Untold",
+   "bytes": 19686,
+   "sha256": "5e23710a8335942fb0f66964987df3f2f52c0b83ebe0620a91fe3461e6816462"
+  },
+  {
+   "tipo": "produto",
+   "i": 8,
+   "alt": "Carolina Herrera 212 VIP Rosé Elixir",
+   "bytes": 17002,
+   "sha256": "2bf8d919bd6ed2f8fb989c2a37143932d8e403bfb6554a131c165fed1be4ff14"
+  },
+  {
+   "tipo": "produto",
+   "i": 9,
+   "alt": "Carolina Herrera Good Girl",
+   "bytes": 15094,
+   "sha256": "bf677a2c5f0cbb17cb49977a8499d99af416c163abcead99654ecbf8f08d1f67"
+  },
+  {
+   "tipo": "produto",
+   "i": 10,
+   "alt": "Carolina Herrera Good Girl Very Good Girl",
+   "bytes": 16218,
+   "sha256": "77c2b2335f568944976e0876253a5c014576580c42d2377ff876bf6a83750560"
+  },
+  {
+   "tipo": "produto",
+   "i": 11,
+   "alt": "Carolina Herrera CH Feminino",
+   "bytes": 17458,
+   "sha256": "40d7635f100b5c017e28e85ecbcecc0bfa0044cc957281f706e8fc0f4d915d74"
+  },
+  {
+   "tipo": "produto",
+   "i": 12,
+   "alt": "Carolina Herrera Good Girl Blush",
+   "bytes": 14382,
+   "sha256": "afca2cbc1972e0351c815cb7d9aca972b0903751ef1ed80914ad789c2bbaf9be"
+  },
+  {
+   "tipo": "produto",
+   "i": 13,
+   "alt": "Carolina Herrera La Bomba",
+   "bytes": 18338,
+   "sha256": "01ebfe50c1ac478a35be3723c16707c458d0c97846a3674ec293e79b446948d5"
+  },
+  {
+   "tipo": "produto",
+   "i": 14,
+   "alt": "Carolina Herrera 212 VIP Wild Party",
+   "bytes": 34100,
+   "sha256": "998272e355505cb3fd76a8de7db84da094b3e5dc2e44a090f7197c050073e34d"
+  },
+  {
+   "tipo": "produto",
+   "i": 15,
+   "alt": "Carolina Herrera 212 VIP Rosé Ready to Party",
+   "bytes": 14196,
+   "sha256": "5264b25548c159e7b0a20e828ef6da7d2f0142d753dc24efbdb1a48bcfcafc1a"
+  },
+  {
+   "tipo": "produto",
+   "i": 16,
+   "alt": "Carolina Herrera 212 VIP Are You On The List?",
+   "bytes": 16808,
+   "sha256": "688a1e5c2bac386c3fd5c040c9e2a01edcddb2bf9aa83a5066de52e5f80b292b"
+  },
+  {
+   "tipo": "produto",
+   "i": 17,
+   "alt": "Carolina Herrera 212 VIP Black Men",
+   "bytes": 17038,
+   "sha256": "f53e1fe5e2b5a48351c188f128833b6ebf0654bec71d04e678351832b394ee5a"
+  },
+  {
+   "tipo": "produto",
+   "i": 18,
+   "alt": "Carolina Herrera 212 VIP Rosé",
+   "bytes": 15796,
+   "sha256": "f818d7284ecd461854bca7f1950480f81e5a19a0733a32971fb41968617561a6"
+  },
+  {
+   "tipo": "produto",
+   "i": 19,
+   "alt": "Carolina Herrera 212 Heroes Forever Young Men",
+   "bytes": 20862,
+   "sha256": "83e325645a00561ab9daacdbc9ca15a3767fe553a7068d94f380d53d399b4dac"
+  },
+  {
+   "tipo": "produto",
+   "i": 20,
+   "alt": "Carolina Herrera 212 VIP Black Elixir Men",
+   "bytes": 13792,
+   "sha256": "4185e5d96596e7ab9a4f9599ec681111be39550e30fa8e0ae48c84bdc3256523"
+  },
+  {
+   "tipo": "produto",
+   "i": 21,
+   "alt": "Paco Rabanne Olympéa Parfum",
+   "bytes": 15246,
+   "sha256": "e5ba8b25c2bef66f7387f1735af54e6f0f1b7ccc78584e8d38dbc842e68c9833"
+  },
+  {
+   "tipo": "produto",
+   "i": 22,
+   "alt": "Paco Rabanne Lady Million",
+   "bytes": 15916,
+   "sha256": "007e0699dc0d4cf9fe6a63b72751a7c63826802c71281b766a182b2c92efe28c"
+  },
+  {
+   "tipo": "produto",
+   "i": 23,
+   "alt": "Paco Rabanne Olympéa Absolu",
+   "bytes": 21496,
+   "sha256": "0d952abf627debbf04c5be0aabbab88c81d3c2a5a1cfc0f9cc14fd7b9f056dfb"
+  },
+  {
+   "tipo": "produto",
+   "i": 24,
+   "alt": "Paco Rabanne Lady Million Royal",
+   "bytes": 19326,
+   "sha256": "bf6ad87de4d7a071e67a736d38a803169c1c3b83866b0fc51c2445f03345c26e"
+  },
+  {
+   "tipo": "produto",
+   "i": 25,
+   "alt": "Paco Rabanne Paco Rose",
+   "bytes": 12466,
+   "sha256": "45ac9185a7a8e3f5f3903501109d566177eb2055b34f98dbc571ba425dc7d37b"
+  },
+  {
+   "tipo": "produto",
+   "i": 26,
+   "alt": "Paco Rabanne Olympéa",
+   "bytes": 15782,
+   "sha256": "a8502d42ac204be020ddf272db3f12909f9451651f0678f1c33d9afe69ee2910"
+  },
+  {
+   "tipo": "produto",
+   "i": 27,
+   "alt": "Paco Rabanne Fame Parfum",
+   "bytes": 22286,
+   "sha256": "938734a917506992d029792f51487cbeb565e2c237310cd0e86a3f98e2c6e3c7"
+  },
+  {
+   "tipo": "produto",
+   "i": 28,
+   "alt": "Paco Rabanne Fame",
+   "bytes": 19768,
+   "sha256": "222c5a7b5016f6ad72f7816560182a6353acbf52d9dda91076916360b1bc8e7e"
+  },
+  {
+   "tipo": "produto",
+   "i": 29,
+   "alt": "Paco Rabanne Invictus Victory Extreme",
+   "bytes": 18354,
+   "sha256": "8ab83d5491ec66f16b2bd621ad4d5118ec133fa22c3f29460da1c143c8a904ef"
+  },
+  {
+   "tipo": "produto",
+   "i": 30,
+   "alt": "Paco Rabanne Invictus Aqua Travel Exclusive",
+   "bytes": 24136,
+   "sha256": "aacc00ed661e256ecc0878b2e7d4ad43ad3684bd747c577aa18b083035208b85"
+  },
+  {
+   "tipo": "produto",
+   "i": 31,
+   "alt": "Paco Rabanne Invictus Victory Elixir Intense",
+   "bytes": 24676,
+   "sha256": "73889a905fbb60de53c90819b0a50b0723def6baccd5a0151eea3efde46f41a7"
+  },
+  {
+   "tipo": "produto",
+   "i": 32,
+   "alt": "Paco Rabanne Invictus Parfum",
+   "bytes": 23462,
+   "sha256": "168b0513bac319e9777d2e49774d49a3364a57e713e0248c59be6b1147f00be0"
+  },
+  {
+   "tipo": "produto",
+   "i": 33,
+   "alt": "Paco Rabanne Invictus",
+   "bytes": 17970,
+   "sha256": "2bf6556f4b9a84c2335d3755a266c2f6e39d85017e995f180c029e869177181c"
+  },
+  {
+   "tipo": "produto",
+   "i": 34,
+   "alt": "Paco Rabanne Invictus Parfum",
+   "bytes": 22174,
+   "sha256": "d2ce4e84294813144b0cc0224e6754985c2dac57ebdf70570d1adf33faedbfd5"
+  },
+  {
+   "tipo": "produto",
+   "i": 35,
+   "alt": "Paco Rabanne Invictus Victory Absolu",
+   "bytes": 21884,
+   "sha256": "545c42b7e192b191821ba9c07368859404c3a2acd548ec8697ff2e92ebfb8c14"
+  },
+  {
+   "tipo": "produto",
+   "i": 36,
+   "alt": "Afnan 9PM Kit Men",
+   "bytes": 15348,
+   "sha256": "5162eec4cb02afe441a5f8ef88272600946527d7cb88444f08e635eeba09e85a"
+  },
+  {
+   "tipo": "produto",
+   "i": 37,
+   "alt": "Afnan 9PM Rebel",
+   "bytes": 12216,
+   "sha256": "756ef3e6f1a70ff9cdbf9f3d102832bc26ca47e0c53696616ce281303340fe4f"
+  },
+  {
+   "tipo": "produto",
+   "i": 38,
+   "alt": "Afnan Isabelle La Belle 9PM Rebel",
+   "bytes": 15768,
+   "sha256": "44a9e09b8e3134f692e57f80fd9c4496029ca8748c0bf25ac84bbc810eb3264a"
+  },
+  {
+   "tipo": "produto",
+   "i": 39,
+   "alt": "Afnan 9PM Men",
+   "bytes": 14430,
+   "sha256": "94e370432a2298947d7aee79fa7ef4f7642c89223e4fdfc0eae08ec62cdaaa88"
+  },
+  {
+   "tipo": "produto",
+   "i": 40,
+   "alt": "Afnan 9PM Fem",
+   "bytes": 15592,
+   "sha256": "2b810ed54960ba32e64913acfee8471745e35b38c3b14055e2f6552bce2d0f4d"
+  },
+  {
+   "tipo": "produto",
+   "i": 41,
+   "alt": "Afnan 9PM Night Out",
+   "bytes": 25154,
+   "sha256": "96c5ffe315e575c4bc0055a0945dfe7ae3d0bf3246e9bde8fb7a754be8024077"
+  },
+  {
+   "tipo": "produto",
+   "i": 42,
+   "alt": "Afnan 9PM Rebel Kit",
+   "bytes": 17132,
+   "sha256": "fcd95be18f49384b3e1792aca3fd2f7a6e29fbd2f4f6b2d142461bf4c707c5bf"
+  },
+  {
+   "tipo": "produto",
+   "i": 43,
+   "alt": "Afnan 9PM Elixir",
+   "bytes": 17746,
+   "sha256": "87c4e9973ba705627a83abdb2e1b68a95283ee5a44a2fd8fedf37771483f9551"
+  },
+  {
+   "tipo": "produto",
+   "i": 44,
+   "alt": "French Avenue Vulcan Feu",
+   "bytes": 30564,
+   "sha256": "5b5954b0bf2a52c947d21c731d8c470a0e56c58de0357bde48199acef25f1bdb"
+  },
+  {
+   "tipo": "produto",
+   "i": 45,
+   "alt": "French Avenue Vulcan Black Friday",
+   "bytes": 28392,
+   "sha256": "35b9122fec9ec4142055a98db616b1f7dfbb3f6ef4b378f64beef73e33bc880b"
+  },
+  {
+   "tipo": "produto",
+   "i": 46,
+   "alt": "French Avenue Liquid Brun",
+   "bytes": 20560,
+   "sha256": "fdbe81ef86044895fcb2c446f99fc56c80c0d0468528819d387f73ae5be59abe"
+  },
+  {
+   "tipo": "produto",
+   "i": 47,
+   "alt": "French Avenue Vulcan Sable",
+   "bytes": 26464,
+   "sha256": "b397089abfa7d8e89671d92752d0132117ca166094c3f0adfb82b8da8fd179e8"
+  },
+  {
+   "tipo": "produto",
+   "i": 48,
+   "alt": "French Avenue Veneno Scarlet",
+   "bytes": 21874,
+   "sha256": "51cc53c292b962c6d8cd6315d0fcc3f79d69aa022e05c6f2a9d703a125d36518"
+  },
+  {
+   "tipo": "produto",
+   "i": 49,
+   "alt": "Al Wataniah Attar Al Wesal Elixir",
+   "bytes": 38226,
+   "sha256": "ff317f706e2f7f5edcc65f034e2424d3dda55c05b385f0f1057613702fbe3d3f"
+  },
+  {
+   "tipo": "produto",
+   "i": 50,
+   "alt": "Al Wataniah Attar Al Wesal Gold",
+   "bytes": 41568,
+   "sha256": "ec22fa5a640ede1ec30c159e8c9c6115e4b499da6701b5de572ef072c6120e84"
+  },
+  {
+   "tipo": "produto",
+   "i": 51,
+   "alt": "Medicube TXA Niacinamide Capsule Cream 5%",
+   "bytes": 21878,
+   "sha256": "618ff138fe387c1a46afdbd96e15cccbce80a9d2aca933a6d5d5f912e295a35c"
+  },
+  {
+   "tipo": "produto",
+   "i": 52,
+   "alt": "Medicube TXA Niacinamide 15% Serum",
+   "bytes": 24342,
+   "sha256": "e059bc2dc3ac57af16b4d56455822b97a85a91cb0f0740a40a7c141d510279bd"
+  },
+  {
+   "tipo": "produto",
+   "i": 53,
+   "alt": "Medicube AGE-R Glutathione Glow Capsule Cream",
+   "bytes": 20944,
+   "sha256": "277a130f3a836bae14286c52ae0dade8aa09d35bca51d2e8603d0badbb60b9e7"
+  },
+  {
+   "tipo": "produto",
+   "i": 54,
+   "alt": "Medicube AGE-R Vita C Pro Ampoule",
+   "bytes": 32070,
+   "sha256": "e479f9576944c4a86019d549647c08596454890eda21e8ee5496e00129046cee"
+  },
+  {
+   "tipo": "produto",
+   "i": 55,
+   "alt": "Medicube AGE-R Glutathione Glow Capsule Mask",
+   "bytes": 25074,
+   "sha256": "e4b9183296e76e315517a3cf8abb005f43ddb46fd7700f2eaa2f117d6569245b"
+  },
+  {
+   "tipo": "produto",
+   "i": 56,
+   "alt": "Medicube Deep Vita C Capsule Serum",
+   "bytes": 25550,
+   "sha256": "4dee8500087c1238c31b06be719d35b8791dccd6d06eef5fc1b841203968b985"
+  },
+  {
+   "tipo": "produto",
+   "i": 57,
+   "alt": "Medicube Zero Pore Pad",
+   "bytes": 16384,
+   "sha256": "f461cca10b5ca9ea013b1ee93f094314a82dd0aa7cf4ffab85e2a91642b5cfea"
+  },
+  {
+   "tipo": "produto",
+   "i": 58,
+   "alt": "Anua Niacinamide 10% + TXA 4% Dark Spot Serum",
+   "bytes": 25156,
+   "sha256": "dc914f26524f7320bcd55ff76d252859f281b39a9abb17f7f423461a1e1fbe44"
+  },
+  {
+   "tipo": "produto",
+   "i": 59,
+   "alt": "Celimax Retinal Shot Tightening Booster",
+   "bytes": 22666,
+   "sha256": "d8b4e9c3110beec3818f74a4d8597a69c3a1fb2a5aabd90ddfb8faedf5d732a3"
+  },
+  {
+   "tipo": "produto",
+   "i": 60,
+   "alt": "Celimax Retinal Shot Tightening Dual Cream",
+   "bytes": 17244,
+   "sha256": "7e3154f8feed17887d88683a04a0ccb4472953fa5ed224b3b293ed3bab9a63f3"
+  },
+  {
+   "tipo": "produto",
+   "i": 61,
+   "alt": "Alluvi Labs GHK-Cu Glow Dual Regenerative Capsule Cream",
+   "bytes": 28844,
+   "sha256": "7de363e7c7e93193ccf1d205e9349f66f3f39cd9adbcdc39b5d8e91aad33e999"
+  },
+  {
+   "tipo": "produto",
+   "i": 62,
+   "alt": "Sungboon Editor Silk Peptide Intensive Lifting Ampoule",
+   "bytes": 36232,
+   "sha256": "3ebd28d0daed6aa72c1c60dd4844935ea9ee4e363b5f0ca219e2b3c926b77be3"
+  },
+  {
+   "tipo": "produto",
+   "i": 63,
+   "alt": "Skin1004 Madagascar Centella Ampoule Foam",
+   "bytes": 36778,
+   "sha256": "2e1a9cf7da77c1e53540eb4e3dba7138a7b48a0a95a3a9cb61e12a7711ce3bac"
+  },
+  {
+   "tipo": "produto",
+   "i": 64,
+   "alt": "Skin1004 Madagascar Centella Poreminizing Travel Kit",
+   "bytes": 28552,
+   "sha256": "ffe3bf54f50f93a8c15f7fea5f39d5d52e8cc7f7ddec099fa4ddd90c99dd3e83"
+  },
+  {
+   "tipo": "produto",
+   "i": 65,
+   "alt": "Numbuzin No.9 NAD+ Retinal Eye Cream",
+   "bytes": 21066,
+   "sha256": "76e06dfa4a0cbea29445631248e1f407e5a7417ab33f8d77bfc2d3258d383b43"
+  },
+  {
+   "tipo": "produto",
+   "i": 66,
+   "alt": "Numbuzin No.9 Eye Cream NAD+ Retinol",
+   "bytes": 39088,
+   "sha256": "b548053cb15b8bc8471f1c73e348695d59f4a6395608e52343886e2662a0a026"
+  },
+  {
+   "tipo": "produto",
+   "i": 67,
+   "alt": "Lattafa Fakhar Elixir",
+   "bytes": 56802,
+   "sha256": "877d93af1016cd0f33c2953ec268afd9ac1f58ad009e25e5e2e32127da490232"
+  },
+  {
+   "tipo": "produto",
+   "i": 68,
+   "alt": "Lattafa Fakhar Black",
+   "bytes": 51630,
+   "sha256": "86a2401134581e025471ce1d0959f4dea747411c5f3ca66b088837f0fbea7d82"
+  },
+  {
+   "tipo": "produto",
+   "i": 69,
+   "alt": "Lattafa Fakhar Men Kit Completo",
+   "bytes": 33376,
+   "sha256": "0c0e3b4790e25a6671582ff257a3603ffc12728749289aab9c0712a26d58199d"
+  },
+  {
+   "tipo": "produto",
+   "i": 70,
+   "alt": "Asdaaf Ameerati Al Arab",
+   "bytes": 23444,
+   "sha256": "e7d89648ebf56c9b3315ed553933ee5cccdef2c4d534ae5667152c8e2b3218da"
+  },
+  {
+   "tipo": "produto",
+   "i": 71,
+   "alt": "Dr. Althea 345 Relief Serum",
+   "bytes": 33152,
+   "sha256": "f8bd05fc3333b61524069ba422853088d0ccfce42b56db26dc19bb7912b595b9"
+  },
+  {
+   "tipo": "produto",
+   "i": 72,
+   "alt": "Dr. Althea 345 Relief Cream",
+   "bytes": 17678,
+   "sha256": "4e3e216301b7d8aee3b6945a83be60cbd7073c97696a26f7eb0bab100cd35c6d"
+  },
+  {
+   "tipo": "produto",
+   "i": 73,
+   "alt": "Dr. Althea Kit Completo 345",
+   "bytes": 29572,
+   "sha256": "a3a244520031d17e74924d1be28974472cc2fcc593c890972ee7edda27340a9a"
+  },
+  {
+   "tipo": "produto",
+   "i": 74,
+   "alt": "Medicube PDRN Pink Peptide Serum",
+   "bytes": 16370,
+   "sha256": "36aebf5915743f52a29601e256ad5b0a8011707f97b5b431da91790da02a2ad0"
+  },
+  {
+   "tipo": "produto",
+   "i": 75,
+   "alt": "Medicube Deep Vita C Pad",
+   "bytes": 19612,
+   "sha256": "c3c15979645e2d02af0a340320f1605004885f96b94de95e9950fe7c2b9f79f0"
+  },
+  {
+   "tipo": "produto",
+   "i": 76,
+   "alt": "Medicube Red Succinic Acid Peeling Pad",
+   "bytes": 20654,
+   "sha256": "860e9f52444ba69f5810ab53c2db41959dac7895add15c2ec623d70a7c3e018e"
+  },
+  {
+   "tipo": "produto",
+   "i": 77,
+   "alt": "Medicube Kit Pads Zero Pore + Red Succinic",
+   "bytes": 15808,
+   "sha256": "9f184f06e06f88b92714b89599ff3736bd8efafc6135a02c4ae3719a61bfa245"
+  },
+  {
+   "tipo": "produto",
+   "i": 78,
+   "alt": "CP Imports Kit Rotina Coreana · 4 passos",
+   "bytes": 28948,
+   "sha256": "da71768bbcb2650d39477110700fc7465d623952367265c1ba3234752311772f"
+  },
+  {
+   "tipo": "produto",
+   "i": 79,
+   "alt": "Catena Zapata Angelica Zapata Cabernet Sauvignon",
+   "bytes": 13392,
+   "sha256": "e5665c5cd4d2c5f104d1c09ba351041b22ddece04abc92d833cb699c88d10285"
+  },
+  {
+   "tipo": "produto",
+   "i": 80,
+   "alt": "Catena Zapata D.V. Catena Cabernet Malbec",
+   "bytes": 16850,
+   "sha256": "95d11ffd0a9865c79babf528fef3e74c0be79ec3cdd8179f02c2f2b008c2c163"
+  },
+  {
+   "tipo": "produto",
+   "i": 81,
+   "alt": "Licor 43 Original",
+   "bytes": 21804,
+   "sha256": "e5e1848e7818cb9bb14bff8ba701934f3d11f7cd12f5cf42ce061b9f34f0a718"
+  },
+  {
+   "tipo": "produto",
+   "i": 82,
+   "alt": "Licor 43 Original",
+   "bytes": 24524,
+   "sha256": "16f2248587734325af2f94e57e93956b37e55c512ebcb23911d9fb2cea4ef192"
+  },
+  {
+   "tipo": "produto",
+   "i": 83,
+   "alt": "Licor 43 Crème Brûlée",
+   "bytes": 21788,
+   "sha256": "675542d5e77e9761521dc1b1dc47ff73549486c500c3582638f08ba4bbaacd68"
+  },
+  {
+   "tipo": "produto",
+   "i": 84,
+   "alt": "Licor 43 Chocolate",
+   "bytes": 21866,
+   "sha256": "7204f9a892cd7e08bccacd88d858fbbac3a093b5c1c15ee1e2e591fb5d404354"
+  },
+  {
+   "tipo": "produto",
+   "i": 85,
+   "alt": "Licor 43 Orochata",
+   "bytes": 18226,
+   "sha256": "a77e0eccef4f4fa084aad2bbd6c0f363df1b160a780cbb29cb54496cc79193ca"
+  },
+  {
+   "tipo": "produto",
+   "i": 86,
+   "alt": "On Cloudhorizon Waterproof",
+   "bytes": 15700,
+   "sha256": "8426c6acd8e4297ce448a1fa643a7109d905ba5482dad6e1896e7405fa8afa65"
+  },
+  {
+   "tipo": "produto",
+   "i": 87,
+   "alt": "Smartwatch T900 Mini Preto",
+   "bytes": 25888,
+   "sha256": "e48faca1a30aa55fb068005c33c5aaa8475b42e77feb114df8d19b0ac295d0d8"
+  },
+  {
+   "tipo": "produto",
+   "i": 88,
+   "alt": "Kerasys Propolis Kit Energy+ &amp; Shine",
+   "bytes": 31808,
+   "sha256": "80001b7ea50a351779965cb2cc6b3fb63c0e510dfffa0a62d710f75ec78b0d1c"
+  },
+  {
+   "tipo": "produto",
+   "i": 89,
+   "alt": "Kerasys Propolis Kit Shampoo + Tratamento",
+   "bytes": 37882,
+   "sha256": "c4c1b59d1c518f02daac1675492feabc7d6a8e3b395ddc3290b69bc9a352438a"
+  },
+  {
+   "tipo": "produto",
+   "i": 90,
+   "alt": "Kerasys Oriental Premium Shampoo Reparação Profunda",
+   "bytes": 19360,
+   "sha256": "3b32cff56e10bcf0c59f344f6736bbedc88db482bc2a24bdc1afd727fec3478b"
+  },
+  {
+   "tipo": "produto",
+   "i": 91,
+   "alt": "Kerasys Oriental Premium Shampoo Volume e Reparação",
+   "bytes": 17754,
+   "sha256": "fef475b0c528fdda263939ad9bbd1eada5e4505487f55923329f9f7268d41c4e"
+  },
+  {
+   "tipo": "produto",
+   "i": 92,
+   "alt": "Kerasys Perfume Lovely Romantic Shampoo + Condicionador",
+   "bytes": 56662,
+   "sha256": "091ec5231351733f967df08ba0c5c69184ebd4d48ece3fb63aa22f0472c49140"
+  },
+  {
+   "tipo": "produto",
+   "i": 93,
+   "alt": "Kerasys Keratin Bond Hair Mask Deep Repair",
+   "bytes": 34530,
+   "sha256": "d7c0e60975d35bb05e9300e8812ae27760c10860620cd5e5594327c0bf43e580"
+  },
+  {
+   "tipo": "produto",
+   "i": 94,
+   "alt": "Kerasys Keratin Bond Hair Mask Silky Moisture",
+   "bytes": 31560,
+   "sha256": "a1b20d5443d152d31baa6a6551fd9640e71dac49742db05ff62b25ce84deb583"
+  },
+  {
+   "tipo": "produto",
+   "i": 95,
+   "alt": "Kerasys Keramide Ampoule Heat Protection Treatment",
+   "bytes": 32314,
+   "sha256": "ac5302e3aea5390b907c37a9ea18a2fa50364be4a07fe6dba25acd64a280dd7e"
+  },
+  {
+   "tipo": "produto",
+   "i": 96,
+   "alt": "Kerasys Oriental Premium Kit Shampoo + Condicionador",
+   "bytes": 30332,
+   "sha256": "fa7356b880aff3a7e3252683544f5cd86a944db19c6eb3dc9d2ad1edd4bfd23d"
+  },
+  {
+   "tipo": "produto",
+   "i": 97,
+   "alt": "Tsubaki Premium Treatment Water",
+   "bytes": 24732,
+   "sha256": "7aa06567a41e4d5faf70f913f44b0e721fa7597161c819a45f41a8f225f6726a"
+  },
+  {
+   "tipo": "produto",
+   "i": 98,
+   "alt": "Tsubaki Premium Moist &amp; Repair Treatment",
+   "bytes": 18140,
+   "sha256": "09bc85cba99cfceb001f83fbfa67646ccfca41bbbe5e595e9f6e3dfc37d5c63d"
+  },
+  {
+   "tipo": "produto",
+   "i": 99,
+   "alt": "Tsubaki Premium Volume &amp; Repair Treatment",
+   "bytes": 14704,
+   "sha256": "2009921e1aa8479a43f725482b9dd0324702be2391cbed2096860e4f9a9eb76e"
+  },
+  {
+   "tipo": "produto",
+   "i": 100,
+   "alt": "Tsubaki Premium EX Kit Shampoo + Condicionador",
+   "bytes": 51470,
+   "sha256": "9145b34964dadeaf144f3d98931dcfae1a6147c57eba2f9f685d7c3c303803f7"
+  },
+  {
+   "tipo": "produto",
+   "i": 101,
+   "alt": "Fino Premium Touch Kit Shampoo + Condicionador",
+   "bytes": 22782,
+   "sha256": "8bf555556aea0bfe0fddeed60b31ae1b022766f5ef27432f9d1dbd4e55d20822"
+  },
+  {
+   "tipo": "produto",
+   "i": 102,
+   "alt": "Fino Premium Touch Hair Mask",
+   "bytes": 17006,
+   "sha256": "d58b26bd856321786b2ed15b435e2231f35c251dd6d96952a25cd56f4cb490d0"
+  },
+  {
+   "tipo": "produto",
+   "i": 103,
+   "alt": "Fino Premium Touch Hair Oil",
+   "bytes": 13668,
+   "sha256": "c1fa6f66f00d38e00475606bdce64b605992d957dcb95c208180f1b2cdab6c75"
+  },
+  {
+   "tipo": "produto",
+   "i": 104,
+   "alt": "Fino Premium Touch Kit Completo",
+   "bytes": 35746,
+   "sha256": "3516baf7ffb8221e8436b99d95d260aa40b5b9a524274d69e7f0574b8615501a"
+  },
+  {
+   "tipo": "produto",
+   "i": 105,
+   "alt": "Lilyeve Grow:Turn Brush Steam Booster + Tratamento grátis",
+   "bytes": 25944,
+   "sha256": "921a7e19afada09fccf7f283c4a4cb7768876c4fbdb673c89837dc7cb53651a1"
+  },
+  {
+   "tipo": "produto",
+   "i": 106,
+   "alt": "Afeef Afeef",
+   "bytes": 71554,
+   "sha256": "db8d4163f35c964ffece0e9fe40d08b47470c3ab063d8bef65fb62a242610943"
+  },
+  {
+   "tipo": "produto",
+   "i": 107,
+   "alt": "Stella Dustin Passion Fruit Caipirinha",
+   "bytes": 43582,
+   "sha256": "7114b1cbe71f440c8ba1ef99819f82f213e593813c486b7d26f1fedfd198dd60"
+  },
+  {
+   "tipo": "produto",
+   "i": 108,
+   "alt": "CP Imports Kit Combinação Perfeita",
+   "bytes": 21578,
+   "sha256": "53d04088a94519958140854db5696981ab0d0c0732e4d27329042a0d7e13247d"
+  },
+  {
+   "tipo": "produto",
+   "i": 109,
+   "alt": "Linha Infantil Kit Make Up Unicorn",
+   "bytes": 66768,
+   "sha256": "5e8070bea0a6444a0e73d7f6dd85e2a15927f09843c86da15a841ea5ba491b31"
+  },
+  {
+   "tipo": "produto",
+   "i": 110,
+   "alt": "Linha Infantil Maleta de Maquiagem 46 itens",
+   "bytes": 79926,
+   "sha256": "a6d238bfb3e91fbac1b19804137f81fd47c0e91cb95cc101957d3ee61fc3f092"
+  },
+  {
+   "tipo": "produto",
+   "i": 111,
+   "alt": "Linha Infantil Kit de Miçangas",
+   "bytes": 47604,
+   "sha256": "ccf26feb4a28d9a7836623aca604535ebff771842433f93c8ef41c4e63289d90"
+  },
+  {
+   "tipo": "produto",
+   "i": 112,
+   "alt": "Linha Infantil Makeup Handbag",
+   "bytes": 76678,
+   "sha256": "74820f635da788e03db3799cdbae36694fa495959adc2a7316ccb754169e0cdc"
+  },
+  {
+   "tipo": "produto",
+   "i": 113,
+   "alt": "On Cloudboom Echo 3",
+   "bytes": 13234,
+   "sha256": "6b98b7f839d8ff1a2e80d167c1a611eb3a3c13ceb867eabba26f44041a0332af"
+  },
+  {
+   "tipo": "produto",
+   "i": 114,
+   "alt": "On Cloudmonster",
+   "bytes": 14052,
+   "sha256": "faadae78dacd3c94530689402544eebae83d30a4b2ed4cb906b37cd3c2b0028e"
+  },
+  {
+   "tipo": "produto",
+   "i": 115,
+   "alt": "Lattafa Tharwah Gold Gift Set",
+   "bytes": 26296,
+   "sha256": "d26ce28c4ef0f03404a59473c2da1c271157048c2e012a194d1027d5ada69ce9"
+  },
+  {
+   "tipo": "produto",
+   "i": 116,
+   "alt": "Lattafa Queen of Arabia Gift Set",
+   "bytes": 28164,
+   "sha256": "1483d751660e2a824eb1f3fd97afa0a4395aabe21a69aaa2d421fcd2484ba087"
+  },
+  {
+   "tipo": "produto",
+   "i": 117,
+   "alt": "Lattafa Maahir Black Men Kit",
+   "bytes": 20666,
+   "sha256": "fa3f75e3d4716290fe8ba81720d909bc02ff99af10d782465d4dfcd3f8506a05"
+  },
+  {
+   "tipo": "produto",
+   "i": 118,
+   "alt": "Lattafa Opulent Dubai",
+   "bytes": 21082,
+   "sha256": "59e5c4c40552288a4a1784024f08526568bb21bf01f71f6088645f4257bd162b"
+  },
+  {
+   "tipo": "produto",
+   "i": 119,
+   "alt": "Armaf Club de Nuit Woman Kit",
+   "bytes": 14838,
+   "sha256": "69432c951c981411167604c52dc31a6178c06cade8d7f9ae81867f7155502a63"
+  },
+  {
+   "tipo": "produto",
+   "i": 120,
+   "alt": "Armaf Club de Nuit Intense Man Kit",
+   "bytes": 18608,
+   "sha256": "5583a158e0cf89878ecf90b090f4013add3855d30ba39fdaeea8dac57c4ac1ac"
+  },
+  {
+   "tipo": "produto",
+   "i": 121,
+   "alt": "Dolce &amp; Gabbana Devotion",
+   "bytes": 21736,
+   "sha256": "68b00a38cdeb11fb86c120edf13744f7d40b0dd9021a93bb962775c23499b37e"
+  },
+  {
+   "tipo": "produto",
+   "i": 122,
+   "alt": "Dolce &amp; Gabbana Queen Kit",
+   "bytes": 15100,
+   "sha256": "d2b2cb99faad92cf0f86768cbf367341a5168fb28857c40da65c7b2d865cc159"
+  },
+  {
+   "tipo": "produto",
+   "i": 123,
+   "alt": "Coach Cherry",
+   "bytes": 17846,
+   "sha256": "b13c1b5c347002ce51c56e511c33dbc7d2f4ef0d5e01296d70bbaf7735a48512"
+  },
+  {
+   "tipo": "produto",
+   "i": 124,
+   "alt": "Montblanc Legend",
+   "bytes": 18370,
+   "sha256": "8d8b267f7e3d1141cca118a3c3a3e2ca32f7a9e50ecf9d19d07453a263583303"
+  },
+  {
+   "tipo": "produto",
+   "i": 125,
+   "alt": "Quenavin Kit Completo Queda Capilar",
+   "bytes": 40220,
+   "sha256": "6bcded77ae5a91090359ea23379e1c061dfbeb764a6df489289a25da3560af65"
+  },
+  {
+   "tipo": "produto",
+   "i": 126,
+   "alt": "Quenavin Loção Capilar Minoxidil 5%",
+   "bytes": 43376,
+   "sha256": "91fb56b719e53de2e92a4b3825c1af8ba9e3c490ae1e3fd3f889d152010a21e6"
+  },
+  {
+   "tipo": "produto",
+   "i": 127,
+   "alt": "Zimaya Tiramisù Coco",
+   "bytes": 36280,
+   "sha256": "17436cbff8d06e69623909799b09aa41e6dc831c1d9911a452042b6e791b44fa"
+  },
+  {
+   "tipo": "produto",
+   "i": 128,
+   "alt": "Pendora Scents Indulge",
+   "bytes": 29282,
+   "sha256": "153ee26e67073086f82cccfad2e16a08df16f189007bc0fd98ab482cfc0b9607"
+  },
+  {
+   "tipo": "produto",
+   "i": 129,
+   "alt": "On Cloudrock Bota Feminina · Marrom",
+   "bytes": 32774,
+   "sha256": "2ac5e7527c6a18734cac42cc4da3d8ce8b9b5e5017a1ba42d4662b640c3aaf4a"
+  },
+  {
+   "tipo": "produto",
+   "i": 130,
+   "alt": "On Cloudrock Bota Feminina · Bege",
+   "bytes": 45376,
+   "sha256": "d26129f4a244bfeac61fd049a924b5741918061742d88600856186afbb64f9a0"
+  },
+  {
+   "tipo": "produto",
+   "i": 131,
+   "alt": "On Cloud 6 Feminino Waterproof",
+   "bytes": 34102,
+   "sha256": "0ab014e6005e96bce590c15b198c47b74c0c839b6899b6ece1f20a57e7f30344"
+  },
+  {
+   "tipo": "produto",
+   "i": 132,
+   "alt": "CP Imports Kit Skincare Pele +30",
+   "bytes": 42964,
+   "sha256": "6c3a1474ac71932be1b00fa2cc6740674657fac7f3dedb43af3827be64781a0d"
+  },
+  {
+   "tipo": "produto",
+   "i": 133,
+   "alt": "Teste Item teste (não enviar)",
+   "bytes": 5758,
+   "sha256": "9e55b3305317b7b491530cea464df5cd2b526d39d92b69960ff642ee41cfabdd"
+  },
+  {
+   "tipo": "produto",
+   "i": 134,
+   "alt": "Numbuzin No.9 NAD+ Retinal Volumetox Eye Cream",
+   "bytes": 71780,
+   "sha256": "9ba9ad247da83d97721aa2ba6aa5a876037844ca6a501ba49f2f00ca86d8423c"
+  },
+  {
+   "tipo": "produto",
+   "i": 135,
+   "alt": "Numbuzin No.9 NAD+ Bio Lifting-sil Essence",
+   "bytes": 67292,
+   "sha256": "42a2a1232b1259a4901d66b7d038d2863756db68009433a78cb265daabd8732d"
+  },
+  {
+   "tipo": "produto",
+   "i": 136,
+   "alt": "Tsubaki Kit Shampoo + Condicionador · Linha Amarela",
+   "bytes": 27042,
+   "sha256": "8d72e767c3d0a476e925cfe89f844afd0912382b159aec6ece8b4620e8a0c534"
+  },
+  {
+   "tipo": "produto",
+   "i": 137,
+   "alt": "Tsubaki Kit Shampoo + Condicionador · Linha Vermelha",
+   "bytes": 26722,
+   "sha256": "b7922373d58819807ff7a3b7e9bdce35b8e111753700ba8a2519ce4e33c60f58"
+  },
+  {
+   "tipo": "produto",
+   "i": 138,
+   "alt": "Tsubaki Kit Shampoo + Condicionador · Linha Azul",
+   "bytes": 28216,
+   "sha256": "9dd8572dd24c5c27db9ec571dfd80fe77a0d6f3ee38b0284e549ed3f5788d701"
+  },
+  {
+   "tipo": "produto",
+   "i": 139,
+   "alt": "Tsubaki Kit Shampoo + Condicionador · Linha Preta",
+   "bytes": 27004,
+   "sha256": "5ffac88fbf5305cc3e4994fce67f43e066050bfbc5efbedd22578039ff5186bb"
+  },
+  {
+   "tipo": "produto",
+   "i": 140,
+   "alt": "Tsubaki Premium Repair Mask",
+   "bytes": 44770,
+   "sha256": "0a4c5bc622a4045b68aa6f9d1af58a34c12f12bf3a430e55c0e1dd6b401043db"
+  },
+  {
+   "tipo": "produto",
+   "i": 141,
+   "alt": "Tsubaki Premium EX Repair Mask",
+   "bytes": 48368,
+   "sha256": "41e6f0d786d05c11f2a2038d016fbad3ac7fa47ba9611206a31d41bda8c2261d"
+  },
+  {
+   "tipo": "produto",
+   "i": 142,
+   "alt": "Elizavecca CER-100 Collagen Ceramide Coating Protein Treatment",
+   "bytes": 42002,
+   "sha256": "55308966c8258d1a2a69cab4d00334428ffcefc8da2feed27e19c79ca1e649a8"
+  },
+  {
+   "tipo": "produto",
+   "i": 143,
+   "alt": "Fino Premium Touch Hair Oil Serum Airy Smooth",
+   "bytes": 11364,
+   "sha256": "7597c37c55263145f02f88d241445ad6067bef20887103265dfdb55b10aaf1ab"
+  },
+  {
+   "tipo": "produto",
+   "i": 144,
+   "alt": "Elizabeth Arden Kit Presente 7 Itens",
+   "bytes": 53230,
+   "sha256": "b1cdfdbdd90c08d28dfaf5589005222b6961212aefbe0a0a346d628e0ef8aec4"
+  },
+  {
+   "tipo": "produto",
+   "i": 145,
+   "alt": "Lattafa Yara",
+   "bytes": 54910,
+   "sha256": "ebf8919f71b1b1a48aedb69da19a1cd1257570a24f239d0f9f1c9d2b1fbb7782"
+  },
+  {
+   "tipo": "produto",
+   "i": 146,
+   "alt": "Lattafa Kit Yara Collection",
+   "bytes": 62156,
+   "sha256": "5ecf9292f8f9fba888aba7ec64f4a83a7c84b7b2419e7cf96dff379107507019"
+  },
+  {
+   "tipo": "produto",
+   "i": 147,
+   "alt": "Lattafa Kit Asad Collection",
+   "bytes": 73764,
+   "sha256": "452ef5c152578b6da3f738ce1c5bc296b1fb688ea840b3875cce778805371178"
+  },
+  {
+   "tipo": "produto",
+   "i": 148,
+   "alt": "Anua Azelaic Acid 10+ Hyaluron Soothing Serum",
+   "bytes": 53694,
+   "sha256": "decad2d8cf4e35499acf214f0169d83c327aecc655aafa2b076a3a2bec153963"
+  },
+  {
+   "tipo": "produto",
+   "i": 149,
+   "alt": "&amp;honey Deep Moist Shampoo 1.0",
+   "bytes": 51536,
+   "sha256": "0d676484076272f0e9dae57ac1eb300760246eccedec150d7a169a2246198db4"
+  },
+  {
+   "tipo": "produto",
+   "i": 150,
+   "alt": "&amp;honey Deep Moist Treatment 2.0",
+   "bytes": 48526,
+   "sha256": "f4a86768c3048f7f6b9945718666b090614446b92131da11f7a0b8354db20316"
+  },
+  {
+   "tipo": "produto",
+   "i": 151,
+   "alt": "Medicube AGE-R Booster Pro X2 White",
+   "bytes": 32690,
+   "sha256": "f7518331be891d7885956c0d1f7989fe27424cb22f276b0f8e0ce668cd7e2d62"
+  },
+  {
+   "tipo": "produto",
+   "i": 152,
+   "alt": "Medicube AGE-R Booster Pro Black",
+   "bytes": 34058,
+   "sha256": "5a34375b373a8068220730452d3a8b9095bd4290bcaa0e5a726d229bb35e6e9b"
+  },
+  {
+   "tipo": "produto",
+   "i": 153,
+   "alt": "Medicube PDRN Collagen Gua Sha Neck Wrinkle Cream",
+   "bytes": 40664,
+   "sha256": "c0d8d09ad0e08d8781baebb3062390a767474ad46242bcba5e2d78966aabc3f2"
+  },
+  {
+   "tipo": "produto",
+   "i": 154,
+   "alt": "Dyson Airwrap HS08",
+   "bytes": 18260,
+   "sha256": "adcd635e43cdb5b51052e51c5f0da9e4843961a6f3a18671a57efde54f63dd1f"
+  },
+  {
+   "tipo": "produto",
+   "i": 155,
+   "alt": "Dyson Airstrait",
+   "bytes": 15402,
+   "sha256": "2dd6c3b26568c96bed1dc611975a57ea95fdb5b24454aa4792ce16e00508b844"
+  },
+  {
+   "tipo": "produto",
+   "i": 156,
+   "alt": "Dyson Supersonic Nural",
+   "bytes": 19298,
+   "sha256": "270708ea75116c1e6aa7cc9c278ffed78cdb2914109b92db2dbc80fc4c2e746d"
+  },
+  {
+   "tipo": "logo-rodape",
+   "alt": "",
+   "bytes": 73034,
+   "sha256": "7b5612abc57ec1c1e5694b8896dfd6d78b7c47aecf6cbab6c897ecbe03dbab58"
+  }
+ ]
+}
