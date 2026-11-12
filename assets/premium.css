@@ -486,3 +486,27 @@ form.find{display:block}
 .erro p{margin:0;max-width:44ch;color:#D5E3DC}
 .erro .eyebrow{color:#D9BD7E;letter-spacing:.34em}
 .erro .ctas{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:8px}
+
+/* ---------- Etapa 4: painéis fechados ficam realmente ocultos ----------
+   Defeito da loja publicada: no desktop, depois de abrir e fechar o painel do produto, ele permanecia no centro da
+   página com opacidade 0 e continuava recebendo os cliques, bloqueando cards e botões. Fechado = oculto, sem clique
+   e fora da ordem de tabulação (a visibilidade só muda depois que a animação de saída termina). */
+.sheet:not(.on){visibility:hidden;pointer-events:none;transition:transform .45s var(--ease),opacity .35s,visibility 0s linear .45s}
+.sheet.on{visibility:visible;pointer-events:auto}
+
+/* ---------- Etapa 4: revisão visual ---------- */
+/* contatos: botão do WhatsApp numa linha só, também em celular estreito */
+.ct .wa{white-space:nowrap}
+@media(max-width:480px){.ct .wa{letter-spacing:.05em;padding:0 14px;gap:6px;font-size:11.5px}}
+/* voltar ao topo não cobre o rodapé */
+.topo.fora{opacity:0!important;pointer-events:none!important}
+/* economia do Pix no checkout */
+.note .eco{color:var(--em);font-weight:700}
+p.note.eco{background:var(--em-t);color:var(--em-d);border-radius:10px;padding:10px 14px;font-size:13px;line-height:1.45;font-weight:600}
+/* botão de pagar fixo: faixa sólida por trás, para não deixar texto aparecendo ao redor */
+#bag .sh-b>.btn-pay[data-submit]{outline:12px solid var(--bg);box-shadow:0 -22px 18px 6px var(--bg)}
+/* painel da sacola: o botão fixo encosta na borda inferior; o respiro final vem de um espaçador */
+#bag .sh-b{padding-bottom:0}
+#bag .sh-b::after{content:"";flex:none;height:20px}
+/* celulares estreitos: o botão dos contatos pode quebrar em duas linhas (não cabe em uma sem estourar a página) */
+@media(max-width:380px){.ct .wa{white-space:normal;text-align:center;line-height:1.25;padding-block:8px;height:auto}}

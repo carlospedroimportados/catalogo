@@ -62,6 +62,10 @@
   });
   atualizar();
 
+  // O botão de voltar ao topo some quando o rodapé aparece, para não cobrir os textos dele.
+  var rodapeEl = $("footer.f");
+  if (rodapeEl && "IntersectionObserver" in window) new IntersectionObserver(function (es) { topo.classList.toggle("fora", es[0].isIntersecting); }).observe(rodapeEl);
+
   // Chegada vinda das páginas de produto: ?busca=termo, ?cat=categoria e #sacola.
   // Só aciona controles existentes; os parâmetros são retirados do endereço em seguida.
   var par = new URLSearchParams(location.search), busca = par.get("busca"), cat = par.get("cat");
