@@ -1,0 +1,59 @@
+# Verificação em hospedagem simulada
+
+- pasta servida: `dist` · 2026-11-12T12:32:33.390Z · ramo `claude/sharp-davinci-n31ccy` · commit `2f3da0c`
+- Servidor local que imita GitHub Pages (modo pages) e Cloudflare/Netlify com `_headers` (modo cdn). Pedidos e pagamento **simulados**; sem rede externa.
+
+| Teste | Status | Descrição |
+|---|---|---|
+| H1 | ✅ PASSOU | Comportamento de hospedagem (modo GitHub Pages): gzip, cache, 304, redirecionamento, 404, caixa das letras |
+| H2 | ✅ PASSOU | Rastreamento do site: 157 páginas, todos os links e arquivos, metadados e dados estruturados |
+| H3 | ✅ PASSOU | Cabeçalhos de segurança e cache do _headers (modo CDN), sem valores somados em conflito |
+| H4 | ✅ PASSOU | Jornada de compra com cliques reais em desktop e celular, sob a CSP: busca, filtros, produto, página, sacola, checkout, retorno e 404 |
+| H5 | ✅ PASSOU | Pix com servidor indisponível sob a CSP (seleção do código liberada por hash) |
+
+## H1 — Comportamento de hospedagem (modo GitHub Pages): gzip, cache, 304, redirecionamento, 404, caixa das letras
+
+**✅ PASSOU**
+
+- página inicial: 200 · text/html; charset=utf-8 · gzip · max-age=600
+- produto/armaf-club-de-nuit-woman → 301 /catalogo/produto/armaf-club-de-nuit-woman/
+- endereço inexistente → 404 com a página 404 da marca
+- revalidação condicional: 304
+- robots.txt: 404 (não existe; num site em subpasta do GitHub Pages ele não seria lido pelos buscadores)
+- página inicial: 271 KB sem compressão → 28 KB com gzip
+
+## H2 — Rastreamento do site: 157 páginas, todos os links e arquivos, metadados e dados estruturados
+
+**✅ PASSOU**
+
+- 158 páginas rastreadas (início, 156 produtos, 404) · 813 arquivos internos distintos conferidos (imagens, miniaturas, fontes, estilos, scripts, ícones, sitemap) · todos com status 200
+- hosts externos referenciados: carlospedroimportados.github.io (157), wa.me (472)
+- títulos únicos: 157 · descrições de 71 a 244 caracteres · HTML total das páginas: 2867 KB
+
+## H3 — Cabeçalhos de segurança e cache do _headers (modo CDN), sem valores somados em conflito
+
+**✅ PASSOU**
+
+- CSP e demais cabeçalhos presentes na loja, nas páginas de produto e na 404; painel com política própria (moldura do Apps Script permitida) e sem herdar a da loja
+- arquivos versionados (estilo, scripts, catálogo, fotos, miniaturas, fontes): Cache-Control de um ano, imutável, sem valor somado
+- nenhum cabeçalho aparece em duas regras que casem com o mesmo caminho (conferido na criação do _headers; aqui, pela resposta)
+
+## H4 — Jornada de compra com cliques reais em desktop e celular, sob a CSP: busca, filtros, produto, página, sacola, checkout, retorno e 404
+
+**✅ PASSOU**
+
+- início: status 200 · 11 imagens visíveis carregadas
+- catálogo: busca "club" 10 · Perfumes 71 de 156 produtos · Armaf 10 produtos em ordem crescente de preço
+- pedido: Pix com cupom, 2 adicionados na página + 1 do "Comprar agora" = 3 unidades → /pay?nsu=CP-PREV-0001 (pagamento simulado) · economia exibida no cartão ("economiza R$ 27,48") e no Pix
+- retorno do pagamento, página 404 estilizada e botão de volta: ok · violações de CSP: 0 · erros de JavaScript: 0 · requisições externas: 0
+- início: status 200 · 10 imagens visíveis carregadas
+- catálogo: busca "club" 10 · Perfumes 71 de 156 produtos · Armaf 10 produtos em ordem crescente de preço
+- pedido: Pix com cupom, 2 adicionados na página + 1 do "Comprar agora" = 3 unidades → /pay?nsu=CP-PREV-0001 (pagamento simulado) · economia exibida no cartão ("economiza R$ 27,48") e no Pix
+- retorno do pagamento, página 404 estilizada e botão de volta: ok · violações de CSP: 0 · erros de JavaScript: 0 · requisições externas: 0
+
+## H5 — Pix com servidor indisponível sob a CSP (seleção do código liberada por hash)
+
+**✅ PASSOU**
+
+- desktop: servidor indisponível → Pix local com QR Code, código selecionado ao focar (liberado por hash), 2 botões de WhatsApp com "CP Importados", violações de CSP: 0
+- celular: servidor indisponível → Pix local com QR Code, código selecionado ao focar (liberado por hash), 2 botões de WhatsApp com "CP Importados", violações de CSP: 0
