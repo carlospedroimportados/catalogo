@@ -510,3 +510,11 @@ p.note.eco{background:var(--em-t);color:var(--em-d);border-radius:10px;padding:1
 #bag .sh-b::after{content:"";flex:none;height:20px}
 /* celulares estreitos: o botão dos contatos pode quebrar em duas linhas (não cabe em uma sem estourar a página) */
 @media(max-width:380px){.ct .wa{white-space:normal;text-align:center;line-height:1.25;padding-block:8px;height:auto}}
+
+/* checkout: o botão de pagar deixa de ser fixo. Fixo, ele cobria "Forma de pagamento" e outros campos; agora fica no fim do formulário,
+   rola junto com o conteúdo, e o espaço final considera a altura do botão e a área segura do iPhone (barra inferior). */
+#bag .sh-b>.btn-pay[data-submit]{position:static;outline:0;box-shadow:none;margin-top:6px}
+#bag .sh-b{padding-bottom:0}
+#bag .sh-b::after{content:"";flex:none;height:calc(28px + env(safe-area-inset-bottom,0px))}
+/* faixa da prévia sempre em uma linha: a fonte acompanha a largura da tela e, no limite, o texto é cortado com reticências */
+.proto{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:clamp(8px,2.65vw,12px);padding:6px 8px}
