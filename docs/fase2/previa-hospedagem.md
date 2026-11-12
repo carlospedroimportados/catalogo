@@ -40,7 +40,7 @@ Nada é alterado no GitHub Pages, na `main` ou no domínio. A Cloudflare apenas 
    - **Variáveis:** `CP_SITE` = `https://cp-importados-previa.pages.dev/` e `NODE_VERSION` = `22`
 4. Salvar e implantar. O endereço será `https://cp-importados-previa.pages.dev/` e se atualiza a cada push na branch.
 
-Esse comando de build usa só Node (sem Python nem dependências) e foi testado aqui (`qa/hospedagem/verificar-raiz.js`): 157 páginas,
+Esse comando de build usa só Node (sem Python nem dependências) e foi testado aqui (`qa/hospedagem/verificar-previa.js`): 157 páginas,
 página 404 estilizada na raiz do domínio, endereço canônico e sitemap com o endereço novo, nenhuma citação ao GitHub Pages.
 
 Se preferir o **segundo repositório**, a autorização necessária é: criar o repositório público, dar acesso ao app Claude e autorizar
@@ -109,7 +109,7 @@ node qa/hospedagem/verificar.js --site dist --sem-desempenho
 ```
 
 ```bash
-node qa/hospedagem/verificar-raiz.js https://cp-importados-previa.pages.dev/
+node qa/hospedagem/verificar-previa.js https://cp-importados-previa.pages.dev/
 ```
 
 Relatórios em `qa/hospedagem/relatorio/` (completo e do `dist/`) e capturas da jornada em `qa/hospedagem/capturas/`.
