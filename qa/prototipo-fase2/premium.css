@@ -367,3 +367,77 @@ footer.fx small.fx-l{display:block;margin-top:48px;padding-top:24px;border-top:1
   #pv .x{background:#fff}
 }
 @media(prefers-reduced-motion:reduce){.entra{opacity:1;transform:none}}
+
+/* ==========================================================================
+   Etapa 3 — revisão de responsividade, navegação, sacola e acessibilidade
+   ========================================================================== */
+
+/* link de atalho para teclado e leitores de tela */
+.pular{position:absolute;left:12px;top:-60px;z-index:100;background:var(--navy);color:var(--gold-hi);padding:12px 18px;border-radius:999px;font-size:13px;font-weight:700;text-decoration:none;transition:top .2s}
+.pular:focus{top:12px}
+
+/* menu: cabe em telas de 861 a 1180 px sem cortar o último item */
+@media(min-width:861px) and (max-width:1180px){
+  .cats-nav .wrap{gap:0 20px}
+  .cats-nav a,.cats-nav button{font-size:11.5px;letter-spacing:.1em}
+  .brand-t small{letter-spacing:.2em}
+}
+
+/* tablet (700 a 860 px): banner em duas colunas, em vez do empilhamento de celular */
+@media(min-width:700px) and (max-width:860px){
+  .slide{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:24px;min-height:440px;padding:48px 28px 72px}
+  .slide h1,.slide h2{font-size:clamp(44px,7.4vw,60px)}
+  .camp-p{margin-bottom:-72px}
+  .arco{flex-basis:130px}.arco.g{flex-basis:190px}
+  .c-esmeralda::before{width:420px;height:420px;right:calc(22% - 210px);top:auto;bottom:-120px}
+  .c-esmeralda::after{width:480px;height:480px;right:calc(22% - 240px);top:auto;bottom:-150px}
+  .c-claro .camp-t{order:2}
+  .camp-n{font-size:190px;justify-self:center}
+  .c-marinho .camp-n{order:0}
+  .garantias .wrap{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .catrow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;overflow:visible}
+  .catb{width:auto}
+  .catb .c{width:100%;height:auto;aspect-ratio:1/1}
+  .routs,.paygrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .payc.sim{grid-column:1/-1}
+  .steps{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .contacts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .fx-g{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .fx-m{grid-column:auto}
+}
+
+/* celulares estreitos (até 360 px): marca e sacola na mesma linha */
+@media(max-width:360px){
+  .brand{min-height:44px}
+  .brand img{width:40px;height:40px}
+  .brand .brand-t b{font-size:15px;letter-spacing:.1em}
+  .bagbtn{padding:0 12px;height:44px}
+  .slide h1,.slide h2{font-size:40px}
+  .slide .eyebrow{letter-spacing:.24em}
+  .btn-gold,.btn-ghost{padding:0 22px}
+  .pi h4{font-size:17px}
+  .pr strong{font-size:16px}
+  .garantias .wrap{grid-template-columns:minmax(0,1fr)}
+}
+
+/* sacola: resumo e botões ancorados no rodapé do painel; botão de pagar sempre à vista no checkout */
+#bag .sh-b{display:flex;flex-direction:column;flex:1}
+#bag .sh-b>.sum{margin-top:auto}
+#bag .sh-b>.rm{align-self:center;min-height:44px}
+#bag .sh-b>.back{align-self:flex-start}
+#bag .sh-b>.btn-pay[data-submit]{position:sticky;bottom:0;flex:none;box-shadow:0 -14px 18px 6px var(--bg)}
+#bag .sh-b>*{flex:none}
+
+/* catálogo: limpar filtros e voltar ao topo (botões criados por navegacao.js) */
+.cnt-l{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;margin-bottom:8px}
+.cnt-l .cnt{margin:0}
+.limpar{min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--navy);background:transparent;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;transition:background .2s,color .2s}
+.limpar:hover{background:var(--navy);color:#fff}
+.topo{position:fixed;right:24px;bottom:24px;z-index:35;width:52px;height:52px;border-radius:50%;border:1px solid var(--gold);background:var(--navy);color:var(--gold-hi);display:grid;place-items:center;opacity:0;pointer-events:none;transform:translateY(12px);transition:opacity .3s,transform .3s var(--ease)}
+.topo.on{opacity:1;pointer-events:auto;transform:none}
+.topo svg{width:20px;height:20px}
+.topo.sobe{bottom:96px}
+@media(max-width:860px){.topo{right:14px;bottom:18px;width:48px;height:48px}.topo.sobe{bottom:88px}}
+.find .apaga{position:absolute;right:4px;top:50%;translate:0 -50%;width:44px;height:44px;border:0;background:none;border-radius:50%;display:grid;place-items:center;color:var(--muted)}
+.find .apaga svg{position:static;translate:none;width:16px;height:16px}
+.find input::-webkit-search-cancel-button{display:none}
