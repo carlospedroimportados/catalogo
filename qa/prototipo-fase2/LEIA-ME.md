@@ -30,11 +30,12 @@ para comparar lado a lado. Para ver a versão de celular, reduza a janela ou use
 | `index.html` | Página do protótipo (gerada; não editar à mão) |
 | `premium.css` | Camada visual do redesign, carregada depois de `assets/estilo.css` |
 | `efeitos.js` | Entrada suave das seções ao rolar |
+| `navegacao.js` | Limpar filtros, apagar busca e voltar ao topo (aciona os controles existentes; não altera a lógica) |
 | `simulacao.js` | Respostas locais para cupom, pedido e confirmação |
 | `pagamento-simulado.html` | Substitui a InfinitePay no protótipo |
 | `servir.js` | Servidor local |
-| `capturar.js` | Gera as capturas de `capturas/` (desktop e celular) |
-| `testar.js` | Bateria P1–P10; grava em `relatorio/` |
+| `capturar.js` | Gera as capturas de `capturas/` (desktop, tablet e celular) |
+| `testar.js` | Bateria P1–P12; grava em `relatorio/` |
 | `auditar.js` | Auditoria automática de SEO, acessibilidade e peso |
 
 ## Regerar
