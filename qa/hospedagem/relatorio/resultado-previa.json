@@ -4,7 +4,8 @@
   "titulo": "Construção limpa como a Cloudflare faria: limites da hospedagem e marcas do modo prévia",
   "status": "PASSOU",
   "detalhes": [
-   "commit fc0cb92 extraído limpo e construído só com Node (sem Python): 668 arquivos, 12.3 MB, maior arquivo 272 KB, 11 regras e linha máxima de 370 caracteres no _headers",
+   "commit 76ff134 extraído limpo e construído só com Node (sem Python): 665 arquivos, 12.3 MB, maior arquivo 272 KB, 11 regras e linha máxima de 370 caracteres no _headers",
+   "trava de segurança: build em hospedagem automática sem CP_PREVIA=1 (Cloudflare e Netlify) ou com CP_API=real é recusado; o painel (admin/, exceto as imagens de ícone) e o ID do servidor de pedidos ausentes do dist/ da prévia",
    "modo prévia: pedidos desativados (api vazio, endereço do Apps Script ausente do dist/), aviso e noindex na página inicial e nas 156 páginas de produto, canônico e sitemap em https://cp-importados-previa.pages.dev/"
   ],
   "divergencias": []

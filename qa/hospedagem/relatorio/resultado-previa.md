@@ -1,6 +1,6 @@
 # Verificação da prévia (Cloudflare Pages simulada)
 
-- 2026-11-12T12:40:48.385Z · commit `fc0cb92` · endereço público simulado: https://cp-importados-previa.pages.dev/
+- 2026-11-12T12:50:20.948Z · commit `76ff134` · endereço público simulado: https://cp-importados-previa.pages.dev/
 - Construção limpa só com Node, servida na raiz de um domínio com o `_headers`. Pedidos e pagamentos **desativados**; nenhuma chamada ao Apps Script.
 
 | Teste | Status | Descrição |
@@ -13,7 +13,8 @@
 
 **✅ PASSOU**
 
-- commit fc0cb92 extraído limpo e construído só com Node (sem Python): 668 arquivos, 12.3 MB, maior arquivo 272 KB, 11 regras e linha máxima de 370 caracteres no _headers
+- commit 76ff134 extraído limpo e construído só com Node (sem Python): 665 arquivos, 12.3 MB, maior arquivo 272 KB, 11 regras e linha máxima de 370 caracteres no _headers
+- trava de segurança: build em hospedagem automática sem CP_PREVIA=1 (Cloudflare e Netlify) ou com CP_API=real é recusado; o painel (admin/, exceto as imagens de ícone) e o ID do servidor de pedidos ausentes do dist/ da prévia
 - modo prévia: pedidos desativados (api vazio, endereço do Apps Script ausente do dist/), aviso e noindex na página inicial e nas 156 páginas de produto, canônico e sitemap em https://cp-importados-previa.pages.dev/
 
 ## V2 — Site servido na raiz de um domínio: 157 páginas, todos os arquivos, 404 e cabeçalhos

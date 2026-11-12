@@ -55,11 +55,19 @@ const crc16 = (s) => { let c = 0xFFFF; for (let i = 0; i < s.length; i++) { c ^=
     if (semMarca) d1.push(`${semMarca} páginas de produto sem aviso, noindex ou canônico correto`);
     const mapa = fs.readFileSync(path.join(dist, "sitemap.xml"), "utf8"); if ((mapa.match(/<loc>/g) || []).length !== 157 || /github\.io/.test(mapa)) d1.push("sitemap incorreto");
     const antigo = arquivos.filter(([f]) => /\.(html|xml)$/.test(f)).filter(([f]) => /github\.io|\/catalogo\//.test(fs.readFileSync(f, "utf8"))).length; if (antigo) d1.push(`${antigo} arquivos HTML/XML ainda citam o endereço do GitHub Pages`);
-    // modo "servidor real" também compila (não é servido aqui)
+    const extraAdmin = fs.existsSync(path.join(dist, "admin")) ? fs.readdirSync(path.join(dist, "admin")).filter((f) => !/^icon-.*\.png$/.test(f)) : []; if (extraAdmin.length) d1.push("o painel foi para o dist/ da prévia: " + extraAdmin.join(", "));
+    if (/AKfy[\w-]{20,}/.test(arquivos.filter(([f]) => !/\.(png|webp|jpg|woff2)$/.test(f)).map(([f]) => fs.readFileSync(f, "utf8")).join("\n"))) d1.push("o ID do servidor de pedidos aparece no dist/ da prévia");
+    // trava de segurança: build em hospedagem automática sem CP_PREVIA=1, ou com CP_API=real, precisa ser RECUSADO
+    for (const [rot, extra] of [["sem CP_PREVIA", { CF_PAGES: "1", CP_PREVIA: "" }], ["com CP_API=real", { CF_PAGES: "1", CP_API: "real" }], ["Netlify sem CP_PREVIA", { NETLIFY: "true", CP_PREVIA: "" }]]) {
+      const r = spawnSync("node", ["ferramentas/montar-site.js"], { cwd: PASTA, env: { ...env, ...extra }, encoding: "utf8" });
+      if (r.status === 0 || !/BUILD RECUSADO/.test(r.stderr)) d1.push(`a trava deixou passar o build ${rot}`);
+    }
+    // modo "servidor real" também compila fora de hospedagem (não é servido aqui)
     const real = build({ CP_API: "real" }); if (real.some((p) => p.status !== 0) || !/script\.google\.com/.test(fs.readFileSync(path.join(dist, "assets/config.js"), "utf8"))) d1.push("o modo CP_API=real não manteve o servidor ligado");
     build(); // volta ao modo seguro
   }
   det1.push(`commit ${commit} extraído limpo e construído só com Node (sem Python): ${arquivos.length} arquivos, ${(total / 1048576).toFixed(1)} MB, maior arquivo ${(maior[1] / 1024).toFixed(0)} KB, ${regras} regras e linha máxima de ${linhaMax} caracteres no _headers`);
+  det1.push("trava de segurança: build em hospedagem automática sem CP_PREVIA=1 (Cloudflare e Netlify) ou com CP_API=real é recusado; o painel (admin/, exceto as imagens de ícone) e o ID do servidor de pedidos ausentes do dist/ da prévia");
   det1.push(`modo prévia: pedidos desativados (api vazio, endereço do Apps Script ausente do dist/), aviso e noindex na página inicial e nas 156 páginas de produto, canônico e sitemap em ${SITE}`);
   reg("V1", "Construção limpa como a Cloudflare faria: limites da hospedagem e marcas do modo prévia", d1, det1);
   if (falhou) { console.log("\nconstrução falhou"); process.exit(1); }
