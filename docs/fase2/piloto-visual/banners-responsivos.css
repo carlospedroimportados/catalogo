@@ -1,0 +1,19 @@
+/* PILOTO (fora da loja): banners editoriais responsivos da CP Importados. Esmeralda, azul-marinho, dourado e marfim. */
+.cpb{position:relative;overflow:hidden;color:#fff;isolation:isolate;font-family:Montserrat,system-ui,sans-serif}
+.cpb-em{background:radial-gradient(120% 140% at 85% 15%,#14705a 0%,#0B3B2F 48%,#072a21 100%)}
+.cpb-nv{background:radial-gradient(120% 140% at 85% 15%,#1b3a5c 0%,#0B1B2E 52%,#06111d 100%)}
+.cpb-iv{background:linear-gradient(120deg,#fbf8f1,#ece4d1);color:#0B1B2E}
+.cpb::before,.cpb::after{content:"";position:absolute;border-radius:50%;border:1.5px solid rgba(201,164,92,.5);z-index:-1;pointer-events:none}
+.cpb::before{width:min(1000px,90vw);aspect-ratio:1;right:-8vw;top:-18vw}.cpb::after{width:min(620px,56vw);aspect-ratio:1;right:16vw;top:-4vw;border-color:rgba(201,164,92,.3)}
+.cpb-in{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:center;padding:clamp(44px,6vw,88px) 24px}
+.cpb-k{display:flex;align-items:center;gap:16px;font-size:clamp(11px,1.1vw,14px);letter-spacing:.32em;text-transform:uppercase;color:#C9A45C;font-weight:600}.cpb-iv .cpb-k{color:#8a6a2a}
+.cpb-k::before{content:"";width:56px;height:1.5px;background:currentColor}
+.cpb h2{font:500 clamp(46px,6.2vw,88px)/.98 "Cormorant",serif;margin:20px 0;letter-spacing:-.01em}.cpb h2 i{display:block;color:#E9D5A1}.cpb-iv h2 i{color:#8a6a2a}
+.cpb p{font-size:clamp(15px,1.5vw,20px);line-height:1.55;opacity:.9;max-width:34em;margin:0}
+.cpb-cta{display:inline-block;margin-top:28px;background:#C9A45C;color:#0B1B2E;font-weight:700;letter-spacing:.18em;text-transform:uppercase;font-size:13px;padding:17px 34px;border-radius:999px;text-decoration:none}
+.cpb-tags{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:26px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:#7a5a1e}.cpb-tags span::before{content:"◆ ";color:#C9A45C}
+.cpb-art{position:relative;height:clamp(330px,36vw,480px)}
+.cpb-ar{position:absolute;margin:0;border:1.5px solid #C9A45C;border-radius:300px 300px 22px 22px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.4);background:#000}
+.cpb-ar img{width:100%;height:100%;object-fit:cover;display:block}
+.cpb-ar.a1{left:4%;top:0;width:47%;height:92%}.cpb-ar.a2{right:2%;top:12%;width:43%;height:88%}
+@media(max-width:820px){.cpb-in{grid-template-columns:1fr;padding-top:44px;padding-bottom:0}.cpb-art{height:min(112vw,520px);margin:12px -8px 0}.cpb::before{width:120vw;right:-50vw;top:42%}.cpb::after{display:none}}

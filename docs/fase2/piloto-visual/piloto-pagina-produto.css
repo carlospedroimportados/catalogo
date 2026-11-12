@@ -1,0 +1,12 @@
+/* PILOTO (não faz parte da loja): apresentação premium da galeria da página de produto. Só visual; nenhuma informação comercial muda. */
+.pg .pvg{border:0;border-radius:28px;background:#fff;box-shadow:0 30px 80px -40px rgba(11,27,46,.35)}
+.pg .pvimg{background:linear-gradient(180deg,#fbf8f1,#eae4d6);aspect-ratio:4/5;max-height:none;position:relative;padding:0;display:block}
+.pg .pvimg img{width:100%;height:100%;object-fit:contain;display:block}
+.pg .pvimg .tg{top:22px;left:22px;z-index:2}
+.pg .pvi{padding:40px 40px 44px}
+@media(max-width:899px){.pg .pvg{border-radius:20px}.pg .pvi{padding:26px 22px 34px}}
+.pg .crumb{letter-spacing:.3em}
+.pg .pvimg::before,.pg .pvimg::after{display:none!important}
+.pg .pvimg{min-height:0!important;padding:0!important;display:block!important;overflow:hidden}
+.pg .pvimg img{border-radius:0!important;border:0!important;aspect-ratio:auto!important;width:100%!important;height:100%!important}
+.pg .pvimg .off{z-index:3}

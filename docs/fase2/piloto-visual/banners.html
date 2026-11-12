@@ -1,0 +1,42 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Banners editoriais — piloto</title>
+<style>
+@font-face{font-family:Cormorant;src:url(../../../fonts/cormorant-garamond-500-normal.woff2);font-weight:500}
+@font-face{font-family:Cormorant;src:url(../../../fonts/cormorant-garamond-500-italic.woff2);font-weight:500;font-style:italic}
+@font-face{font-family:Montserrat;src:url(../../../fonts/montserrat-600-normal.woff2);font-weight:600}
+@font-face{font-family:Montserrat;src:url(../../../fonts/montserrat-700-normal.woff2);font-weight:700}
+:root{--navy:#0B1B2E;--navy2:#12263B;--em:#0E5A46;--emd:#0B3B2F;--gold:#C9A45C;--hi:#E9D5A1;--ivory:#FAF7F0}
+*{box-sizing:border-box;margin:0}body{background:#d9d3c4;padding:24px;display:grid;gap:28px;font-family:Montserrat,sans-serif}
+.b{position:relative;overflow:hidden;color:#fff;display:grid;align-items:center}
+.d{width:1600px;height:560px;grid-template-columns:1fr 1fr;padding:0 110px}.m{width:780px;height:1000px;grid-template-rows:auto 1fr;padding:70px 56px 0;justify-items:start}
+.em{background:radial-gradient(120% 140% at 85% 20%,#14705a 0%,var(--emd) 48%,#072a21 100%)}.nv{background:radial-gradient(120% 140% at 85% 20%,#1b3a5c 0%,var(--navy) 52%,#06111d 100%)}
+.iv{background:linear-gradient(120deg,#fbf8f1,#ece4d1);color:var(--navy)}
+.b::before{content:"";position:absolute;width:980px;height:980px;border-radius:50%;border:1.5px solid rgba(201,164,92,.55);right:-120px;top:-210px}
+.m::before{width:900px;height:900px;right:-300px;top:200px}
+.b::after{content:"";position:absolute;width:620px;height:620px;border-radius:50%;border:1px solid rgba(201,164,92,.35);right:260px;top:-60px}.m::after{display:none}
+.t{position:relative;z-index:2;max-width:640px}.m .t{max-width:none}
+.k{font-size:15px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);font-weight:600;display:flex;align-items:center;gap:18px}.k::before{content:"";width:64px;height:1.5px;background:var(--gold)}
+h2{font:500 84px/.98 Cormorant,serif;margin:22px 0 22px;letter-spacing:-.01em}.m h2{font-size:92px}h2 i{color:var(--hi);display:block}.iv h2 i{color:#8a6a2a}
+p{font-size:20px;line-height:1.55;opacity:.88;max-width:520px}.m p{font-size:24px}
+.cta{display:inline-block;margin-top:34px;background:var(--gold);color:var(--navy);font-weight:700;letter-spacing:.2em;text-transform:uppercase;font-size:15px;padding:20px 40px;border-radius:999px}
+.sel{white-space:nowrap;display:flex;gap:30px;margin-top:34px;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--hi);font-weight:600}.sel span::before{content:"◆ ";color:var(--gold)}
+.ar{position:absolute;z-index:1;background:#000;border:1.5px solid var(--gold);border-radius:300px 300px 22px 22px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.45)}.ar img{width:100%;height:100%;object-fit:cover;display:block}
+.d .a1{right:430px;top:80px;width:300px;height:420px}.d .a2{right:110px;top:140px;width:290px;height:400px}.d .a3{right:320px;top:330px;width:0}
+.m .a1{left:70px;top:590px;width:300px;height:380px}.m .a2{left:410px;top:540px;width:300px;height:430px}
+.p .ar{background:#f6f1e6;border-radius:26px;border-color:rgba(201,164,92,.9)}.p .ar img{object-fit:contain}
+.d.p .a1{right:470px;top:60px;width:330px;height:412px}.d.p .a2{right:110px;top:110px;width:330px;height:412px}.m.p .a1{left:56px;top:600px;width:310px;height:388px}.m.p .a2{left:410px;top:560px;width:310px;height:388px}
+.nota{font:600 13px Montserrat;color:#40382a;letter-spacing:.08em}
+</style></head><body>
+<!-- A: perfumaria -->
+<section class="b d em" id="A-desktop"><div class="t"><div class="k">Perfumaria importada</div><h2>Assinaturas <i>que ficam</i></h2><p>Árabes e de grife, com notas olfativas detalhadas em cada produto para você escolher com segurança.</p><a class="cta">Ver perfumes</a></div>
+<div class="ar a1"><img src="../../../img/produtos/010.webp"></div><div class="ar a2"><img src="../../../img/produtos/032.webp"></div></section>
+<section class="b m em" id="A-mobile"><div class="t"><div class="k">Perfumaria importada</div><h2>Assinaturas <i>que ficam</i></h2><p>Árabes e de grife, com notas olfativas detalhadas em cada produto.</p><a class="cta">Ver perfumes</a></div>
+<div class="ar a1"><img src="../../../img/produtos/010.webp"></div><div class="ar a2"><img src="../../../img/produtos/032.webp"></div></section>
+<!-- B: skincare -->
+<section class="b d nv" id="B-desktop"><div class="t"><div class="k">Skincare coreano</div><h2>Rotina de <i>brilho</i></h2><p>Combinações prontas, com a ordem de uso. Monte sua rotina e adicione tudo de uma vez.</p><a class="cta">Montar minha rotina</a></div>
+<div class="ar a1"><img src="../../../img/produtos/053.webp"></div><div class="ar a2"><img src="../../../img/produtos/056.webp"></div></section>
+<section class="b m nv" id="B-mobile"><div class="t"><div class="k">Skincare coreano</div><h2>Rotina de <i>brilho</i></h2><p>Combinações prontas, com a ordem de uso.</p><a class="cta">Montar minha rotina</a></div>
+<div class="ar a1"><img src="../../../img/produtos/053.webp"></div><div class="ar a2"><img src="../../../img/produtos/056.webp"></div></section>
+<!-- C: institucional -->
+<section class="b d iv" id="C-desktop" style="grid-template-columns:1.1fr .9fr"><div class="t"><div class="k" style="color:#8a6a2a">CP Importados</div><h2>O mundo da beleza <i>ao seu alcance</i></h2><p style="color:#2c3a4a">Curadoria internacional de perfumes, skincare, cabelos e bebidas. Pix sem acréscimo e cartão em até 12x.</p><div class="sel" style="color:#7a5a1e"><span>Pix sem acréscimo</span><span>Até 12x</span><span>Envio para todo o Brasil</span></div></div>
+<div class="ar a1" style="right:420px;top:70px;width:290px;height:420px"><img src="../../../img/produtos/009.webp"></div><div class="ar a2" style="right:110px;top:130px;width:270px;height:400px"><img src="../../../img/produtos/000.webp"></div></section>
+</body></html>
