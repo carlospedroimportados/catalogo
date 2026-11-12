@@ -142,3 +142,78 @@ original de 640 px: não há ganho nesse caso. Reduzir isso exigiria aceitar ima
 6. **Endereço público e `robots.txt`**: ver pendências do bloco 2.
 7. **Atualização do catálogo**: rodar `node ferramentas/construir.js` (cria miniaturas só das fotos novas).
 8. Correção do link do comprovante e pedido real de teste, registrados à parte.
+
+---
+
+## Bloco 4 — Finalização comercial e revisão
+
+### Ajustes da lógica (rastreáveis)
+
+O `assets/app.js` da Fase 1 **continua idêntico** (teste P7). `ferramentas/ajustar-app.js` o lê e gera `assets/app-premium.js`
+com 7 trocas declaradas, cada uma exigindo exatamente uma ocorrência do trecho original (se o `app.js` mudar, a geração
+falha em vez de gerar algo diferente). Nada toca em cálculo de preço, parcelamento, cupom, pedido, InfinitePay ou envio.
+
+| Troca | Efeito |
+|---|---|
+| `whatsapp-pedido`, `whatsapp-duvida` | mensagens de WhatsApp com "CP Importados" |
+| `economia-cartao` | no cartão: "No Pix você paga R$ X e **economiza R$ Y**" (Y = taxa do cartão na parcela escolhida, já exibida na linha "Taxa do cartão") |
+| `economia-pix` | no Pix: "Pagando no Pix você economiza **de R$ A (cartão à vista) até R$ B (cartão em Nx)**" (a taxa que o cliente evita, a partir de `CFG.fees`) |
+| `miniatura-definicao`, `miniatura-sacola`, `miniatura-rotina` | fotos da sacola e das rotinas usam a miniatura de 320 px |
+
+Nenhum desconto novo foi criado: a economia é a taxa de cartão que a loja já repassa ao cliente. O valor cobrado não muda.
+Os cards e links estáticos de WhatsApp também passaram a dizer "CP Importados". **Permanece "CP Imports"** o nome de
+marca de produtos do catálogo ("CP Imports Kit Skincare…"), por estar em `dados/catalogo.js`, que não foi alterado.
+
+### Processo de atualização do catálogo
+
+`dados/catalogo.js` virou a fonte única. `ferramentas/base.js` gera os cards a partir dele e foi provado fiel: com o nome
+antigo, reproduz o `index.html` da Fase 1 **byte a byte** (157 cards, contagens, textos). No caminho foram descobertas duas
+regras do gerador original: o rótulo "Preço Brasil" por marca e a codificação dos links de WhatsApp.
+`ferramentas/validar-catalogo.js` aplica travas (posição, foto, preço, marca) contra `catalogo.trava.json`.
+Passo a passo em `ferramentas/ATUALIZAR-CATALOGO.md`. O ensaio `qa/prototipo-fase2/atualizacao.js` (teste P17), em cópia
+descartável: reconstrução idêntica ao repositório; preço alterado e produto novo refletidos em card, página, sitemap e
+miniatura; só 13 de 156 páginas mudam (a do produto 3 e as que o exibem entre os relacionados); endereços existentes
+estáveis; fotos originais intactas; **11 de 11 violações recusadas**; repositório real intacto.
+
+### Defeito encontrado e corrigido (já existia na loja publicada)
+
+No desktop, depois de abrir **qualquer** produto e fechar o painel, ele ficava invisível no centro da página
+(`opacity: 0`) mas continuava recebendo os cliques: os cards e botões do meio da tela deixavam de responder até recarregar
+a página. Os testes anteriores clicavam por script e não percebiam. Corrigido em `assets/premium.css` (painel fechado fica
+oculto, sem clique e fora da tabulação) e coberto pelo teste P18, com cliques reais em desktop, tablet e celular.
+Confirmado também na loja publicada (`89ef168`) com o mesmo teste.
+
+### Revisão visual
+
+- Ícone do WhatsApp dos contatos estava incompleto (só o anel) desde a Fase 1; usa agora o desenho completo da própria loja.
+- Botão "Chamar no WhatsApp" numa linha em celular estreito; "voltar ao topo" some quando o rodapé aparece.
+- Economia do Pix destacada em verde; botão de pagar fixo encostado na borda inferior do painel, sem texto aparecendo atrás.
+
+### Desempenho (celular 390 px, local, rolando a página inteira)
+
+| | Fase 1 | Loja atual |
+|---|---|---|
+| Imagens, tela 1x | 2.412 KB | 583 KB (-76%) |
+| Imagens, tela 2x | 2.412 KB | 870 KB (-64%) |
+| Imagens, tela 3x | 2.412 KB | 2.370 KB (sem ganho) |
+| Total, tela 1x | 2.923 KB | 1.164 KB |
+| Requisições, tela 1x | 104 | 65 |
+| Estabilidade de layout (CLS) | 0,003 | 0,001 |
+| Maior elemento pintado (LCP), tela 1x | 260 ms | 176 ms |
+
+Valores de laboratório local, sem rede real e sem Lighthouse: servem para comparar, não para prometer números ao cliente.
+
+### Testes (loja, `testar.js --alvo loja`)
+
+18 de 18: P1–P15 anteriores, mais **P16** (gerador fiel, `app-premium.js` rastreável, nome, economia do Pix, miniaturas na
+sacola), **P17** (ensaio da atualização do catálogo) e **P18** (cliques reais). P2 e P5 agora calculam, de forma independente,
+o resultado esperado das diferenças aprovadas (nome e economia do Pix) e exigem a tela exatamente assim.
+
+### O que exige teste real (não coberto por automação)
+
+1. Pedido real de ponta a ponta com a InfinitePay e conferência no painel (loja e servidor).
+2. Que o Apps Script tenha os mesmos preços e posições da loja, inclusive após cada atualização.
+3. Leitor de tela real (VoiceOver/TalkBack) e aparelhos físicos (iPhone, Android de entrada).
+4. Rede móvel real (4G/3G) e Lighthouse/PageSpeed na hospedagem final.
+5. Indexação no Google (Search Console) depois da publicação.
+6. O botão "Ver comprovante": a correção de segurança continua pendente (depende do domínio da InfinitePay).
