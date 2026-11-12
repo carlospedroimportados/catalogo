@@ -8,7 +8,7 @@ const path = require("path");
 const TIPOS = { ".html": "text/html; charset=utf-8", ".js": "text/javascript", ".json": "application/json", ".css": "text/css",
   ".png": "image/png", ".jpg": "image/jpeg", ".webp": "image/webp", ".svg": "image/svg+xml", ".woff2": "font/woff2" };
 
-function iniciar(pasta, prefixo = "/catalogo/") {
+function iniciar(pasta, prefixo = "/catalogo/", porta = 0) {
   const raiz = path.resolve(pasta);
   const srv = http.createServer((req, res) => {
     const u = new URL(req.url, "http://x");
@@ -24,7 +24,7 @@ function iniciar(pasta, prefixo = "/catalogo/") {
       res.end(buf);
     });
   });
-  return new Promise((ok) => srv.listen(0, "127.0.0.1", () => ok({ url: `http://127.0.0.1:${srv.address().port}${prefixo}`, fechar: () => srv.close() })));
+  return new Promise((ok) => srv.listen(porta, "127.0.0.1", () => ok({ url: `http://127.0.0.1:${srv.address().port}${prefixo}`, fechar: () => srv.close() })));
 }
 
 module.exports = { iniciar };
