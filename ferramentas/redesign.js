@@ -16,7 +16,10 @@ const RAIZ = path.resolve(__dirname, "..");
 const SITE = process.env.CP_SITE || "https://carlospedroimportados.github.io/catalogo/";
 const versao = (rel) => crypto.createHash("sha256").update(fs.readFileSync(path.join(RAIZ, rel))).digest("hex").slice(0, 10);
 
+// Modo prévia (CP_PREVIA=1): aviso no topo e fora do índice do Google. Os pedidos são desativados em ferramentas/montar-site.js.
+const AVISO_PREVIA = "Prévia da loja · pedidos e pagamentos desativados · nada é cobrado";
 function transformar(fase1, { prefixo = "", prototipo = false } = {}) {
+  const previa = process.env.CP_PREVIA === "1" && !prototipo;
   let html = fase1;
   if (/base64,/.test(html)) throw new Error("a entrada não é o index.html separado da Fase 1");
   const P = prefixo;
@@ -34,14 +37,14 @@ function transformar(fase1, { prefixo = "", prototipo = false } = {}) {
   // 2. Cabeçalho do documento: título, estilos, fontes pré-carregadas, ícone
   const css = fs.readFileSync(path.join(RAIZ, "assets", "estilo.css"), "utf8");
   const fonte = (nome) => { const u = (css.match(new RegExp(`url\\(\\.\\./(fonts/${nome}\\.woff2[^)]*)\\)`)) || [])[1]; if (!u) throw new Error("fonte não encontrada: " + nome); return `<link rel="preload" as="font" type="font/woff2" crossorigin href="${P}${u}">`; };
-  trocar(/<title>[^<]*<\/title>/, prototipo ? '<title>CP Importados · Protótipo Fase 2</title><meta name="robots" content="noindex">' : "<title>CP Importados · Perfumes importados, skincare coreano e cabelos</title>", "title");
+  trocar(/<title>[^<]*<\/title>/, prototipo ? '<title>CP Importados · Protótipo Fase 2</title><meta name="robots" content="noindex">' : "<title>CP Importados · Perfumes importados, skincare coreano e cabelos</title>" + (previa ? '<meta name="robots" content="noindex,nofollow">' : ""), "title");
   trocar("</head>", `<link rel="stylesheet" href="${ativo("assets/premium.css")}">${["cormorant-garamond-500-normal", "cormorant-garamond-500-italic", "montserrat-500-normal", "montserrat-600-normal", "montserrat-700-normal"].map(fonte).join("")}<link rel="icon" href="${P}admin/icon-192.png"><link rel="apple-touch-icon" href="${P}admin/icon-180.png">${prototipo ? "" : seo()}</head>`, "head");
 
   trocar('content="CP Imports — perfumes', 'content="CP Importados — perfumes', "descrição");
 
   // 3. Atalho de teclado, faixa de avisos e marca
   trocar('<header class="top">', `<a class="pular" href="#conteudo">Pular para o conteúdo</a>
-${prototipo ? '<div class="proto" role="note">Protótipo da Fase 2 · pagamentos simulados · nenhum pedido real é criado</div>\n' : ""}<div class="aviso"><span>Pix sem acréscimo</span><span>Cartão em até 12x</span><span>Envio para todo o Brasil</span></div>
+${prototipo ? '<div class="proto" role="note">Protótipo da Fase 2 · pagamentos simulados · nenhum pedido real é criado</div>\n' : previa ? `<div class="proto" role="note">${AVISO_PREVIA}</div>\n` : ""}<div class="aviso"><span>Pix sem acréscimo</span><span>Cartão em até 12x</span><span>Envio para todo o Brasil</span></div>
 <header class="top">`, "header");
   trocar(/alt="CP Imports" width="42" height="42"><b>CP IMPORTS<\/b><\/a>/,
     'alt="CP Importados" width="60" height="60"><span class="brand-t"><b>CP IMPORTADOS</b><small>Perfumaria · Skincare · Cabelos</small></span></a>', "marca");
@@ -124,4 +127,4 @@ function seo() {
   return `<link rel="canonical" href="${SITE}"><meta property="og:type" content="website"><meta property="og:site_name" content="CP Importados"><meta property="og:locale" content="pt_BR"><meta property="og:title" content="CP Importados · Perfumes importados, skincare coreano e cabelos"><meta property="og:description" content="${desc}"><meta property="og:url" content="${SITE}"><meta property="og:image" content="${SITE}admin/icon-512.png"><meta name="twitter:card" content="summary"><script type="application/ld+json">${JSON.stringify(ld)}</script>`;
 }
 
-module.exports = { transformar, rodape, versao, RAIZ, SITE };
+module.exports = { transformar, rodape, versao, RAIZ, SITE, AVISO_PREVIA };

@@ -17,7 +17,8 @@
 const fs = require("fs");
 const path = require("path");
 const vm = require("vm");
-const { rodape, versao, RAIZ, SITE } = require("./redesign");
+const { rodape, versao, RAIZ, SITE, AVISO_PREVIA } = require("./redesign");
+const PREVIA = process.env.CP_PREVIA === "1"; // prévia: fora do índice do Google e com aviso no topo
 
 const ler = (rel) => fs.readFileSync(path.join(RAIZ, rel), "utf8");
 const DATA = vm.runInNewContext(ler("dados/catalogo.js") + "\n;DATA", Object.create(null));
@@ -91,12 +92,12 @@ function pagina(p) {
   const logo = `${R}img/marca/logo-cp-imports.webp?v=${versao("img/marca/logo-cp-imports.webp")}`;
   return `<!doctype html>
 <html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>${esc(nome)} · ${esc(p.spec)} — CP Importados</title><meta name="description" content="${esc(desc)}"><meta name="theme-color" content="#0B1B2E">
+<title>${esc(nome)} · ${esc(p.spec)} — CP Importados</title><meta name="description" content="${esc(desc)}"><meta name="theme-color" content="#0B1B2E">${PREVIA ? '<meta name="robots" content="noindex,nofollow">' : ""}
 <link rel="canonical" href="${url}"><meta property="og:type" content="product"><meta property="og:site_name" content="CP Importados"><meta property="og:locale" content="pt_BR"><meta property="og:title" content="${esc(nome)} — CP Importados"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${url}"><meta property="og:image" content="${imagem}"><meta property="og:image:width" content="640"><meta property="og:image:height" content="800"><meta property="product:price:amount" content="${p.price.toFixed(2)}"><meta property="product:price:currency" content="BRL"><meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="${a("assets/estilo.css")}"><link rel="stylesheet" href="${a("assets/premium.css")}">${fonte("cormorant-garamond-500-normal")}${fonte("montserrat-500-normal")}<link rel="icon" href="${R}admin/icon-192.png"><link rel="apple-touch-icon" href="${R}admin/icon-180.png">
 <script type="application/ld+json">${JSON.stringify(ld)}</script><script type="application/ld+json">${JSON.stringify(trilha)}</script></head><body class="pagina-produto">
 <a class="pular" href="#conteudo">Pular para o conteúdo</a>
-<div class="aviso"><span>Pix sem acréscimo</span><span>Cartão em até 12x</span><span>Envio para todo o Brasil</span></div>
+${PREVIA ? `<div class="proto" role="note">${AVISO_PREVIA}</div>\n` : ""}<div class="aviso"><span>Pix sem acréscimo</span><span>Cartão em até 12x</span><span>Envio para todo o Brasil</span></div>
 <header class="top"><div class="wrap top-in"><a class="brand" href="${R}"><img src="${logo}" srcset="${a("miniaturas/marca/logo-128.webp")} 128w, ${a("miniaturas/marca/logo-256.webp")} 256w" sizes="60px" alt="CP Importados" width="60" height="60"><span class="brand-t"><b>CP IMPORTADOS</b><small>Perfumaria · Skincare · Cabelos</small></span></a>
 <form class="find" role="search" action="${R}" method="get"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4-4"/></svg><input name="busca" type="search" aria-label="Buscar produto ou marca" placeholder="Buscar produto, marca ou nota" autocomplete="off"></form>
 <a class="bagbtn" href="${R}#sacola" aria-label="Abrir sacola"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6a3 3 0 016 0v2"/></svg><span>Sacola</span><span class="n" id="sacolaN">0</span></a></div>
