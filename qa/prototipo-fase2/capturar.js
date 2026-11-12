@@ -16,7 +16,7 @@ const API = { coupon: { ok: true, code: "PROTOTIPO10", tipo: "%", valor: 10, min
   const url = srv.url + "qa/prototipo-fase2/";
   const browser = await abrirNavegador();
   const erros = [];
-  for (const [nome, viewport, escala] of [["desktop", { width: 1440, height: 900 }, 1], ["celular", { width: 390, height: 844 }, 2]]) {
+  for (const [nome, viewport, escala] of [["desktop", { width: 1440, height: 900 }, 1], ["tablet", { width: 768, height: 1024 }, 1], ["celular", { width: 390, height: 844 }, 2]]) {
     const ctx = await novoContexto(browser, { viewport, cenario: API });
     const p = await ctx.newPage();
     await p.emulateMedia({ reducedMotion: "reduce" });
@@ -35,6 +35,8 @@ const API = { coupon: { ok: true, code: "PROTOTIPO10", tipo: "%", valor: 10, min
     await ir("#maisvendidos"); await foto("04-mais-vendidos");
     await ir("#rotinas"); await foto("05-rotinas");
     await clique('.seg [data-cat="perfume"]'); await ir("#catalogo"); await foto("06-catalogo");
+    await p.fill("#q", "woman"); await p.waitForTimeout(150); await ir("#catalogo"); await foto("06b-catalogo-filtrado");
+    await clique(".limpar");
     await ir("#pagamento"); await foto("07-pagamento");
     await ir("#contato"); await foto("08-contato-rodape");
     await p.evaluate(() => window.scrollTo(0, document.body.scrollHeight)); await foto("09-rodape");
