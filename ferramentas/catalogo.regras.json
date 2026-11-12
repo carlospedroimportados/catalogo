@@ -1,0 +1,5 @@
+{
+  "_sobre": "Regras de apresentação que não estão em dados/catalogo.js. Extraídas do gerador original (Fase 1) e conferidas contra os 157 cards publicados.",
+  "precoBrasil": ["alluvi", "zapata", "licor43", "on"],
+  "_precoBrasil": "Marcas cujo preço 'de' é o preço praticado no Brasil: o card mostra o rótulo 'Preço Brasil' acima do valor riscado."
+}
