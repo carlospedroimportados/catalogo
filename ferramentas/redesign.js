@@ -2,7 +2,7 @@
 /*
  * Redesign Premium (Fase 2) — transformação única usada pela loja e pelo protótipo.
  *
- * Recebe o index.html da Fase 1 e devolve a página com a nova apresentação. Só troca a "moldura"
+ * Recebe a base da página inicial (ferramentas/base.js, equivalente ao index.html da Fase 1) e devolve a página com a nova apresentação. Só troca a "moldura"
  * (cabeçalho, banners, faixa de garantias, rodapé, metadados) e acrescenta folhas de estilo e
  * scripts de apresentação. Os 157 cards, os identificadores usados pela lógica, os dados, a
  * configuração comercial e assets/app.js não são alterados.
@@ -36,6 +36,8 @@ function transformar(fase1, { prefixo = "", prototipo = false } = {}) {
   trocar(/<title>[^<]*<\/title>/, prototipo ? '<title>CP Importados · Protótipo Fase 2</title><meta name="robots" content="noindex">' : "<title>CP Importados · Perfumes importados, skincare coreano e cabelos</title>", "title");
   trocar("</head>", `<link rel="stylesheet" href="${ativo("assets/premium.css")}">${fonte("cormorant-garamond-500-normal")}${fonte("montserrat-500-normal")}<link rel="icon" href="${P}admin/icon-192.png"><link rel="apple-touch-icon" href="${P}admin/icon-180.png">${prototipo ? "" : seo()}</head>`, "head");
 
+  trocar('content="CP Imports — perfumes', 'content="CP Importados — perfumes', "descrição");
+
   // 3. Atalho de teclado, faixa de avisos e marca
   trocar('<header class="top">', `<a class="pular" href="#conteudo">Pular para o conteúdo</a>
 ${prototipo ? '<div class="proto" role="note">Protótipo da Fase 2 · pagamentos simulados · nenhum pedido real é criado</div>\n' : ""}<div class="aviso"><span>Pix sem acréscimo</span><span>Cartão em até 12x</span><span>Envio para todo o Brasil</span></div>
@@ -63,8 +65,16 @@ ${prototipo ? '<div class="proto" role="note">Protótipo da Fase 2 · pagamentos
   const logo = (html.match(/<img src="([^"]*logo-cp-imports\.webp[^"]*)"/) || [])[1];
   trocar(/<footer class="f">[\s\S]*?<\/footer>/, rodape(logo), "rodapé");
 
+  // 5b. Ícone do WhatsApp dos contatos: o desenho original está incompleto (só o anel). Usa o desenho completo que a
+  // própria loja já usa em assets/app.js.
+  const completo = (fs.readFileSync(path.join(RAIZ, "assets", "app.js"), "utf8").match(/wa:'<svg[^>]*><path d="([^"]+)"/) || [])[1];
+  const anel = "M12.04 2a9.9 9.9 0 00-8.5 15l-1.3 4.8 4.9-1.3A9.9 9.9 0 1012.04 2zm0 18.1a8.2 8.2 0 01-4.2-1.15l-.3-.18-2.9.76.78-2.83-.2-.3a8.2 8.2 0 1117.02-4.5 8.2 8.2 0 01-10.2 8.2z";
+  if (!completo || !completo.startsWith(anel)) throw new Error("ícone do WhatsApp: desenho completo não encontrado em assets/app.js");
+  if (!html.includes(`d="${anel}"`)) throw new Error("ícone do WhatsApp: desenho incompleto não encontrado nos contatos");
+  html = html.split(`d="${anel}"`).join(`d="${completo}"`);
+
   // 6. Scripts de apresentação (depois da lógica); no protótipo, simulação de pagamento (antes)
-  trocar(/<script src="[^"]*assets\/app\.js[^"]*"><\/script>/, (m) => `${prototipo ? '<script src="simulacao.js"></script>\n' : ""}${m}\n<script src="${ativo("assets/efeitos.js")}"></script>\n${fs.existsSync(path.join(RAIZ, "dados", "paginas.js")) ? `<script src="${ativo("dados/paginas.js")}"></script>` : ""}<script src="${ativo("assets/navegacao.js")}"></script>`, "scripts");
+  trocar(/<script src="[^"]*assets\/app\.js[^"]*"><\/script>/, () => `${prototipo ? '<script src="simulacao.js"></script>\n' : ""}<script src="${ativo("assets/app-premium.js")}"></script>\n<script src="${ativo("assets/efeitos.js")}"></script>\n${fs.existsSync(path.join(RAIZ, "dados", "paginas.js")) ? `<script src="${ativo("dados/paginas.js")}"></script>` : ""}<script src="${ativo("assets/navegacao.js")}"></script>`, "scripts");
 
   // 7. Dimensões declaradas nas imagens e prioridade para as do primeiro banner
   let comDimensoes = 0;

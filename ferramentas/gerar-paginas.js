@@ -82,7 +82,7 @@ function pagina(p) {
   const nome = `${b.short} ${p.name}`, url = `${SITE}produto/${SLUG[p.i]}/`, imagem = SITE + foto(p.i);
   const desc = (p.desc || `${nome} — ${p.spec}.`) + ` ${fmt(p.price)} no Pix ou em até ${m.n}x no cartão.`;
   const c0 = DATA.contacts[0];
-  const wa = `https://wa.me/${c0.phone}?text=${encodeURIComponent(`Olá, ${c0.name}! Vim pelo catálogo da CP Imports e tenho uma dúvida sobre:\n\n${lineOf(p, 1)}`)}`;
+  const wa = `https://wa.me/${c0.phone}?text=${encodeURIComponent(`Olá, ${c0.name}! Vim pelo catálogo da CP Importados e tenho uma dúvida sobre:\n\n${lineOf(p, 1)}`)}`;
   const ld = { "@context": "https://schema.org", "@type": "Product", name: nome, image: imagem, description: p.desc || `${nome} — ${p.spec}`, sku: String(p.i), brand: { "@type": "Brand", name: b.short }, category: CATN[cat],
     offers: { "@type": "Offer", url, priceCurrency: "BRL", price: p.price.toFixed(2), seller: { "@type": "Organization", name: "CP Importados" } } };
   const trilha = { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [["Início", SITE], [CATN[cat], `${SITE}?cat=${cat}#catalogo`], [nome, url]].map(([name, item], k) => ({ "@type": "ListItem", position: k + 1, name, item })) };
