@@ -1,6 +1,6 @@
 # Bateria da Fase 2 — loja redesenhada
 
-- 2026-11-12T10:57:24.268Z · referência: loja publicada `89ef168` · candidato: `index.html da raiz`
+- 2026-11-12T12:31:31.584Z · referência: loja publicada `89ef168` · candidato: `index.html da raiz`
 - Servidor de pedidos e pagamento **simulados**; rede externa bloqueada.
 
 | Teste | Status | Descrição |
