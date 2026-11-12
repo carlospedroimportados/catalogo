@@ -202,7 +202,9 @@ const reg = (id, titulo, divergencias, detalhes = []) => { R.push({ id, titulo, 
         if (!mapa.includes(`produto/${PAG[p.i]}/</loc>`)) d.push(`i=${p.i}: fora do sitemap`);
         if (/base64,|script\.google\.com|fetch\(/.test(h)) d.push(`i=${p.i}: conteúdo inesperado na página`);
       }
-      det.push(`${reais.length} páginas conferidas contra o catálogo: posição, preço, preço "de", parcelas, imagem, dados estruturados e sitemap`);
+      const e404 = fs.existsSync(path.join(RAIZ, "404.html")) ? fs.readFileSync(path.join(RAIZ, "404.html"), "utf8") : "";
+      if (!/noindex/.test(e404) || !/href="\/catalogo\/"/.test(e404) || /href="(assets|img)\//.test(e404)) d.push("404.html ausente, indexável ou com caminhos relativos");
+      det.push(`${reais.length} páginas conferidas contra o catálogo: posição, preço, preço "de", parcelas, imagem, dados estruturados e sitemap · 404.html da marca (noindex, caminhos absolutos)`);
       // Navegação real: página → sacola compartilhada → sacola da loja
       for (const [nome, viewport] of [["desktop", { width: 1440, height: 900 }], ["celular", { width: 390, height: 844 }]]) {
         const ctx = await novoContexto(browser, { viewport }); const p = await ctx.newPage(); await p.emulateMedia({ reducedMotion: "reduce" });
@@ -227,6 +229,66 @@ const reg = (id, titulo, divergencias, detalhes = []) => { R.push({ id, titulo, 
       }
       reg("P13", "Páginas de produto: 156 páginas fiéis ao catálogo e integradas à sacola da loja", d, det);
     }
+
+    // P14: miniaturas — arquivos, dimensões, originais preservados e peso do primeiro carregamento no celular
+    { const d = [], det = [];
+      const dim = (arq) => { const b = fs.readFileSync(arq), t = b.slice(12, 16).toString();
+        if (t === "VP8 ") return [b.readUInt16LE(26) & 0x3fff, b.readUInt16LE(28) & 0x3fff];
+        if (t === "VP8X") return [1 + b.readUIntLE(24, 3), 1 + b.readUIntLE(27, 3)]; return null; };
+      const lista = fs.readdirSync(path.join(RAIZ, "img", "produtos")).filter((n) => n.endsWith(".webp"));
+      let menores = 0, somaOrig = 0, somaMini = 0;
+      for (const n of lista) for (const [pasta, w, h] of [["produtos-320", 320, 400], ["produtos-480", 480, 600]]) {
+        const arq = path.join(RAIZ, "miniaturas", pasta, n);
+        if (!fs.existsSync(arq)) { d.push(`ausente: miniaturas/${pasta}/${n}`); continue; }
+        const [lw, lh] = dim(arq) || [0, 0]; if (lw !== w || lh !== h) d.push(`${pasta}/${n}: ${lw}×${lh} (esperado ${w}×${h})`);
+        if (pasta === "produtos-320") { somaOrig += fs.statSync(path.join(RAIZ, "img", "produtos", n)).size; somaMini += fs.statSync(arq).size; if (fs.statSync(arq).size < fs.statSync(path.join(RAIZ, "img", "produtos", n)).size) menores++; }
+      }
+      for (const [n, w] of [["logo-128.webp", 128], ["logo-256.webp", 256]]) { const arq = path.join(RAIZ, "miniaturas", "marca", n); const x = fs.existsSync(arq) ? dim(arq) : null; if (!x || x[0] !== w || x[1] !== w) d.push(`logotipo ${n} ausente ou com dimensões erradas`); }
+      det.push(`${lista.length} fotos × 2 miniaturas e 2 tamanhos do logotipo conferidos · miniatura de 320 px menor que o original em ${menores} de ${lista.length}`);
+      det.push(`soma das miniaturas de 320 px: ${(somaMini / 1024).toFixed(0)} KB contra ${(somaOrig / 1024).toFixed(0)} KB dos originais`);
+      // peso no celular: sem rolagem, só o que o navegador baixa ao abrir
+      const medir = async (dpr) => { const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: dpr, serviceWorkers: "block", locale: "pt-BR" });
+        await ctx.route("**/*", (r) => (new URL(r.request().url()).hostname === "127.0.0.1" ? r.continue() : r.abort()));
+        const pg = await ctx.newPage(), imgs = []; pg.on("response", async (r) => { if (r.request().resourceType() === "image") { try { imgs.push({ u: r.url(), b: (await r.body()).length }); } catch { /* sem corpo */ } } });
+        await pg.goto(uProto, { waitUntil: "load" }); await pg.waitForLoadState("networkidle");
+        const usa = await pg.evaluate(() => { const c = document.querySelector('#grid .pc[data-i="0"] img'), b = document.querySelector(".slide.on .arco.g img"); return { atual: b.currentSrc, src: c.getAttribute("src") }; });
+        await ctx.close(); return { kb: imgs.reduce((a, x) => a + x.b, 0) / 1024, n: imgs.length, usa, mini: imgs.filter((x) => /miniaturas\//.test(x.u)).length }; };
+      const m1 = await medir(1), m2 = await medir(2);
+      if (!/miniaturas\/produtos-320\//.test(m1.usa.atual)) d.push(`1x: banner usa ${m1.usa.atual}`);
+      if (!/miniaturas\/produtos-480\//.test(m2.usa.atual)) d.push(`2x: banner usa ${m2.usa.atual}`);
+      if (!/img\/produtos\/000\.webp/.test(m1.usa.src)) d.push(`o atributo src do card não aponta para o original: ${m1.usa.src}`);
+      for (const [r, m] of [["1x", m1], ["2x", m2]]) { det.push(`celular ${r}: ${m.kb.toFixed(0)} KB de imagens em ${m.n} arquivos (${m.mini} miniaturas) — antes das miniaturas: 2474 KB`); if (m.kb > 1300) d.push(`celular ${r}: ${m.kb.toFixed(0)} KB de imagens (limite 1300 KB)`); }
+      reg("P14", "Miniaturas: 316 arquivos nas dimensões certas, originais preservados e no máximo 1,3 MB de imagens no primeiro acesso no celular", d, det); }
+
+    // P15: indicador de etapas e foco dentro dos painéis (desktop e celular)
+    { const d = [], det = [];
+      for (const [nome, viewport] of [["desktop", { width: 1440, height: 900 }], ["celular", { width: 390, height: 844 }]]) {
+        const ctx = await novoContexto(browser, { viewport }); const p = await ctx.newPage(); await p.emulateMedia({ reducedMotion: "reduce" });
+        await p.goto(uProto, { waitUntil: "load" }); await p.evaluate(() => localStorage.clear()); await p.reload({ waitUntil: "load" });
+        const esp = () => p.waitForTimeout(500);
+        await p.evaluate(() => document.querySelector('#grid .pc[data-i="0"] [data-add]').click());
+        await p.focus(".bagbtn"); await p.keyboard.press("Enter"); await esp();
+        const e1 = await p.evaluate(() => { const e = document.querySelector("#bagBody > .etapas"); return e && { n: e.dataset.n, ligadas: e.querySelectorAll(".on").length, oculto: e.getAttribute("aria-hidden"), texto: e.textContent }; });
+        if (!e1 || e1.n !== "1" || e1.ligadas !== 1 || e1.oculto !== "true" || e1.texto !== "") d.push(`${nome}: etapa 1 incorreta ${JSON.stringify(e1)}`);
+        await p.evaluate(() => document.querySelector('[data-step="checkout"]').click()); await esp();
+        const e2 = await p.evaluate(() => { const e = document.querySelector("#bagBody > .etapas"); return e && { n: e.dataset.n, ligadas: e.querySelectorAll(".on").length, total: document.querySelectorAll("#bagBody > .etapas").length }; });
+        if (!e2 || e2.n !== "2" || e2.ligadas !== 2 || e2.total !== 1) d.push(`${nome}: etapa 2 incorreta ${JSON.stringify(e2)}`);
+        // foco preso: 40 Tabs e 40 Shift+Tabs nunca saem do painel
+        let fora = 0;
+        for (let k = 0; k < 40; k++) { await p.keyboard.press("Tab"); if (!(await p.evaluate(() => document.getElementById("bag").contains(document.activeElement)))) fora++; }
+        for (let k = 0; k < 40; k++) { await p.keyboard.press("Shift+Tab"); if (!(await p.evaluate(() => document.getElementById("bag").contains(document.activeElement)))) fora++; }
+        if (fora) d.push(`${nome}: foco saiu do painel da sacola ${fora} vezes`);
+        await p.keyboard.press("Escape"); await esp();
+        const volta = await p.evaluate(() => document.activeElement.className); if (!/bagbtn/.test(volta)) d.push(`${nome}: foco não voltou ao botão da sacola (${volta})`);
+        await p.evaluate(() => document.querySelector('#grid .pc[data-i="1"] .ph').focus()); await p.keyboard.press("Enter"); await esp();
+        let foraP = 0; for (let k = 0; k < 40; k++) { await p.keyboard.press("Tab"); if (!(await p.evaluate(() => document.getElementById("pv").contains(document.activeElement)))) foraP++; }
+        if (foraP) d.push(`${nome}: foco saiu do painel do produto ${foraP} vezes`);
+        await p.keyboard.press("Escape"); await esp();
+        const voltaP = await p.evaluate(() => document.activeElement.closest(".pc")?.dataset.i); if (voltaP !== "1") d.push(`${nome}: foco não voltou ao card do produto (${voltaP})`);
+        det.push(`${nome}: etapas 1 e 2 corretas · 80 Tabs na sacola e 40 no produto sem sair do painel · foco devolvido ao fechar`);
+        d.push(...ctx.registro.erros.map((x) => `${nome}: ${x}`)); await ctx.close();
+      }
+      reg("P15", "Sacola e checkout: indicador de etapas e foco preso no painel, com devolução ao fechar", d, det); }
   } finally { await browser.close(); sRef.fechar(); sLoja.fechar(); }
 
   const ic = { PASSOU: "✅ PASSOU", FALHOU: "❌ FALHOU" };

@@ -471,3 +471,18 @@ form.find{display:block}
   .pg .rel{margin-top:44px}
   .pi h3{font-size:18px}
 }
+
+/* ---------- Etapas 4: indicador de etapas da sacola e do checkout ---------- */
+.etapas{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:-6px 0 2px}
+.etapas span{height:3px;border-radius:2px;background:var(--line);transition:background .4s var(--ease)}
+.etapas span.on{background:var(--em)}
+.etapas::before{content:"Etapa " attr(data-n) " de 2";grid-row:2;grid-column:1/-1;margin-top:8px;font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-deep)}
+
+/* página 404 */
+.pagina-erro{background:var(--em-d);color:#FBF9F4;min-height:100vh;padding-bottom:0}
+.erro{min-height:100vh;display:grid;align-content:center;justify-items:center;gap:18px;text-align:center;padding:48px 24px}
+.erro h1{font-family:var(--serif);font-weight:500;font-size:clamp(40px,7vw,72px);line-height:1;margin:0}
+.erro h1 em{color:var(--gold-hi)}
+.erro p{margin:0;max-width:44ch;color:#D5E3DC}
+.erro .eyebrow{color:#D9BD7E;letter-spacing:.34em}
+.erro .ctas{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:8px}

@@ -72,7 +72,25 @@ ${prototipo ? '<div class="proto" role="note">Protótipo da Fase 2 · pagamentos
     comDimensoes++; return `<img width="${tipo === "produtos" ? 640 : 300}" height="${tipo === "produtos" ? 800 : 375}" src="${src}"`;
   });
   html = html.replace(/<div class="slide on[\s\S]*?(?=\n<div class="slide )/, (m) => m.replace(/<img /g, '<img fetchpriority="high" '));
-  return { html, comDimensoes, cards: (html.match(/<article class="pc"/g) || []).length };
+
+  // 8. Miniaturas: o navegador escolhe o menor arquivo que serve para o tamanho exibido. O atributo src continua
+  // apontando para o original (a lógica da loja lê esse src), então nenhuma imagem original é substituída.
+  const existe = (rel) => fs.existsSync(path.join(RAIZ, rel));
+  const mini = (rel) => `${P}${rel}?v=${versao(rel)}`;
+  let comMiniaturas = 0;
+  if (existe("miniaturas/produtos-320/000.webp")) {
+    const srcset = (n3, original) => `${mini(`miniaturas/produtos-320/${n3}.webp`)} 320w, ${mini(`miniaturas/produtos-480/${n3}.webp`)} 480w, ${original} 640w`;
+    html = html.replace(/<img ([^>]*?)src="([^"]*img\/produtos\/(\d{3})\.webp[^"]*)"([^>]*)>/g, (m, antes, original, n3, depois, posicao, inteiro) => {
+      if (/srcset=/.test(m)) return m;
+      const arco = /<figure class="arco[^"]*">$/.test(inteiro.slice(Math.max(0, posicao - 60), posicao)); // imagem dentro de um arco de banner
+      comMiniaturas++;
+      return m.replace(/>$/, ` srcset="${srcset(n3, original)}" sizes="${arco ? "(max-width:860px) 170px, 300px" : "(max-width:860px) 46vw, 280px"}">`);
+    });
+  }
+  if (existe("miniaturas/marca/logo-128.webp")) {
+    html = html.replace(/(<a class="brand" href="#"><img src="[^"]*logo-cp-imports\.webp[^"]*")/, (m) => `${m} srcset="${mini("miniaturas/marca/logo-128.webp")} 128w, ${mini("miniaturas/marca/logo-256.webp")} 256w" sizes="60px"`);
+  }
+  return { html, comDimensoes, comMiniaturas, cards: (html.match(/<article class="pc"/g) || []).length };
 }
 
 function rodape(logo, P = "") {

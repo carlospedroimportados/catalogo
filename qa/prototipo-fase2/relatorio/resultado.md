@@ -1,6 +1,6 @@
 # Bateria da Fase 2 — protótipo
 
-- 2026-11-12T01:31:29.887Z · referência: loja publicada `89ef168` · candidato: `qa/prototipo-fase2/`
+- 2026-11-12T09:11:00.312Z · referência: loja publicada `89ef168` · candidato: `qa/prototipo-fase2/`
 - Servidor de pedidos e pagamento **simulados**; rede externa bloqueada.
 
 | Teste | Status | Descrição |
@@ -17,6 +17,8 @@
 | P10 | ✅ PASSOU | Imagens carregam, zero erros de JavaScript e zero requisições externas |
 | P11 | ✅ PASSOU | Contraste do texto dentro do mínimo (4,5:1; 3:1 para texto grande) em início, banners, produto, sacola e checkout |
 | P12 | ✅ PASSOU | Navegação do catálogo: limpar filtros, apagar busca, voltar ao topo e atalho de teclado |
+| P14 | ✅ PASSOU | Miniaturas: 316 arquivos nas dimensões certas, originais preservados e no máximo 1,3 MB de imagens no primeiro acesso no celular |
+| P15 | ✅ PASSOU | Sacola e checkout: indicador de etapas e foco preso no painel, com devolução ao fechar |
 
 ## P1 — Cards: 157 produtos com os mesmos dados, selos, parcelas e a mesma imagem (bytes)
 
@@ -78,7 +80,7 @@
 
 **✅ PASSOU**
 
-- alterações pendentes no repositório: 188
+- alterações pendentes no repositório: 546
 
 ## P8 — Sem rolagem lateral e painéis dentro da tela em 1440, 1024, 768, 390 e 320 px
 
@@ -119,3 +121,19 @@
 
 - desktop: com filtros "6 de 156 produtos" → após limpar "156 produtos"
 - celular: com filtros "6 de 156 produtos" → após limpar "156 produtos"
+
+## P14 — Miniaturas: 316 arquivos nas dimensões certas, originais preservados e no máximo 1,3 MB de imagens no primeiro acesso no celular
+
+**✅ PASSOU**
+
+- 157 fotos × 2 miniaturas e 2 tamanhos do logotipo conferidos · miniatura de 320 px menor que o original em 157 de 157
+- soma das miniaturas de 320 px: 1884 KB contra 4259 KB dos originais
+- celular 1x: 699 KB de imagens em 51 arquivos (38 miniaturas) — antes das miniaturas: 2474 KB
+- celular 2x: 938 KB de imagens em 51 arquivos (38 miniaturas) — antes das miniaturas: 2474 KB
+
+## P15 — Sacola e checkout: indicador de etapas e foco preso no painel, com devolução ao fechar
+
+**✅ PASSOU**
+
+- desktop: etapas 1 e 2 corretas · 80 Tabs na sacola e 40 no produto sem sair do painel · foco devolvido ao fechar
+- celular: etapas 1 e 2 corretas · 80 Tabs na sacola e 40 no produto sem sair do painel · foco devolvido ao fechar

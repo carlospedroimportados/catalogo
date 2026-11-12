@@ -76,3 +76,69 @@ redesenhada, cujo `index.html` mudou de propósito; a proteção dos dados passo
    `index.html` monolítico continua incompatível com esta versão.
 7. **Disponibilidade em estoque** — os dados estruturados não declaram estoque, porque a loja não tem essa informação.
 8. Correção do link do comprovante e teste real de pedido — registrados à parte.
+
+---
+
+## Bloco 3 — Imagens e velocidade, sacola e checkout, acessibilidade
+
+### Imagens e velocidade
+
+- `ferramentas/otimizar-imagens.py` cria **316 miniaturas novas** em `miniaturas/` (320×400 e 480×600 para cada uma
+  das 157 fotos) e dois tamanhos do logotipo (128 e 256 px). **Os originais em `img/` não foram tocados** (teste P7).
+- Cada foto é comparada com a redução sem compressão (PSNR). Se ficar abaixo de 34 dB, a qualidade sobe só para essa
+  foto (31 precisaram). Pior resultado: 33,6 dB, acima do mínimo de 33 dB; abaixo disso a ferramenta para.
+- Cards, banners e logotipo ganharam `srcset`/`sizes`: o navegador escolhe o menor arquivo que serve. O atributo `src`
+  continua apontando para o original, porque a lógica da loja lê esse valor (sacola, painel do produto).
+- As páginas de produto usam as mesmas miniaturas nos relacionados e no logotipo.
+
+Peso do primeiro carregamento no celular (390 px, local, sem cache):
+
+| | Antes | Depois | Variação |
+|---|---|---|---|
+| Início, tela 1x · imagens | 2.474 KB | 714 KB | **-71%** |
+| Início, tela 2x · imagens | 2.474 KB | 961 KB | **-61%** |
+| Início, tela 1x · total | 3.018 KB | 1.291 KB | -57% |
+| Início, tela 2x · total | 3.018 KB | 1.539 KB | -49% |
+| Início, tela 1x · requisições | 108 | 69 | -36% |
+| Início, tela 3x · imagens | 2.349 KB | 2.496 KB | sem ganho |
+| Página de produto 1x · imagens | 216 KB | 155 KB | -28% |
+
+Em telas 3x (iPhones Pro e semelhantes) o card de 179 px precisa de 537 px reais, e o navegador volta ao arquivo
+original de 640 px: não há ganho nesse caso. Reduzir isso exigiria aceitar imagens levemente menos nítidas.
+
+### Sacola e checkout
+
+- Indicador de etapas ("Etapa 1 de 2" e "Etapa 2 de 2", com barras) acima da sacola e do checkout. É feito por um
+  script de apresentação (`assets/navegacao.js`): **a lógica da loja (`assets/app.js`) não foi alterada**. O indicador
+  é decorativo (oculto para leitores de tela), não tem texto no documento e some na tela de pedido concluído.
+- Textos, valores e envios ao servidor idênticos (P5 continua aprovado).
+
+### Acessibilidade e usabilidade
+
+- Foco preso dentro do painel aberto (sacola ou produto) e devolvido ao botão ou card de origem ao fechar.
+  Testado com 80 Tabs/Shift+Tabs na sacola e 40 no painel do produto, em desktop e celular.
+- Página `404.html` da marca (noindex, caminhos absolutos), para endereços inexistentes.
+
+### Testes
+
+| Bateria | Resultado |
+|---|---|
+| Loja (`testar.js --alvo loja`) | **15 de 15** aprovados — P14 (miniaturas e peso) e P15 (etapas e foco) são novos |
+| Protótipo (`testar.js`) | **14 de 14** aprovados |
+
+### Arquivos novos ou alterados neste bloco
+
+`miniaturas/` (316 arquivos), `ferramentas/otimizar-imagens.py`, `ferramentas/redesign.js`, `ferramentas/gerar-paginas.js`,
+`ferramentas/construir.js`, `assets/navegacao.js`, `assets/premium.css`, `404.html`, `index.html`, `produto/*/index.html`,
+`qa/prototipo-fase2/{testar,medir,gerar}.js` e os relatórios e capturas de `qa/relatorio-fase2/`.
+
+### Pendências atualizadas
+
+1. **Mensagens de WhatsApp** ainda dizem "CP Imports" (texto da lógica).
+2. **Economia do Pix em reais no checkout** — exige alterar a lógica.
+3. **Telas 3x** sem ganho de peso (ver acima).
+4. **Miniaturas das fotos da sacola**: a sacola usa o original de 640 px para uma foto de 84 px — exige alterar a lógica.
+5. **Leitor de tela real** e rede 4G real não foram testados.
+6. **Endereço público e `robots.txt`**: ver pendências do bloco 2.
+7. **Atualização do catálogo**: rodar `node ferramentas/construir.js` (cria miniaturas só das fotos novas).
+8. Correção do link do comprovante e pedido real de teste, registrados à parte.

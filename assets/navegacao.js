@@ -72,6 +72,50 @@
     try { history.replaceState(null, "", location.pathname + (resto ? "?" + resto : "") + location.hash); } catch (e) { /* endereço fica como está */ }
     var alvo = $("#catalogo"); if (alvo) setTimeout(function () { alvo.scrollIntoView(); }, 60);
   }
+  // Indicador de etapas da sacola e do checkout. É decorativo (aria-hidden) e não tem texto no documento;
+  // o rótulo "Etapa 1 de 2" vem do CSS. Reaparece a cada redesenho do painel feito pela loja.
+  var corpoSac = $("#bagBody"), tituloSac = $("#bagT");
+  var etapas = function () {
+    if (!corpoSac || !tituloSac) return;
+    var t = tituloSac.textContent.trim(), n = t === "Sua sacola" ? 1 : t === "Finalizar compra" ? 2 : 0;
+    var atual = corpoSac.querySelector(":scope > .etapas");
+    if (!n || corpoSac.querySelector(".empty-bag") || corpoSac.querySelector(".done")) { if (atual) atual.remove(); return; }
+    if (atual && +atual.dataset.n === n) return;
+    if (atual) atual.remove();
+    var el = document.createElement("div");
+    el.className = "etapas"; el.dataset.n = n; el.setAttribute("aria-hidden", "true");
+    el.innerHTML = '<span class="on"></span><span class="' + (n === 2 ? "on" : "") + '"></span>';
+    corpoSac.insertBefore(el, corpoSac.firstChild);
+  };
+  if (corpoSac) new MutationObserver(etapas).observe(corpoSac, { childList: true });
+
+  // Foco: preso dentro do painel aberto (sacola ou produto) e devolvido a quem o abriu ao fechar.
+  var abriu = null;
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest("button,a,[data-open]");
+    if (b && !b.closest(".sheet")) abriu = b;
+  }, true);
+  document.addEventListener("keydown", function (e) {
+    if (e.key !== "Tab") return;
+    var painel = $("#bag.on, #pv.on"); if (!painel) return;
+    var itens = [].slice.call(painel.querySelectorAll('a[href],button:not([disabled]),input:not([disabled]),select,textarea,summary,[tabindex]:not([tabindex="-1"])'))
+      .filter(function (x) { return x.getClientRects().length > 0 && getComputedStyle(x).visibility !== "hidden"; });
+    if (!itens.length) return;
+    var primeiro = itens[0], ultimo = itens[itens.length - 1], foco = document.activeElement;
+    if (!painel.contains(foco)) { primeiro.focus(); e.preventDefault(); }
+    else if (e.shiftKey && foco === primeiro) { ultimo.focus(); e.preventDefault(); }
+    else if (!e.shiftKey && foco === ultimo) { primeiro.focus(); e.preventDefault(); }
+  });
+  ["#bag", "#pv"].forEach(function (sel) {
+    var painel = $(sel); if (!painel) return;
+    var estava = false;
+    new MutationObserver(function () {
+      var aberto = painel.classList.contains("on");
+      if (estava && !aberto && abriu && document.contains(abriu) && !$("#bag.on, #pv.on")) abriu.focus({ preventScroll: true });
+      estava = aberto;
+    }).observe(painel, { attributes: true, attributeFilter: ["class"] });
+  });
+
   if (location.hash === "#sacola") { var sac = $(".bagbtn"); if (sac) sac.click(); }
 
   // Atalho do painel do produto para a página com endereço próprio (se as páginas foram geradas).

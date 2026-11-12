@@ -1,6 +1,6 @@
 # Bateria da Fase 2 — loja redesenhada
 
-- 2026-11-12T01:29:18.393Z · referência: loja publicada `89ef168` · candidato: `index.html da raiz`
+- 2026-11-12T09:08:42.786Z · referência: loja publicada `89ef168` · candidato: `index.html da raiz`
 - Servidor de pedidos e pagamento **simulados**; rede externa bloqueada.
 
 | Teste | Status | Descrição |
@@ -18,6 +18,8 @@
 | P11 | ✅ PASSOU | Contraste do texto dentro do mínimo (4,5:1; 3:1 para texto grande) em início, banners, produto, sacola e checkout |
 | P12 | ✅ PASSOU | Navegação do catálogo: limpar filtros, apagar busca, voltar ao topo e atalho de teclado |
 | P13 | ✅ PASSOU | Páginas de produto: 156 páginas fiéis ao catálogo e integradas à sacola da loja |
+| P14 | ✅ PASSOU | Miniaturas: 316 arquivos nas dimensões certas, originais preservados e no máximo 1,3 MB de imagens no primeiro acesso no celular |
+| P15 | ✅ PASSOU | Sacola e checkout: indicador de etapas e foco preso no painel, com devolução ao fechar |
 
 ## P1 — Cards: 157 produtos com os mesmos dados, selos, parcelas e a mesma imagem (bytes)
 
@@ -126,6 +128,22 @@
 
 **✅ PASSOU**
 
-- 156 páginas conferidas contra o catálogo: posição, preço, preço "de", parcelas, imagem, dados estruturados e sitemap
+- 156 páginas conferidas contra o catálogo: posição, preço, preço "de", parcelas, imagem, dados estruturados e sitemap · 404.html da marca (noindex, caminhos absolutos)
 - desktop: página → +2 na sacola → "Comprar agora" → sacola da loja aberta com R$ 690,00; chegada por categoria e busca: 8 de 156 produtos
 - celular: página → +2 na sacola → "Comprar agora" → sacola da loja aberta com R$ 690,00; chegada por categoria e busca: 8 de 156 produtos
+
+## P14 — Miniaturas: 316 arquivos nas dimensões certas, originais preservados e no máximo 1,3 MB de imagens no primeiro acesso no celular
+
+**✅ PASSOU**
+
+- 157 fotos × 2 miniaturas e 2 tamanhos do logotipo conferidos · miniatura de 320 px menor que o original em 157 de 157
+- soma das miniaturas de 320 px: 1884 KB contra 4259 KB dos originais
+- celular 1x: 656 KB de imagens em 45 arquivos (32 miniaturas) — antes das miniaturas: 2474 KB
+- celular 2x: 961 KB de imagens em 53 arquivos (40 miniaturas) — antes das miniaturas: 2474 KB
+
+## P15 — Sacola e checkout: indicador de etapas e foco preso no painel, com devolução ao fechar
+
+**✅ PASSOU**
+
+- desktop: etapas 1 e 2 corretas · 80 Tabs na sacola e 40 no produto sem sair do painel · foco devolvido ao fechar
+- celular: etapas 1 e 2 corretas · 80 Tabs na sacola e 40 no produto sem sair do painel · foco devolvido ao fechar

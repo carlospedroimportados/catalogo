@@ -73,7 +73,7 @@ ${f.uso ? `<div class="fam"><small>Como usar</small><span>${esc(f.uso)}</span></
 
 function cartao(x) {
   const m = opcoes(x.price).pop(), b = B[x.brand];
-  return `<article class="pc"><a class="ph" href="../${SLUG[x.i]}/" aria-label="Ver ${esc(b.short + " " + x.name)}"><img width="640" height="800" loading="lazy" decoding="async" src="${R}${foto(x.i)}" alt="${esc(b.short + " " + x.name)}"></a>
+  return `<article class="pc"><a class="ph" href="../${SLUG[x.i]}/" aria-label="Ver ${esc(b.short + " " + x.name)}"><img width="640" height="800" loading="lazy" decoding="async" src="${R}${foto(x.i)}" srcset="${a(`miniaturas/produtos-320/${String(x.i).padStart(3, "0")}.webp`)} 320w, ${a(`miniaturas/produtos-480/${String(x.i).padStart(3, "0")}.webp`)} 480w, ${R}${foto(x.i)} 640w" sizes="(max-width:860px) 46vw, 270px" alt="${esc(b.short + " " + x.name)}"></a>
 <div class="pi"><div class="b">${esc(b.short)}</div><h3>${esc(x.name)}</h3><div class="s">${esc(x.spec)}</div><div class="pr">${x.old ? `<s>${fmt(x.old)}</s>` : ""}<strong><small>R$</small>${fmt(x.price).slice(3)}</strong></div><div class="inst">${m.n > 1 ? `ou ${m.n}x de ${fmt(m.par)} no cartão` : "no cartão: " + fmt(m.total)}</div><div class="act"><a class="add" href="../${SLUG[x.i]}/">Ver produto</a></div></div></article>`;
 }
 
@@ -97,7 +97,7 @@ function pagina(p) {
 <script type="application/ld+json">${JSON.stringify(ld)}</script><script type="application/ld+json">${JSON.stringify(trilha)}</script></head><body class="pagina-produto">
 <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 <div class="aviso"><span>Pix sem acréscimo</span><span>Cartão em até 12x</span><span>Envio para todo o Brasil</span></div>
-<header class="top"><div class="wrap top-in"><a class="brand" href="${R}"><img src="${logo}" alt="CP Importados" width="60" height="60"><span class="brand-t"><b>CP IMPORTADOS</b><small>Perfumaria · Skincare · Cabelos</small></span></a>
+<header class="top"><div class="wrap top-in"><a class="brand" href="${R}"><img src="${logo}" srcset="${a("miniaturas/marca/logo-128.webp")} 128w, ${a("miniaturas/marca/logo-256.webp")} 256w" sizes="60px" alt="CP Importados" width="60" height="60"><span class="brand-t"><b>CP IMPORTADOS</b><small>Perfumaria · Skincare · Cabelos</small></span></a>
 <form class="find" role="search" action="${R}" method="get"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4-4"/></svg><input name="busca" type="search" aria-label="Buscar produto ou marca" placeholder="Buscar produto, marca ou nota" autocomplete="off"></form>
 <a class="bagbtn" href="${R}#sacola" aria-label="Abrir sacola"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6a3 3 0 016 0v2"/></svg><span>Sacola</span><span class="n" id="sacolaN">0</span></a></div>
 <nav class="cats-nav" aria-label="Categorias"><div class="wrap"><a href="${R}#maisvendidos">Mais vendidos</a><a href="${R}#ofertas">Ofertas</a>${Object.entries({ perfume: "Perfumes", skincare: "Skincare", cabelo: "Cabelos", bebida: "Bebidas", outros: "Outros" }).map(([k, v]) => `<a${k === cat ? ' class="pill" aria-current="true"' : ""} href="${R}?cat=${k}#catalogo">${v}</a>`).join("")}<a href="${R}#rotinas">Rotinas</a><a href="${R}#pagamento">Pagamento</a><a href="${R}#contato">Contato</a></div></nav></header>
@@ -136,3 +136,20 @@ for (const p of P) {
 fs.writeFileSync(path.join(RAIZ, "dados", "paginas.js"), `/* Gerado por ferramentas/gerar-paginas.js — posição do produto → endereço da página. Não editar à mão. */\nconst PAGINAS=${JSON.stringify(SLUG)};\n`);
 fs.writeFileSync(path.join(RAIZ, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n<url><loc>${SITE}</loc></url>\n${Object.values(SLUG).map((s) => `<url><loc>${SITE}produto/${s}/</loc></url>`).join("\n")}\n</urlset>\n`);
 console.log(`Páginas de produto: ${Object.keys(SLUG).length} · ${(bytes / 1024).toFixed(0)} KB no total · média ${(bytes / Object.keys(SLUG).length / 1024).toFixed(1)} KB`);
+
+// Página 404 da marca (o GitHub Pages a serve para qualquer endereço inexistente). Usa caminhos absolutos
+// porque é exibida em endereços de qualquer profundidade; fora do índice dos buscadores (noindex).
+{
+  const base = new URL(SITE).pathname; // "/catalogo/"
+  const abs = (rel) => `${base}${rel}?v=${versao(rel)}`;
+  const logo = abs("img/marca/logo-cp-imports.webp");
+  const html = `<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Página não encontrada · CP Importados</title><meta name="robots" content="noindex"><meta name="theme-color" content="#0B1B2E">
+<link rel="stylesheet" href="${abs("assets/estilo.css")}"><link rel="stylesheet" href="${abs("assets/premium.css")}"><link rel="icon" href="${base}admin/icon-192.png"></head>
+<body class="pagina-erro"><main class="erro"><img src="${logo}" alt="CP Importados" width="96" height="96"><div class="eyebrow">Erro 404</div><h1>Esta página <em>não foi encontrada</em></h1>
+<p>O endereço pode ter mudado. Volte ao catálogo para encontrar perfumes, skincare, cabelos e bebidas.</p>
+<div class="ctas"><a class="btn-gold" href="${base}">Ir para a loja</a><a class="btn-ghost" href="${base}?cat=perfume#catalogo">Ver perfumes</a></div></main></body></html>
+`;
+  fs.writeFileSync(path.join(RAIZ, "404.html"), html);
+  console.log("Página 404 gerada.");
+}
