@@ -6,7 +6,7 @@
  *
  * P1–P7 comparam o protótipo com a loja publicada (89ef168) usando os mesmos coletores da bateria
  * principal: o redesign não pode mudar dados, filtros, parcelas, sacola nem o que vai ao servidor.
- * P8–P10 verificam o layout novo em desktop e celular.
+ * P8–P12 verificam o layout novo, o contraste e a navegação em desktop, tablet e celular.
  * Rede externa bloqueada; servidor de pedidos e pagamento simulados.
  */
 const fs = require("fs");
@@ -69,7 +69,7 @@ const reg = (id, titulo, divergencias, detalhes = []) => { R.push({ id, titulo, 
 
     // P8–P10: layout novo em desktop e celular
     const layout = {};
-    for (const [nome, viewport] of [["desktop", { width: 1440, height: 900 }], ["notebook", { width: 1024, height: 768 }], ["celular", { width: 390, height: 844 }], ["celular pequeno", { width: 320, height: 640 }]]) {
+    for (const [nome, viewport] of [["desktop", { width: 1440, height: 900 }], ["notebook", { width: 1024, height: 768 }], ["tablet", { width: 768, height: 1024 }], ["celular", { width: 390, height: 844 }], ["celular pequeno", { width: 320, height: 640 }]]) {
       const ctx = await novoContexto(browser, { viewport }); const p = await ctx.newPage();
       await p.emulateMedia({ reducedMotion: "reduce" });
       await p.goto(uProto, { waitUntil: "load" }); await p.evaluate(() => localStorage.clear()); await p.reload({ waitUntil: "load" });
@@ -93,7 +93,7 @@ const reg = (id, titulo, divergencias, detalhes = []) => { R.push({ id, titulo, 
       layout[nome] = m; await ctx.close();
     }
     const L = Object.entries(layout);
-    reg("P8", "Sem rolagem lateral e painéis dentro da tela em 1440, 1024, 390 e 320 px",
+    reg("P8", "Sem rolagem lateral e painéis dentro da tela em 1440, 1024, 768, 390 e 320 px",
       L.flatMap(([n, m]) => [m.inicio.estouro > 1 && `${n}: página estoura ${m.inicio.estouro}px`, m.produto.estouro > 1 && `${n}: produto estoura`, m.checkout.estouro > 1 && `${n}: checkout estoura`, !m.painelCabe && `${n}: painel do produto fora da tela`, !m.sacolaCabe && `${n}: sacola fora da tela`].filter(Boolean)),
       L.map(([n, m]) => `${n}: estouro ${m.inicio.estouro}px · painel do produto ${m.painelCabe ? "ok" : "fora"} · sacola ${m.sacolaCabe ? "ok" : "fora"}`));
     reg("P9", "Áreas de toque com pelo menos 44 px no celular (início, produto e checkout)",
@@ -103,6 +103,70 @@ const reg = (id, titulo, divergencias, detalhes = []) => { R.push({ id, titulo, 
       [...L.flatMap(([n, m]) => [m.imagens.falhas && `${n}: ${m.imagens.falhas} imagens falharam`, m.erros && `${n}: ${m.erros} erros`, m.externas && `${n}: ${m.externas} requisições externas`].filter(Boolean)),
         ...[...new Set(erros)].slice(0, 5), ...[...new Set(bloqueadas)].slice(0, 5)],
       L.map(([n, m]) => `${n}: ${m.imagens.total} imagens distintas, ${m.imagens.falhas} falhas`));
+
+    // P11: contraste do texto (WCAG AA: 4,5:1; 3:1 para texto grande) nas telas principais
+    { const falhas = []; let conferidos = 0;
+      for (const [nome, viewport] of [["desktop", { width: 1440, height: 900 }], ["celular", { width: 390, height: 844 }]]) {
+        const ctx = await novoContexto(browser, { viewport }); const p = await ctx.newPage();
+        await p.emulateMedia({ reducedMotion: "reduce" });
+        await p.goto(uProto, { waitUntil: "load" }); await p.evaluate(() => localStorage.clear()); await p.reload({ waitUntil: "load" });
+        const medir = (tela) => p.evaluate((tela) => {
+          const lum = (c) => { const v = c.map((x) => { x /= 255; return x <= 0.03928 ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4); }); return 0.2126 * v[0] + 0.7152 * v[1] + 0.0722 * v[2]; };
+          const cor = (s) => { const m = s.match(/[\d.]+/g).map(Number); return { rgb: m.slice(0, 3), a: m.length > 3 ? m[3] : 1 }; };
+          const fundo = (e) => { for (let x = e; x; x = x.parentElement) { const cs = getComputedStyle(x); if (cs.backgroundImage !== "none" && !/^linear-gradient\(rgb\([^)]+\), rgb\([^)]+\)\)$/.test(cs.backgroundImage)) return null;
+            const c = cor(cs.backgroundColor); if (c.a >= 0.99) return c.rgb; if (c.a > 0.01) return null; } return [255, 255, 255]; };
+          const out = []; let n = 0;
+          for (const e of document.querySelectorAll("body *")) {
+            if (![...e.childNodes].some((t) => t.nodeType === 3 && t.textContent.trim())) continue;
+            const r = e.getBoundingClientRect(), cs = getComputedStyle(e);
+            if (!r.width || !r.height || cs.visibility === "hidden" || +cs.opacity === 0 || e.closest(".sheet:not(.on)") || e.closest(".nojs") || e.closest("[hidden]")) continue;
+            if (e.closest(".slide:not(.on)") || e.closest(".toast") || e.closest(".bar:not(.on)")) continue;
+            const bg = fundo(e); if (!bg) continue; const fg = cor(cs.color); if (fg.a < 0.99) continue;
+            const a = lum(fg.rgb), b = lum(bg), razao = (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
+            const px = parseFloat(cs.fontSize), grande = px >= 24 || (px >= 18.66 && +cs.fontWeight >= 700); n++;
+            if (razao < (grande ? 3 : 4.5)) out.push(`${tela}: "${e.textContent.trim().slice(0, 28)}" (${(e.className || e.tagName).toString().slice(0, 24)}) ${razao.toFixed(2)}:1`);
+          }
+          return { n, out: [...new Set(out)] };
+        }, tela);
+        const junta = (m) => { conferidos += m.n; falhas.push(...m.out); };
+        junta(await medir(nome + " · início"));
+        for (const k of [1, 2, 3]) { await p.evaluate((k) => document.querySelector(`#dots [data-sl="${k}"]`).click(), k); await p.waitForTimeout(900); junta(await medir(`${nome} · banner ${k + 1}`)); }
+        await p.evaluate(() => document.querySelector('#grid .pc[data-i="0"] .ph').click()); await p.waitForTimeout(600); junta(await medir(nome + " · produto"));
+        await p.evaluate(() => { document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" })); document.querySelector('#grid .pc[data-i="0"] [data-add]').click(); document.querySelector(".bagbtn").click(); }); await p.waitForTimeout(600);
+        junta(await medir(nome + " · sacola"));
+        await p.evaluate(() => { document.querySelector('[data-step="checkout"]').click(); document.querySelector('[data-pay="card"]').click(); document.querySelector("[data-submit]").click(); }); await p.waitForTimeout(300);
+        junta(await medir(nome + " · checkout com erros"));
+        await ctx.close();
+      }
+      reg("P11", "Contraste do texto dentro do mínimo (4,5:1; 3:1 para texto grande) em início, banners, produto, sacola e checkout", [...new Set(falhas)], [`${conferidos} textos medidos em desktop e celular`]); }
+
+    // P12: limpar filtros, apagar busca, voltar ao topo e atalho de teclado
+    { const d = [], det = [];
+      for (const [nome, viewport] of [["desktop", { width: 1440, height: 900 }], ["celular", { width: 390, height: 844 }]]) {
+        const ctx = await novoContexto(browser, { viewport }); const p = await ctx.newPage();
+        await p.emulateMedia({ reducedMotion: "reduce" });
+        await p.goto(uProto, { waitUntil: "load" }); await p.evaluate(() => localStorage.clear()); await p.reload({ waitUntil: "load" });
+        const estado = () => p.evaluate(() => ({ cnt: document.getElementById("cnt").textContent, limpar: !document.querySelector(".limpar").hidden, apaga: !document.querySelector(".apaga").hidden,
+          cat: document.querySelector('.seg [aria-pressed="true"]').dataset.cat, marca: document.getElementById("fBrand").value, ordem: document.getElementById("fSort").value, q: document.getElementById("q").value }));
+        const tick = () => p.waitForTimeout(80);
+        const e0 = await estado(); if (e0.limpar || e0.apaga) d.push(`${nome}: botões visíveis sem filtro`);
+        await p.fill("#q", "club"); await tick(); const e1 = await estado(); if (!e1.limpar || !e1.apaga) d.push(`${nome}: busca não mostrou limpar/apagar`);
+        await p.evaluate(() => document.querySelector(".apaga").click()); await tick(); const e2 = await estado(); if (e2.q || e2.cnt !== e0.cnt || e2.limpar) d.push(`${nome}: apagar busca não restaurou o catálogo`);
+        await p.evaluate(() => { document.querySelector('.seg [data-cat="perfume"]').click(); const o = document.getElementById("fSort"); o.value = "asc"; o.dispatchEvent(new Event("change", { bubbles: true })); });
+        await p.selectOption("#fBrand", "armaf"); await p.fill("#q", "woman"); await tick();
+        const e3 = await estado(); if (!e3.limpar || e3.cnt === e0.cnt) d.push(`${nome}: filtros combinados não refletidos`);
+        await p.evaluate(() => document.querySelector(".limpar").click()); await tick();
+        const e4 = await estado(); if (e4.cnt !== e0.cnt || e4.cat !== "all" || e4.marca !== "all" || e4.ordem !== "cat" || e4.q || e4.limpar) d.push(`${nome}: limpar filtros não restaurou tudo (${JSON.stringify(e4)})`);
+        await p.evaluate(() => window.scrollTo(0, 3000)); await p.waitForTimeout(250);
+        const t1 = await p.evaluate(() => document.querySelector(".topo").classList.contains("on")); if (!t1) d.push(`${nome}: voltar ao topo não apareceu`);
+        await p.evaluate(() => document.querySelector(".topo").click()); await p.waitForTimeout(300);
+        const y = await p.evaluate(() => window.scrollY); if (y > 5) d.push(`${nome}: voltar ao topo não rolou (y=${y})`);
+        await p.reload({ waitUntil: "load" }); // foco volta ao início do documento
+        await p.keyboard.press("Tab"); const foco = await p.evaluate(() => document.activeElement.className); if (foco !== "pular") d.push(`${nome}: primeiro Tab não foca o atalho (${foco})`);
+        det.push(`${nome}: com filtros "${e3.cnt}" → após limpar "${e4.cnt}"`);
+        d.push(...ctx.registro.erros.map((x) => `${nome}: ${x}`)); await ctx.close();
+      }
+      reg("P12", "Navegação do catálogo: limpar filtros, apagar busca, voltar ao topo e atalho de teclado", d, det); }
   } finally { await browser.close(); sRef.fechar(); sLoja.fechar(); }
 
   const ic = { PASSOU: "✅ PASSOU", FALHOU: "❌ FALHOU" };

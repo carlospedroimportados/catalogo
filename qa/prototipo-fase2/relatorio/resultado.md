@@ -1,6 +1,6 @@
 # Bateria do protótipo da Fase 2
 
-- 2026-11-11T20:41:14.222Z · referência: loja publicada `89ef168` · candidato: `qa/prototipo-fase2/`
+- 2026-11-12T01:07:04.265Z · referência: loja publicada `89ef168` · candidato: `qa/prototipo-fase2/`
 - Servidor de pedidos e pagamento **simulados**; rede externa bloqueada.
 
 | Teste | Status | Descrição |
@@ -12,9 +12,11 @@
 | P5 | ✅ PASSOU | Checkout simulado (16 cenários): o que é enviado ao servidor e os textos da tela não mudam |
 | P6 | ✅ PASSOU | Retorno do pagamento: confirmação, mensagens e limpeza do endereço idênticos |
 | P7 | ✅ PASSOU | Isolamento: loja original intacta; protótipo usa lógica, dados e imagens originais sem cópia |
-| P8 | ✅ PASSOU | Sem rolagem lateral e painéis dentro da tela em 1440, 1024, 390 e 320 px |
+| P8 | ✅ PASSOU | Sem rolagem lateral e painéis dentro da tela em 1440, 1024, 768, 390 e 320 px |
 | P9 | ✅ PASSOU | Áreas de toque com pelo menos 44 px no celular (início, produto e checkout) |
 | P10 | ✅ PASSOU | Imagens carregam, zero erros de JavaScript e zero requisições externas |
+| P11 | ✅ PASSOU | Contraste do texto dentro do mínimo (4,5:1; 3:1 para texto grande) em início, banners, produto, sacola e checkout |
+| P12 | ✅ PASSOU | Navegação do catálogo: limpar filtros, apagar busca, voltar ao topo e atalho de teclado |
 
 ## P1 — Cards: 157 produtos com os mesmos dados, selos, parcelas e a mesma imagem (bytes)
 
@@ -79,12 +81,13 @@
 - arquivos alterados fora de qa/ e docs/: 0
 - main: 89ef168 · origin/main: 89ef168
 
-## P8 — Sem rolagem lateral e painéis dentro da tela em 1440, 1024, 390 e 320 px
+## P8 — Sem rolagem lateral e painéis dentro da tela em 1440, 1024, 768, 390 e 320 px
 
 **✅ PASSOU**
 
 - desktop: estouro 0px · painel do produto ok · sacola ok
 - notebook: estouro 0px · painel do produto ok · sacola ok
+- tablet: estouro 0px · painel do produto ok · sacola ok
 - celular: estouro 0px · painel do produto ok · sacola ok
 - celular pequeno: estouro 0px · painel do produto ok · sacola ok
 
@@ -92,8 +95,8 @@
 
 **✅ PASSOU**
 
-- celular: 230 controles visíveis conferidos no início
-- celular pequeno: 230 controles visíveis conferidos no início
+- celular: 232 controles visíveis conferidos no início
+- celular pequeno: 232 controles visíveis conferidos no início
 
 ## P10 — Imagens carregam, zero erros de JavaScript e zero requisições externas
 
@@ -101,5 +104,19 @@
 
 - desktop: 168 imagens distintas, 0 falhas
 - notebook: 168 imagens distintas, 0 falhas
+- tablet: 168 imagens distintas, 0 falhas
 - celular: 168 imagens distintas, 0 falhas
 - celular pequeno: 168 imagens distintas, 0 falhas
+
+## P11 — Contraste do texto dentro do mínimo (4,5:1; 3:1 para texto grande) em início, banners, produto, sacola e checkout
+
+**✅ PASSOU**
+
+- 14037 textos medidos em desktop e celular
+
+## P12 — Navegação do catálogo: limpar filtros, apagar busca, voltar ao topo e atalho de teclado
+
+**✅ PASSOU**
+
+- desktop: com filtros "6 de 156 produtos" → após limpar "156 produtos"
+- celular: com filtros "6 de 156 produtos" → após limpar "156 produtos"
