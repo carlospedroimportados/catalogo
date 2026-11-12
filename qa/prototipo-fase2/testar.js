@@ -63,7 +63,7 @@ const reg = (id, titulo, divergencias, detalhes = []) => { R.push({ id, titulo, 
       reg("P6", "Retorno do pagamento: confirmação, mensagens e limpeza do endereço idênticos", d, det); }
     if (LOJA) {
       // Tudo o que é comercial ou lógica deve estar idêntico, byte a byte, ao commit da Fase 1.
-      const intactos = ["dados", "assets/config.js", "assets/app.js", "assets/qrcode.js", "assets/estilo.css", "img", "fonts", "admin", "instagram"];
+      const intactos = ["dados/catalogo.js", "assets/config.js", "assets/app.js", "assets/qrcode.js", "assets/estilo.css", "img", "fonts", "admin", "instagram"];
       const mudou = git(["status", "--porcelain", "--untracked-files=all", "--", ...intactos]).toString().split("\n").filter(Boolean)
         .concat(git(["diff", "--name-only", FASE1, "HEAD", "--", ...intactos]).toString().split("\n").filter(Boolean));
       const n = git(["ls-tree", "-r", "--name-only", FASE1, "--", ...intactos]).toString().split("\n").filter(Boolean).length;
@@ -176,6 +176,57 @@ const reg = (id, titulo, divergencias, detalhes = []) => { R.push({ id, titulo, 
         d.push(...ctx.registro.erros.map((x) => `${nome}: ${x}`)); await ctx.close();
       }
       reg("P12", "Navegação do catálogo: limpar filtros, apagar busca, voltar ao topo e atalho de teclado", d, det); }
+
+    // P13 (só a loja): páginas individuais de produto
+    if (LOJA) {
+      const vm = require("vm"); const d = [], det = [];
+      const DATA = vm.runInNewContext(fs.readFileSync(path.join(RAIZ, "dados/catalogo.js"), "utf8") + "\n;DATA", Object.create(null));
+      const CFG = vm.runInNewContext(fs.readFileSync(path.join(RAIZ, "assets/config.js"), "utf8") + "\n;CFG", Object.create(null));
+      const PAG = vm.runInNewContext(fs.readFileSync(path.join(RAIZ, "dados/paginas.js"), "utf8") + "\n;PAGINAS", Object.create(null));
+      const fmt = (v) => "R$ " + v.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      const opc = (b) => { const o = []; for (let n = 1; n <= 12; n++) { const par = Math.ceil(b / (1 - (CFG.fees[n] || 0) / 100) / n * 100 - 1e-9) / 100; if (n === 1 || par >= CFG.minParcela) o.push(`<tr><td>${n}x</td><td>${fmt(par)}</td><td>${fmt(Math.round(par * n * 100) / 100)}</td></tr>`); } return o.join(""); };
+      const reais = DATA.products.filter((p) => !p.test); const slugs = Object.values(PAG);
+      if (slugs.length !== reais.length || new Set(slugs).size !== slugs.length) d.push(`páginas ${slugs.length} (únicas ${new Set(slugs).size}) ≠ produtos ${reais.length}`);
+      const mapa = fs.readFileSync(path.join(RAIZ, "sitemap.xml"), "utf8");
+      for (const p of reais) {
+        const arq = path.join(RAIZ, "produto", PAG[p.i] || "?", "index.html");
+        if (!fs.existsSync(arq)) { d.push(`i=${p.i}: página ausente`); continue; }
+        const h = fs.readFileSync(arq, "utf8"), n3 = String(p.i).padStart(3, "0");
+        const ld = JSON.parse((h.match(/<script type="application\/ld\+json">(\{"@context":"https:\/\/schema.org","@type":"Product".*?)<\/script>/) || [])[1] || "{}");
+        if (!h.includes(`data-i="${p.i}"`)) d.push(`i=${p.i}: posição errada na página`);
+        if (!h.includes(`<strong id="preco">${fmt(p.price)}</strong>`)) d.push(`i=${p.i}: preço da página difere do catálogo`);
+        if (p.old && !h.includes(`<s>${fmt(p.old)}</s>`)) d.push(`i=${p.i}: preço "de" ausente`);
+        if (!h.includes(`<table class="itab" id="parcelas">${opc(p.price)}</table>`)) d.push(`i=${p.i}: parcelas diferem da fórmula`);
+        if (!h.includes(`fetchpriority="high" src="../../img/produtos/${n3}.webp"`)) d.push(`i=${p.i}: imagem errada`);
+        if (ld.offers?.price !== p.price.toFixed(2) || ld.sku !== String(p.i)) d.push(`i=${p.i}: dados estruturados divergentes`);
+        if (!mapa.includes(`produto/${PAG[p.i]}/</loc>`)) d.push(`i=${p.i}: fora do sitemap`);
+        if (/base64,|script\.google\.com|fetch\(/.test(h)) d.push(`i=${p.i}: conteúdo inesperado na página`);
+      }
+      det.push(`${reais.length} páginas conferidas contra o catálogo: posição, preço, preço "de", parcelas, imagem, dados estruturados e sitemap`);
+      // Navegação real: página → sacola compartilhada → sacola da loja
+      for (const [nome, viewport] of [["desktop", { width: 1440, height: 900 }], ["celular", { width: 390, height: 844 }]]) {
+        const ctx = await novoContexto(browser, { viewport }); const p = await ctx.newPage(); await p.emulateMedia({ reducedMotion: "reduce" });
+        const alvo = reais.find((x) => x.i === 61), u = uProto + "produto/" + PAG[61] + "/";
+        await p.goto(u, { waitUntil: "load" }); await p.evaluate(() => localStorage.clear()); await p.reload({ waitUntil: "load" });
+        const estouro = await p.evaluate(() => document.documentElement.scrollWidth - innerWidth); if (estouro > 1) d.push(`${nome}: página estoura ${estouro}px`);
+        const peq = await p.evaluate(() => [...document.querySelectorAll("main button, main a.btn-pay, main a.add, .bagbtn")].filter((e) => e.getBoundingClientRect().height < 43.5).map((e) => e.id || e.className)); if (peq.length) d.push(`${nome}: controles menores que 44px: ${peq}`);
+        await p.click("#mais"); await p.click("#adicionar");
+        const s1 = await p.evaluate(() => ({ bag: localStorage.getItem("cp3_bag"), n: document.getElementById("sacolaN").textContent, preco: document.getElementById("preco").textContent }));
+        if (s1.bag !== '{"61":2}' || s1.n !== "2" || s1.preco !== fmt(alvo.price)) d.push(`${nome}: sacola da página incorreta ${JSON.stringify(s1)}`);
+        await p.click("#comprar"); await p.waitForURL((x) => x.pathname === new URL(uProto).pathname, { timeout: 10000 }); await p.waitForTimeout(500);
+        const s2 = await p.evaluate(() => ({ aberta: document.getElementById("bag").classList.contains("on"), bag: localStorage.getItem("cp3_bag"), total: document.getElementById("barTotal").textContent }));
+        if (!s2.aberta || s2.bag !== '{"61":3}' || s2.total !== fmt(alvo.price * 3)) d.push(`${nome}: sacola da loja não refletiu a página ${JSON.stringify(s2)}`);
+        await p.goto(uProto + "?cat=cabelo&busca=fino#catalogo", { waitUntil: "load" }); await p.waitForTimeout(200);
+        const s3 = await p.evaluate(() => ({ cnt: document.getElementById("cnt").textContent, cat: document.querySelector('.seg [aria-pressed="true"]').dataset.cat, q: document.getElementById("q").value, url: location.search }));
+        if (s3.cat !== "cabelo" || s3.q !== "fino" || s3.url !== "") d.push(`${nome}: chegada por ?cat/?busca incorreta ${JSON.stringify(s3)}`);
+        await p.evaluate(() => document.querySelector('#grid .pc[data-i="61"] .ph').click()); await p.waitForTimeout(400);
+        const lk = await p.evaluate(() => document.querySelector("#pvBody .pg-link")?.getAttribute("href")); if (lk !== `produto/${PAG[61]}/`) d.push(`${nome}: atalho do painel para a página: ${lk}`);
+        d.push(...ctx.registro.erros.map((x) => `${nome}: ${x}`), ...ctx.registro.bloqueadas.map((x) => `${nome}: externa ${x}`));
+        det.push(`${nome}: página → +2 na sacola → "Comprar agora" → sacola da loja aberta com ${s2.total}; chegada por categoria e busca: ${s3.cnt}`);
+        await ctx.close();
+      }
+      reg("P13", "Páginas de produto: 156 páginas fiéis ao catálogo e integradas à sacola da loja", d, det);
+    }
   } finally { await browser.close(); sRef.fechar(); sLoja.fechar(); }
 
   const ic = { PASSOU: "✅ PASSOU", FALHOU: "❌ FALHOU" };

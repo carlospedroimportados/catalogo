@@ -64,7 +64,7 @@ ${prototipo ? '<div class="proto" role="note">Protótipo da Fase 2 · pagamentos
   trocar(/<footer class="f">[\s\S]*?<\/footer>/, rodape(logo), "rodapé");
 
   // 6. Scripts de apresentação (depois da lógica); no protótipo, simulação de pagamento (antes)
-  trocar(/<script src="[^"]*assets\/app\.js[^"]*"><\/script>/, (m) => `${prototipo ? '<script src="simulacao.js"></script>\n' : ""}${m}\n<script src="${ativo("assets/efeitos.js")}"></script>\n<script src="${ativo("assets/navegacao.js")}"></script>`, "scripts");
+  trocar(/<script src="[^"]*assets\/app\.js[^"]*"><\/script>/, (m) => `${prototipo ? '<script src="simulacao.js"></script>\n' : ""}${m}\n<script src="${ativo("assets/efeitos.js")}"></script>\n${fs.existsSync(path.join(RAIZ, "dados", "paginas.js")) ? `<script src="${ativo("dados/paginas.js")}"></script>` : ""}<script src="${ativo("assets/navegacao.js")}"></script>`, "scripts");
 
   // 7. Dimensões declaradas nas imagens e prioridade para as do primeiro banner
   let comDimensoes = 0;

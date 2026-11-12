@@ -6,6 +6,8 @@
  */
 (function () {
   var $ = function (s) { return document.querySelector(s); };
+  var eu = document.currentScript && document.currentScript.getAttribute("src") || "assets/navegacao.js";
+  var BASE = eu.slice(0, eu.indexOf("assets/")); // "" na loja, "../../" no protótipo
   var q = $("#q"), marca = $("#fBrand"), ordem = $("#fSort"), cnt = $("#cnt");
   if (!q || !marca || !ordem || !cnt) return;
   var avisar = function (el, tipo) { el.dispatchEvent(new Event(tipo, { bubbles: true })); };
@@ -59,4 +61,30 @@
     window.scrollTo({ top: 0, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
   });
   atualizar();
+
+  // Chegada vinda das páginas de produto: ?busca=termo, ?cat=categoria e #sacola.
+  // Só aciona controles existentes; os parâmetros são retirados do endereço em seguida.
+  var par = new URLSearchParams(location.search), busca = par.get("busca"), cat = par.get("cat");
+  if (cat) { var botao = $('.seg [data-cat="' + cat.replace(/[^a-z]/g, "") + '"]'); if (botao) botao.click(); }
+  if (busca) { q.value = busca.slice(0, 80); avisar(q, "input"); }
+  if (busca || cat) {
+    par.delete("busca"); par.delete("cat"); var resto = par.toString();
+    try { history.replaceState(null, "", location.pathname + (resto ? "?" + resto : "") + location.hash); } catch (e) { /* endereço fica como está */ }
+    var alvo = $("#catalogo"); if (alvo) setTimeout(function () { alvo.scrollIntoView(); }, 60);
+  }
+  if (location.hash === "#sacola") { var sac = $(".bagbtn"); if (sac) sac.click(); }
+
+  // Atalho do painel do produto para a página com endereço próprio (se as páginas foram geradas).
+  var corpo = $("#pvBody");
+  if (corpo && typeof PAGINAS !== "undefined") {
+    new MutationObserver(function () {
+      if (corpo.querySelector(".pg-link")) return;
+      var im = corpo.querySelector(".pvimg img"), m = im && /produtos\/(\d+)\.webp/.exec(im.getAttribute("src") || "");
+      var destino = m && PAGINAS[+m[1]], ancora = corpo.querySelector(".wa.ghost");
+      if (!destino || !ancora) return;
+      var l = document.createElement("a");
+      l.className = "pg-link"; l.href = BASE + "produto/" + destino + "/"; l.textContent = "Abrir página do produto";
+      ancora.insertAdjacentElement("afterend", l);
+    }).observe(corpo, { childList: true });
+  }
 })();

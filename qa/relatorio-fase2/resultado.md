@@ -1,6 +1,6 @@
 # Bateria da Fase 2 — loja redesenhada
 
-- 2026-11-12T01:17:54.503Z · referência: loja publicada `89ef168` · candidato: `index.html da raiz`
+- 2026-11-12T01:29:18.393Z · referência: loja publicada `89ef168` · candidato: `index.html da raiz`
 - Servidor de pedidos e pagamento **simulados**; rede externa bloqueada.
 
 | Teste | Status | Descrição |
@@ -17,6 +17,7 @@
 | P10 | ✅ PASSOU | Imagens carregam, zero erros de JavaScript e zero requisições externas |
 | P11 | ✅ PASSOU | Contraste do texto dentro do mínimo (4,5:1; 3:1 para texto grande) em início, banners, produto, sacola e checkout |
 | P12 | ✅ PASSOU | Navegação do catálogo: limpar filtros, apagar busca, voltar ao topo e atalho de teclado |
+| P13 | ✅ PASSOU | Páginas de produto: 156 páginas fiéis ao catálogo e integradas à sacola da loja |
 
 ## P1 — Cards: 157 produtos com os mesmos dados, selos, parcelas e a mesma imagem (bytes)
 
@@ -112,7 +113,7 @@
 
 **✅ PASSOU**
 
-- 14023 textos medidos em desktop e celular
+- 14025 textos medidos em desktop e celular
 
 ## P12 — Navegação do catálogo: limpar filtros, apagar busca, voltar ao topo e atalho de teclado
 
@@ -120,3 +121,11 @@
 
 - desktop: com filtros "6 de 156 produtos" → após limpar "156 produtos"
 - celular: com filtros "6 de 156 produtos" → após limpar "156 produtos"
+
+## P13 — Páginas de produto: 156 páginas fiéis ao catálogo e integradas à sacola da loja
+
+**✅ PASSOU**
+
+- 156 páginas conferidas contra o catálogo: posição, preço, preço "de", parcelas, imagem, dados estruturados e sitemap
+- desktop: página → +2 na sacola → "Comprar agora" → sacola da loja aberta com R$ 690,00; chegada por categoria e busca: 8 de 156 produtos
+- celular: página → +2 na sacola → "Comprar agora" → sacola da loja aberta com R$ 690,00; chegada por categoria e busca: 8 de 156 produtos

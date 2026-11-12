@@ -65,6 +65,12 @@ Nenhum pedido, cupom, pagamento ou mensagem real é criado.
 | T14 | Tamanho do HTML (bruto e gzip) e volume do primeiro carregamento: original × nova versão |
 | T15 | Reversibilidade: o `index.html` remontado a partir dos arquivos separados é idêntico byte a byte ao original; nenhum arquivo ausente, órfão ou com `?v=` desatualizado |
 
+## Fase 2 (loja redesenhada)
+
+A bateria T1–T15 valida a Fase 1 contra o original byte a byte. Depois do redesign, o `index.html` muda de
+propósito, e a validação da loja passa a ser feita por `qa/prototipo-fase2/testar.js --alvo loja` (P1–P13), que
+grava em `qa/relatorio-fase2/`. Os relatórios de `qa/relatorio/` são o registro da Fase 1 e não são regravados.
+
 ## Limites conhecidos
 
 - O comportamento **do servidor** (Apps Script) não é testado: as respostas são simuladas com base no contrato

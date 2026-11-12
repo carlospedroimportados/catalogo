@@ -1,6 +1,6 @@
 # Bateria da Fase 2 — protótipo
 
-- 2026-11-12T01:20:53.959Z · referência: loja publicada `89ef168` · candidato: `qa/prototipo-fase2/`
+- 2026-11-12T01:31:29.887Z · referência: loja publicada `89ef168` · candidato: `qa/prototipo-fase2/`
 - Servidor de pedidos e pagamento **simulados**; rede externa bloqueada.
 
 | Teste | Status | Descrição |
@@ -78,7 +78,7 @@
 
 **✅ PASSOU**
 
-- alterações pendentes no repositório: 69
+- alterações pendentes no repositório: 188
 
 ## P8 — Sem rolagem lateral e painéis dentro da tela em 1440, 1024, 768, 390 e 320 px
 
@@ -111,7 +111,7 @@
 
 **✅ PASSOU**
 
-- 14037 textos medidos em desktop e celular
+- 14039 textos medidos em desktop e celular
 
 ## P12 — Navegação do catálogo: limpar filtros, apagar busca, voltar ao topo e atalho de teclado
 

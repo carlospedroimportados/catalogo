@@ -124,7 +124,7 @@
   "titulo": "Contraste do texto dentro do mínimo (4,5:1; 3:1 para texto grande) em início, banners, produto, sacola e checkout",
   "status": "PASSOU",
   "detalhes": [
-   "14023 textos medidos em desktop e celular"
+   "14025 textos medidos em desktop e celular"
   ],
   "divergencias": []
  },
@@ -135,6 +135,17 @@
   "detalhes": [
    "desktop: com filtros \"6 de 156 produtos\" → após limpar \"156 produtos\"",
    "celular: com filtros \"6 de 156 produtos\" → após limpar \"156 produtos\""
+  ],
+  "divergencias": []
+ },
+ {
+  "id": "P13",
+  "titulo": "Páginas de produto: 156 páginas fiéis ao catálogo e integradas à sacola da loja",
+  "status": "PASSOU",
+  "detalhes": [
+   "156 páginas conferidas contra o catálogo: posição, preço, preço \"de\", parcelas, imagem, dados estruturados e sitemap",
+   "desktop: página → +2 na sacola → \"Comprar agora\" → sacola da loja aberta com R$ 690,00; chegada por categoria e busca: 8 de 156 produtos",
+   "celular: página → +2 na sacola → \"Comprar agora\" → sacola da loja aberta com R$ 690,00; chegada por categoria e busca: 8 de 156 produtos"
   ],
   "divergencias": []
  }

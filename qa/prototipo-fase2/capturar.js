@@ -54,6 +54,13 @@ const API = { coupon: { ok: true, code: "PROTOTIPO10", tipo: "%", valor: 10, min
     await clique('[data-pay="card"]');
     await p.evaluate(() => { document.getElementById("bagBody").scrollTop = 9999; }); await foto("15-checkout-cartao-cupom");
     await clique("[data-submit]"); await p.evaluate(() => { document.getElementById("bagBody").scrollTop = 0; }); await foto("16-checkout-validacao");
+    if (LOJA && fs.existsSync(path.resolve(__dirname, "..", "..", "produto"))) { // páginas individuais
+      const pasta = fs.readdirSync(path.resolve(__dirname, "..", "..", "produto")).find((x) => x.startsWith("armaf-club-de-nuit-woman"));
+      await p.goto(url + "produto/" + pasta + "/", { waitUntil: "load" }); await p.evaluate(() => document.fonts.ready);
+      await foto("17-pagina-de-produto");
+      await ir(".acc"); await foto("18-pagina-de-produto-notas");
+      await ir(".rel"); await foto("19-pagina-de-produto-relacionados");
+    }
     erros.push(...ctx.registro.erros.map((e) => `${nome}: ${e}`), ...ctx.registro.bloqueadas.map((e) => `${nome}: bloqueada ${e}`));
     await ctx.close();
   }
