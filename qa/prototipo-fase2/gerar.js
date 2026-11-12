@@ -71,8 +71,23 @@ trocar(/<footer class="f">[\s\S]*?<\/footer>/, `<footer class="f fx"><div class=
 <small class="fx-l">Valores conforme o catálogo vigente. Seus dados são usados apenas para processar o pedido.</small>
 </div></footer>`, "rodapé");
 
-// 6. Simulação de pagamento (antes da lógica) e efeitos visuais (depois)
-trocar(/<script src="[^"]*assets\/app\.js[^"]*"><\/script>/, (m) => `<script src="simulacao.js"></script>\n${m}\n<script src="efeitos.js"></script>`, "scripts");
+// 6. Simulação de pagamento (antes da lógica); efeitos visuais e navegação do catálogo (depois)
+trocar(/<script src="[^"]*assets\/app\.js[^"]*"><\/script>/, (m) => `<script src="simulacao.js"></script>\n${m}\n<script src="efeitos.js"></script>\n<script src="navegacao.js"></script>`, "scripts");
+
+// 7. Desempenho e acessibilidade (etapa 3)
+// 7a. Dimensões declaradas nas imagens: o navegador reserva o espaço antes de a foto chegar.
+let comDimensoes = 0;
+html = html.replace(/<img src="([^"]*\/img\/(produtos|banners|categorias)\/[^"]+)"(?![^>]*\swidth=)/g, (m, src, tipo) => {
+  comDimensoes++; return `<img width="${tipo === "produtos" ? 640 : 300}" height="${tipo === "produtos" ? 800 : 375}" src="${src}"`;
+});
+// 7b. Imagens do primeiro banner com prioridade; fontes principais pré-carregadas; ícone da aba.
+html = html.replace(/<div class="slide on[\s\S]*?(?=\n<div class="slide )/, (m) => m.replace(/<img /g, '<img fetchpriority="high" '));
+const css = fs.readFileSync(path.join(RAIZ, "assets", "estilo.css"), "utf8");
+const fonte = (nome) => { const u = (css.match(new RegExp(`url\\(\\.\\./(fonts/${nome}\\.woff2[^)]*)\\)`)) || [])[1]; if (!u) throw new Error("fonte não encontrada: " + nome); return `<link rel="preload" as="font" type="font/woff2" crossorigin href="${P}${u}">`; };
+trocar('<link rel="stylesheet" href="premium.css"></head>', `<link rel="stylesheet" href="premium.css">${fonte("cormorant-garamond-500-normal")}${fonte("montserrat-500-normal")}<link rel="icon" href="${P}admin/icon-192.png"></head>`, "pré-carga");
+// 7c. Atalho "pular para o conteúdo" e alvo no conteúdo principal.
+trocar('<div class="proto" role="note">', '<a class="pular" href="#conteudo">Pular para o conteúdo</a>\n<div class="proto" role="note">', "atalho");
+trocar("<main>", '<main id="conteudo">', "main");
 
 fs.writeFileSync(path.join(AQUI, "index.html"), html);
-console.log(`Protótipo gerado: qa/prototipo-fase2/index.html (${(Buffer.byteLength(html) / 1024).toFixed(1)} KB) · cards: ${(html.match(/<article class="pc"/g) || []).length}`);
+console.log(`Protótipo gerado: qa/prototipo-fase2/index.html (${(Buffer.byteLength(html) / 1024).toFixed(1)} KB) · cards: ${(html.match(/<article class="pc"/g) || []).length} · imagens com dimensões declaradas: ${comDimensoes}`);
