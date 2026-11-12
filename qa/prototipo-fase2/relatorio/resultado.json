@@ -75,11 +75,10 @@
  },
  {
   "id": "P7",
-  "titulo": "Isolamento: loja original intacta; protótipo usa lógica, dados e imagens originais sem cópia",
+  "titulo": "Isolamento: protótipo usa lógica, dados e imagens da loja sem cópia",
   "status": "PASSOU",
   "detalhes": [
-   "arquivos alterados fora de qa/ e docs/: 0",
-   "main: 89ef168 · origin/main: 89ef168"
+   "alterações pendentes no repositório: 69"
   ],
   "divergencias": []
  },

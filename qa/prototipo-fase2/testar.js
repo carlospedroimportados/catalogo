@@ -17,11 +17,14 @@ const { abrirNavegador, novoContexto } = require("../lib/navegador");
 const N = require("../testes/navegador");
 
 const REF = "89ef168bd1304769d1eeabdb88ddea6724839995";
-const SAIDA = path.join(__dirname, "relatorio");
-const SUB = "qa/prototipo-fase2/";
+const FASE1 = "8954947e986e0ea08fa180f789032b7a2c6a5134";
+// Alvo: "prototipo" (padrão) ou "loja" (a loja redesenhada na raiz). Uso: node testar.js --alvo loja
+const LOJA = process.argv[process.argv.indexOf("--alvo") + 1] === "loja" && process.argv.includes("--alvo");
+const SAIDA = LOJA ? path.join(RAIZ, "qa", "relatorio-fase2") : path.join(__dirname, "relatorio");
+const SUB = LOJA ? "" : "qa/prototipo-fase2/";
 
 // Texto exibido pode mudar de caixa (CSS) e de espaçamento sem mudar o conteúdo: normaliza para comparar.
-const norm = (v) => typeof v === "string" ? v.split(SUB).join("").toLowerCase().replace(/\s+/g, " ").trim()
+const norm = (v) => typeof v === "string" ? (SUB ? v.split(SUB).join("") : v).toLowerCase().replace(/\s+/g, " ").trim()
   : Array.isArray(v) ? v.map(norm) : v && typeof v === "object" ? Object.fromEntries(Object.entries(v).map(([k, x]) => [k, norm(x)])) : v;
 const R = [];
 const reg = (id, titulo, divergencias, detalhes = []) => { R.push({ id, titulo, status: divergencias.length ? "FALHOU" : "PASSOU", detalhes, divergencias: divergencias.slice(0, 25) }); process.stdout.write(id + " "); };
@@ -58,14 +61,20 @@ const reg = (id, titulo, divergencias, detalhes = []) => { R.push({ id, titulo, 
       for (const nome of Object.keys(N.RETORNOS)) { const { r, c } = await par(N.retorno, nome);
         const x = diff(norm(r), norm(c), "retorno"); det.push(`${nome}: ${x.length ? "DIFERENTE" : "idêntico"}`); d.push(...x.map((y) => `${nome}: ${y}`)); }
       reg("P6", "Retorno do pagamento: confirmação, mensagens e limpeza do endereço idênticos", d, det); }
-    { const fonte = (f) => fs.readFileSync(path.join(RAIZ, f));
+    if (LOJA) {
+      // Tudo o que é comercial ou lógica deve estar idêntico, byte a byte, ao commit da Fase 1.
+      const intactos = ["dados", "assets/config.js", "assets/app.js", "assets/qrcode.js", "assets/estilo.css", "img", "fonts", "admin", "instagram"];
+      const mudou = git(["status", "--porcelain", "--untracked-files=all", "--", ...intactos]).toString().split("\n").filter(Boolean)
+        .concat(git(["diff", "--name-only", FASE1, "HEAD", "--", ...intactos]).toString().split("\n").filter(Boolean));
+      const n = git(["ls-tree", "-r", "--name-only", FASE1, "--", ...intactos]).toString().split("\n").filter(Boolean).length;
+      reg("P7", "Preservação: catálogo, configuração comercial, lógica, imagens, fontes e painel idênticos à Fase 1", mudou.map((f) => "alterado: " + f),
+        [`${n} arquivos conferidos contra a Fase 1 (${FASE1.slice(0, 7)}) · alterados: ${mudou.length}`, `main: ${git(["rev-parse", "--short", "main"]).toString().trim()} · origin/main: ${git(["rev-parse", "--short", "origin/main"]).toString().trim()}`]);
+    } else {
       const st = git(["status", "--porcelain", "--untracked-files=all"]).toString().split("\n").filter(Boolean).map((l) => l.slice(3));
-      const fora = st.filter((f) => !f.startsWith("qa/") && !f.startsWith("docs/"));
       const html = fs.readFileSync(path.join(__dirname, "index.html"), "utf8");
       const usa = ["../../assets/app.js", "../../assets/config.js", "../../dados/catalogo.js", "../../assets/qrcode.js", "../../assets/estilo.css"].filter((f) => !html.includes(f));
-      void fonte;
-      reg("P7", "Isolamento: loja original intacta; protótipo usa lógica, dados e imagens originais sem cópia", [...fora.map((f) => "alterado fora de qa/ e docs/: " + f), ...usa.map((f) => "não referencia o original: " + f)],
-        [`arquivos alterados fora de qa/ e docs/: ${fora.length}`, `main: ${git(["rev-parse", "--short", "main"]).toString().trim()} · origin/main: ${git(["rev-parse", "--short", "origin/main"]).toString().trim()}`]); }
+      reg("P7", "Isolamento: protótipo usa lógica, dados e imagens da loja sem cópia", usa.map((f) => "não referencia o original: " + f), [`alterações pendentes no repositório: ${st.length}`]);
+    }
 
     // P8–P10: layout novo em desktop e celular
     const layout = {};
@@ -170,7 +179,7 @@ const reg = (id, titulo, divergencias, detalhes = []) => { R.push({ id, titulo, 
   } finally { await browser.close(); sRef.fechar(); sLoja.fechar(); }
 
   const ic = { PASSOU: "✅ PASSOU", FALHOU: "❌ FALHOU" };
-  let md = `# Bateria do protótipo da Fase 2\n\n- ${new Date().toISOString()} · referência: loja publicada \`${REF.slice(0, 7)}\` · candidato: \`${SUB}\`\n- Servidor de pedidos e pagamento **simulados**; rede externa bloqueada.\n\n| Teste | Status | Descrição |\n|---|---|---|\n`;
+  let md = `# Bateria da Fase 2 — ${LOJA ? "loja redesenhada" : "protótipo"}\n\n- ${new Date().toISOString()} · referência: loja publicada \`${REF.slice(0, 7)}\` · candidato: \`${SUB || "index.html da raiz"}\`\n- Servidor de pedidos e pagamento **simulados**; rede externa bloqueada.\n\n| Teste | Status | Descrição |\n|---|---|---|\n`;
   md += R.map((r) => `| ${r.id} | ${ic[r.status]} | ${r.titulo} |`).join("\n") + "\n";
   for (const r of R) { md += `\n## ${r.id} — ${r.titulo}\n\n**${ic[r.status]}**\n\n` + r.detalhes.map((x) => `- ${x}`).join("\n") + "\n"; if (r.divergencias.length) md += "\nDivergências:\n\n" + r.divergencias.map((x) => `- ${x}`).join("\n") + "\n"; }
   fs.writeFileSync(path.join(SAIDA, "resultado.md"), md);

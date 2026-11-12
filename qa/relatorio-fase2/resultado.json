@@ -1,0 +1,141 @@
+[
+ {
+  "id": "P1",
+  "titulo": "Cards: 157 produtos com os mesmos dados, selos, parcelas e a mesma imagem (bytes)",
+  "status": "PASSOU",
+  "detalhes": [
+   "157 cards comparados sem normalização"
+  ],
+  "divergencias": []
+ },
+ {
+  "id": "P2",
+  "titulo": "Categorias, marcas, ordenações, busca e vitrines devolvem os mesmos produtos",
+  "status": "PASSOU",
+  "detalhes": [
+   "por categoria: all 156, perfume 71, skincare 34, cabelo 33, bebida 7, outros 11",
+   "11 buscas · 40 marcas · 5 ordenações"
+  ],
+  "divergencias": []
+ },
+ {
+  "id": "P3",
+  "titulo": "Parcelamento: tabela de cada produto e simulador idênticos",
+  "status": "PASSOU",
+  "detalhes": [
+   "157 produtos · 10 valores do simulador"
+  ],
+  "divergencias": []
+ },
+ {
+  "id": "P4",
+  "titulo": "Sacola: mesmos totais, persistência, limite e compatibilidade com sacolas já salvas",
+  "status": "PASSOU",
+  "detalhes": [
+   "total após rotina: R$ 1.846,00 · sacola antiga aberta: R$ 1.260,00"
+  ],
+  "divergencias": []
+ },
+ {
+  "id": "P5",
+  "titulo": "Checkout simulado (16 cenários): o que é enviado ao servidor e os textos da tela não mudam",
+  "status": "PASSOU",
+  "detalhes": [
+   "C01 Pix · pedido criado com link: envio ao servidor idêntico · textos da tela idênticos",
+   "C02 Cartão 1x · link: envio ao servidor idêntico · textos da tela idênticos",
+   "C03 Cartão 6x · link: envio ao servidor idêntico · textos da tela idênticos",
+   "C04 Cartão 12x · servidor devolve total: envio ao servidor idêntico · textos da tela idênticos",
+   "C05 Cupom 10% + Pix: envio ao servidor idêntico · textos da tela idênticos",
+   "C06 Cupom R$ 20 (mín. R$ 100) + cartão 12x: envio ao servidor idêntico · textos da tela idênticos",
+   "C07 Cupom acima do mínimo não atingido: envio ao servidor idêntico · textos da tela idênticos",
+   "C08 Cupom inválido: envio ao servidor idêntico · textos da tela idênticos",
+   "C09 Cupom com falha de rede: envio ao servidor idêntico · textos da tela idênticos",
+   "C10 Erro do servidor ao criar (Pix): envio ao servidor idêntico · textos da tela idênticos",
+   "C11 Erro do servidor ao criar (cartão): envio ao servidor idêntico · textos da tela idênticos",
+   "C12 Servidor rejeita cupom no pedido: envio ao servidor idêntico · textos da tela idênticos",
+   "C13 Sem rede · Pix offline: envio ao servidor idêntico · textos da tela idênticos",
+   "C14 Sem rede · cartão via WhatsApp: envio ao servidor idêntico · textos da tela idênticos",
+   "C15 Pedido criado sem link (Pix local): envio ao servidor idêntico · textos da tela idênticos",
+   "C16 Formulário vazio (validação): envio ao servidor idêntico · textos da tela idênticos"
+  ],
+  "divergencias": []
+ },
+ {
+  "id": "P6",
+  "titulo": "Retorno do pagamento: confirmação, mensagens e limpeza do endereço idênticos",
+  "status": "PASSOU",
+  "detalhes": [
+   "R1 Pago · confirmação aprovada: idêntico",
+   "R2 Pago · confirmação pendente: idêntico",
+   "R3 Volta sem pagamento: idêntico",
+   "R4 Confirmação com falha de rede: idêntico",
+   "R5 [segurança] receipt_url não-https: idêntico"
+  ],
+  "divergencias": []
+ },
+ {
+  "id": "P7",
+  "titulo": "Preservação: catálogo, configuração comercial, lógica, imagens, fontes e painel idênticos à Fase 1",
+  "status": "PASSOU",
+  "detalhes": [
+   "225 arquivos conferidos contra a Fase 1 (8954947) · alterados: 0",
+   "main: 89ef168 · origin/main: 89ef168"
+  ],
+  "divergencias": []
+ },
+ {
+  "id": "P8",
+  "titulo": "Sem rolagem lateral e painéis dentro da tela em 1440, 1024, 768, 390 e 320 px",
+  "status": "PASSOU",
+  "detalhes": [
+   "desktop: estouro 0px · painel do produto ok · sacola ok",
+   "notebook: estouro 0px · painel do produto ok · sacola ok",
+   "tablet: estouro 0px · painel do produto ok · sacola ok",
+   "celular: estouro 0px · painel do produto ok · sacola ok",
+   "celular pequeno: estouro 0px · painel do produto ok · sacola ok"
+  ],
+  "divergencias": []
+ },
+ {
+  "id": "P9",
+  "titulo": "Áreas de toque com pelo menos 44 px no celular (início, produto e checkout)",
+  "status": "PASSOU",
+  "detalhes": [
+   "celular: 232 controles visíveis conferidos no início",
+   "celular pequeno: 232 controles visíveis conferidos no início"
+  ],
+  "divergencias": []
+ },
+ {
+  "id": "P10",
+  "titulo": "Imagens carregam, zero erros de JavaScript e zero requisições externas",
+  "status": "PASSOU",
+  "detalhes": [
+   "desktop: 168 imagens distintas, 0 falhas",
+   "notebook: 168 imagens distintas, 0 falhas",
+   "tablet: 168 imagens distintas, 0 falhas",
+   "celular: 168 imagens distintas, 0 falhas",
+   "celular pequeno: 168 imagens distintas, 0 falhas"
+  ],
+  "divergencias": []
+ },
+ {
+  "id": "P11",
+  "titulo": "Contraste do texto dentro do mínimo (4,5:1; 3:1 para texto grande) em início, banners, produto, sacola e checkout",
+  "status": "PASSOU",
+  "detalhes": [
+   "14023 textos medidos em desktop e celular"
+  ],
+  "divergencias": []
+ },
+ {
+  "id": "P12",
+  "titulo": "Navegação do catálogo: limpar filtros, apagar busca, voltar ao topo e atalho de teclado",
+  "status": "PASSOU",
+  "detalhes": [
+   "desktop: com filtros \"6 de 156 produtos\" → após limpar \"156 produtos\"",
+   "celular: com filtros \"6 de 156 produtos\" → após limpar \"156 produtos\""
+  ],
+  "divergencias": []
+ }
+]

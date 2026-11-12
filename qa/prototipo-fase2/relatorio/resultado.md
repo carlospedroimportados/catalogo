@@ -1,6 +1,6 @@
-# Bateria do protótipo da Fase 2
+# Bateria da Fase 2 — protótipo
 
-- 2026-11-12T01:07:04.265Z · referência: loja publicada `89ef168` · candidato: `qa/prototipo-fase2/`
+- 2026-11-12T01:20:53.959Z · referência: loja publicada `89ef168` · candidato: `qa/prototipo-fase2/`
 - Servidor de pedidos e pagamento **simulados**; rede externa bloqueada.
 
 | Teste | Status | Descrição |
@@ -11,7 +11,7 @@
 | P4 | ✅ PASSOU | Sacola: mesmos totais, persistência, limite e compatibilidade com sacolas já salvas |
 | P5 | ✅ PASSOU | Checkout simulado (16 cenários): o que é enviado ao servidor e os textos da tela não mudam |
 | P6 | ✅ PASSOU | Retorno do pagamento: confirmação, mensagens e limpeza do endereço idênticos |
-| P7 | ✅ PASSOU | Isolamento: loja original intacta; protótipo usa lógica, dados e imagens originais sem cópia |
+| P7 | ✅ PASSOU | Isolamento: protótipo usa lógica, dados e imagens da loja sem cópia |
 | P8 | ✅ PASSOU | Sem rolagem lateral e painéis dentro da tela em 1440, 1024, 768, 390 e 320 px |
 | P9 | ✅ PASSOU | Áreas de toque com pelo menos 44 px no celular (início, produto e checkout) |
 | P10 | ✅ PASSOU | Imagens carregam, zero erros de JavaScript e zero requisições externas |
@@ -74,12 +74,11 @@
 - R4 Confirmação com falha de rede: idêntico
 - R5 [segurança] receipt_url não-https: idêntico
 
-## P7 — Isolamento: loja original intacta; protótipo usa lógica, dados e imagens originais sem cópia
+## P7 — Isolamento: protótipo usa lógica, dados e imagens da loja sem cópia
 
 **✅ PASSOU**
 
-- arquivos alterados fora de qa/ e docs/: 0
-- main: 89ef168 · origin/main: 89ef168
+- alterações pendentes no repositório: 69
 
 ## P8 — Sem rolagem lateral e painéis dentro da tela em 1440, 1024, 768, 390 e 320 px
 

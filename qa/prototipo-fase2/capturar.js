@@ -7,13 +7,15 @@ const path = require("path");
 const { iniciar } = require("../lib/servidor");
 const { abrirNavegador, novoContexto } = require("../lib/navegador");
 
-const SAIDA = path.resolve(process.argv[2] || path.join(__dirname, "capturas"));
+// Alvo: protótipo (padrão) ou a loja redesenhada (--alvo loja → qa/relatorio-fase2/capturas).
+const LOJA = process.argv.includes("--alvo") && process.argv[process.argv.indexOf("--alvo") + 1] === "loja";
+const SAIDA = LOJA ? path.resolve(__dirname, "..", "relatorio-fase2", "capturas") : path.join(__dirname, "capturas");
 const API = { coupon: { ok: true, code: "PROTOTIPO10", tipo: "%", valor: 10, min: 0, label: "10% de desconto (cupom de demonstração)" } };
 
 (async () => {
   fs.mkdirSync(SAIDA, { recursive: true });
   const srv = await iniciar(path.resolve(__dirname, "..", ".."));
-  const url = srv.url + "qa/prototipo-fase2/";
+  const url = srv.url + (LOJA ? "" : "qa/prototipo-fase2/");
   const browser = await abrirNavegador();
   const erros = [];
   for (const [nome, viewport, escala] of [["desktop", { width: 1440, height: 900 }, 1], ["tablet", { width: 768, height: 1024 }, 1], ["celular", { width: 390, height: 844 }, 2]]) {
