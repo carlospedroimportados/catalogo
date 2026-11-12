@@ -38,7 +38,7 @@
  },
  {
   "id": "P5",
-  "titulo": "Checkout simulado (16 cenários): o que é enviado ao servidor e os textos da tela não mudam",
+  "titulo": "Checkout simulado (16 cenários): envio ao servidor idêntico; tela igual, exceto as diferenças aprovadas (economia do Pix e nome nas mensagens)",
   "status": "PASSOU",
   "detalhes": [
    "C01 Pix · pedido criado com link: envio ao servidor idêntico · textos da tela idênticos",
@@ -111,11 +111,11 @@
   "titulo": "Imagens carregam, zero erros de JavaScript e zero requisições externas",
   "status": "PASSOU",
   "detalhes": [
-   "desktop: 168 imagens distintas, 0 falhas",
-   "notebook: 168 imagens distintas, 0 falhas",
-   "tablet: 168 imagens distintas, 0 falhas",
-   "celular: 168 imagens distintas, 0 falhas",
-   "celular pequeno: 168 imagens distintas, 0 falhas"
+   "desktop: 175 imagens distintas, 0 falhas",
+   "notebook: 175 imagens distintas, 0 falhas",
+   "tablet: 175 imagens distintas, 0 falhas",
+   "celular: 175 imagens distintas, 0 falhas",
+   "celular pequeno: 175 imagens distintas, 0 falhas"
   ],
   "divergencias": []
  },
@@ -124,7 +124,7 @@
   "titulo": "Contraste do texto dentro do mínimo (4,5:1; 3:1 para texto grande) em início, banners, produto, sacola e checkout",
   "status": "PASSOU",
   "detalhes": [
-   "14025 textos medidos em desktop e celular"
+   "14027 textos medidos em desktop e celular"
   ],
   "divergencias": []
  },
@@ -150,14 +150,25 @@
   "divergencias": []
  },
  {
+  "id": "P18",
+  "titulo": "Cliques reais depois de abrir e fechar painéis (defeito do painel invisível que bloqueava a página no desktop)",
+  "status": "PASSOU",
+  "detalhes": [
+   "desktop: abrir produto, fechar, abrir outro, adicionar, sacola, checkout e pagamento com cliques reais — painéis fechados ocultos",
+   "tablet: abrir produto, fechar, abrir outro, adicionar, sacola, checkout e pagamento com cliques reais — painéis fechados ocultos",
+   "celular: abrir produto, fechar, abrir outro, adicionar, sacola, checkout e pagamento com cliques reais — painéis fechados ocultos"
+  ],
+  "divergencias": []
+ },
+ {
   "id": "P14",
   "titulo": "Miniaturas: 316 arquivos nas dimensões certas, originais preservados e no máximo 1,3 MB de imagens no primeiro acesso no celular",
   "status": "PASSOU",
   "detalhes": [
    "157 fotos × 2 miniaturas e 2 tamanhos do logotipo conferidos · miniatura de 320 px menor que o original em 157 de 157",
    "soma das miniaturas de 320 px: 1884 KB contra 4259 KB dos originais",
-   "celular 1x: 656 KB de imagens em 45 arquivos (32 miniaturas) — antes das miniaturas: 2474 KB",
-   "celular 2x: 961 KB de imagens em 53 arquivos (40 miniaturas) — antes das miniaturas: 2474 KB"
+   "celular 1x: 547 KB de imagens em 46 arquivos (40 miniaturas) — antes das miniaturas: 2474 KB",
+   "celular 2x: 794 KB de imagens em 46 arquivos (40 miniaturas) — antes das miniaturas: 2474 KB"
   ],
   "divergencias": []
  },
@@ -168,6 +179,32 @@
   "detalhes": [
    "desktop: etapas 1 e 2 corretas · 80 Tabs na sacola e 40 no produto sem sair do painel · foco devolvido ao fechar",
    "celular: etapas 1 e 2 corretas · 80 Tabs na sacola e 40 no produto sem sair do painel · foco devolvido ao fechar"
+  ],
+  "divergencias": []
+ },
+ {
+  "id": "P16",
+  "titulo": "Ajustes da lógica: gerador fiel à Fase 1, app-premium rastreável, nome CP Importados, economia do Pix e miniaturas na sacola",
+  "status": "PASSOU",
+  "detalhes": [
+   "gerador de cards reproduz o index.html da Fase 1 byte a byte (157 cards, contagens e textos)",
+   "assets/app-premium.js = assets/app.js (intacto, ver P7) + 7 trocas declaradas: whatsapp-pedido, whatsapp-duvida, economia-cartao, economia-pix, miniatura-definicao, miniatura-sacola, miniatura-rotina",
+   "travas do catálogo: aprovado (157 produtos, 157 na trava)",
+   "mensagens de WhatsApp estáticas conferidas em index.html e 156 páginas: nenhuma com \"CP Imports\" (o nome do produto \"CP Imports Kit…\" vem do catálogo e não foi alterado)",
+   "desktop: fotos da sacola e das rotinas = miniaturas de 320 px carregadas · mensagem do painel com \"CP Importados\" · cartão: \"economiza R$ 123,60\" · Pix: \"Pagando no Pix você economiza de R$ 27,10 (cartão à vista) até R$ 123,60 (cartão em 12x).\"",
+   "celular: fotos da sacola e das rotinas = miniaturas de 320 px carregadas · mensagem do painel com \"CP Importados\" · cartão: \"economiza R$ 123,60\" · Pix: \"Pagando no Pix você economiza de R$ 27,10 (cartão à vista) até R$ 123,60 (cartão em 12x).\""
+  ],
+  "divergencias": []
+ },
+ {
+  "id": "P17",
+  "titulo": "Atualização do catálogo (ensaio em cópia): reconstrução idêntica, preço e produto novo refletidos, nada além do esperado muda, 11 violações recusadas",
+  "status": "PASSOU",
+  "detalhes": [
+   "reconstrução sem alterações: 0 arquivos diferentes, 0 de 156 páginas diferentes",
+   "atualização simulada: cards alterados [3] de 158 · produto novo → produto/armaf-produto-de-simulacao/ · 13 páginas alteradas (preço e relacionados) · 1 miniatura nova · endereços existentes estáveis: true · fotos originais alteradas: 0",
+   "travas: 11 de 11 violações recusadas (reordenar dois produtos; trocar o produto de uma posição; remover o último produto; produto novo sem foto; foto fora do padrão (300×375); foto que não é WebP; preço zerado; preço \"de\" menor que o preço; marca inexistente; posição fora de sequência; mais vendidos apontando para produto inexistente)",
+   "repositório real intacto após o ensaio: true"
   ],
   "divergencias": []
  }

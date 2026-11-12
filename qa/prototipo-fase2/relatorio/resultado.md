@@ -1,6 +1,6 @@
 # Bateria da Fase 2 — protótipo
 
-- 2026-11-12T09:11:00.312Z · referência: loja publicada `89ef168` · candidato: `qa/prototipo-fase2/`
+- 2026-11-12T11:00:06.408Z · referência: loja publicada `89ef168` · candidato: `qa/prototipo-fase2/`
 - Servidor de pedidos e pagamento **simulados**; rede externa bloqueada.
 
 | Teste | Status | Descrição |
@@ -9,7 +9,7 @@
 | P2 | ✅ PASSOU | Categorias, marcas, ordenações, busca e vitrines devolvem os mesmos produtos |
 | P3 | ✅ PASSOU | Parcelamento: tabela de cada produto e simulador idênticos |
 | P4 | ✅ PASSOU | Sacola: mesmos totais, persistência, limite e compatibilidade com sacolas já salvas |
-| P5 | ✅ PASSOU | Checkout simulado (16 cenários): o que é enviado ao servidor e os textos da tela não mudam |
+| P5 | ✅ PASSOU | Checkout simulado (16 cenários): envio ao servidor idêntico; tela igual, exceto as diferenças aprovadas (economia do Pix e nome nas mensagens) |
 | P6 | ✅ PASSOU | Retorno do pagamento: confirmação, mensagens e limpeza do endereço idênticos |
 | P7 | ✅ PASSOU | Isolamento: protótipo usa lógica, dados e imagens da loja sem cópia |
 | P8 | ✅ PASSOU | Sem rolagem lateral e painéis dentro da tela em 1440, 1024, 768, 390 e 320 px |
@@ -17,6 +17,7 @@
 | P10 | ✅ PASSOU | Imagens carregam, zero erros de JavaScript e zero requisições externas |
 | P11 | ✅ PASSOU | Contraste do texto dentro do mínimo (4,5:1; 3:1 para texto grande) em início, banners, produto, sacola e checkout |
 | P12 | ✅ PASSOU | Navegação do catálogo: limpar filtros, apagar busca, voltar ao topo e atalho de teclado |
+| P18 | ✅ PASSOU | Cliques reais depois de abrir e fechar painéis (defeito do painel invisível que bloqueava a página no desktop) |
 | P14 | ✅ PASSOU | Miniaturas: 316 arquivos nas dimensões certas, originais preservados e no máximo 1,3 MB de imagens no primeiro acesso no celular |
 | P15 | ✅ PASSOU | Sacola e checkout: indicador de etapas e foco preso no painel, com devolução ao fechar |
 
@@ -45,7 +46,7 @@
 
 - total após rotina: R$ 1.846,00 · sacola antiga aberta: R$ 1.260,00
 
-## P5 — Checkout simulado (16 cenários): o que é enviado ao servidor e os textos da tela não mudam
+## P5 — Checkout simulado (16 cenários): envio ao servidor idêntico; tela igual, exceto as diferenças aprovadas (economia do Pix e nome nas mensagens)
 
 **✅ PASSOU**
 
@@ -80,7 +81,7 @@
 
 **✅ PASSOU**
 
-- alterações pendentes no repositório: 546
+- alterações pendentes no repositório: 221
 
 ## P8 — Sem rolagem lateral e painéis dentro da tela em 1440, 1024, 768, 390 e 320 px
 
@@ -103,17 +104,17 @@
 
 **✅ PASSOU**
 
-- desktop: 168 imagens distintas, 0 falhas
-- notebook: 168 imagens distintas, 0 falhas
-- tablet: 168 imagens distintas, 0 falhas
-- celular: 168 imagens distintas, 0 falhas
-- celular pequeno: 168 imagens distintas, 0 falhas
+- desktop: 175 imagens distintas, 0 falhas
+- notebook: 175 imagens distintas, 0 falhas
+- tablet: 175 imagens distintas, 0 falhas
+- celular: 175 imagens distintas, 0 falhas
+- celular pequeno: 175 imagens distintas, 0 falhas
 
 ## P11 — Contraste do texto dentro do mínimo (4,5:1; 3:1 para texto grande) em início, banners, produto, sacola e checkout
 
 **✅ PASSOU**
 
-- 14039 textos medidos em desktop e celular
+- 14041 textos medidos em desktop e celular
 
 ## P12 — Navegação do catálogo: limpar filtros, apagar busca, voltar ao topo e atalho de teclado
 
@@ -122,14 +123,22 @@
 - desktop: com filtros "6 de 156 produtos" → após limpar "156 produtos"
 - celular: com filtros "6 de 156 produtos" → após limpar "156 produtos"
 
+## P18 — Cliques reais depois de abrir e fechar painéis (defeito do painel invisível que bloqueava a página no desktop)
+
+**✅ PASSOU**
+
+- desktop: abrir produto, fechar, abrir outro, adicionar, sacola, checkout e pagamento com cliques reais — painéis fechados ocultos
+- tablet: abrir produto, fechar, abrir outro, adicionar, sacola, checkout e pagamento com cliques reais — painéis fechados ocultos
+- celular: abrir produto, fechar, abrir outro, adicionar, sacola, checkout e pagamento com cliques reais — painéis fechados ocultos
+
 ## P14 — Miniaturas: 316 arquivos nas dimensões certas, originais preservados e no máximo 1,3 MB de imagens no primeiro acesso no celular
 
 **✅ PASSOU**
 
 - 157 fotos × 2 miniaturas e 2 tamanhos do logotipo conferidos · miniatura de 320 px menor que o original em 157 de 157
 - soma das miniaturas de 320 px: 1884 KB contra 4259 KB dos originais
-- celular 1x: 699 KB de imagens em 51 arquivos (38 miniaturas) — antes das miniaturas: 2474 KB
-- celular 2x: 938 KB de imagens em 51 arquivos (38 miniaturas) — antes das miniaturas: 2474 KB
+- celular 1x: 531 KB de imagens em 44 arquivos (38 miniaturas) — antes das miniaturas: 2474 KB
+- celular 2x: 771 KB de imagens em 44 arquivos (38 miniaturas) — antes das miniaturas: 2474 KB
 
 ## P15 — Sacola e checkout: indicador de etapas e foco preso no painel, com devolução ao fechar
 

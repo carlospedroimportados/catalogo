@@ -26,6 +26,17 @@ const SUB = LOJA ? "" : "qa/prototipo-fase2/";
 // Texto exibido pode mudar de caixa (CSS) e de espaçamento sem mudar o conteúdo: normaliza para comparar.
 const norm = (v) => typeof v === "string" ? (SUB ? v.split(SUB).join("") : v).toLowerCase().replace(/\s+/g, " ").trim()
   : Array.isArray(v) ? v.map(norm) : v && typeof v === "object" ? Object.fromEntries(Object.entries(v).map(([k, x]) => [k, norm(x)])) : v;
+// Diferenças APROVADAS entre a loja publicada e a loja nova. O resultado esperado é calculado aqui, de forma
+// independente da lógica da loja, a partir das taxas de assets/config.js e dos valores exibidos na própria tela de referência.
+const CFG_LOJA = require("vm").runInNewContext(fs.readFileSync(path.join(RAIZ, "assets/config.js"), "utf8") + "\n;CFG", Object.create(null));
+const moeda = (v) => "R$ " + v.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+const parcelas = (b) => { const o = []; for (let n = 1; n <= 12; n++) { const par = Math.ceil(b / (1 - (CFG_LOJA.fees[n] || 0) / 100) / n * 100 - 1e-9) / 100; if (n === 1 || par >= CFG_LOJA.minParcela) o.push({ n, total: Math.round(par * n * 100) / 100 }); } return o; };
+const aprovarTexto = (t) => typeof t !== "string" ? t : t
+  .replace(/No Pix você paga (R\$ [\d.,]+)\./g, (m, pago) => { const taxa = (t.match(/Taxa do cartão \(\d+x\)\s*\+\s*(R\$ [\d.,]+)/) || [])[1]; return taxa ? `No Pix você paga ${pago} e economiza ${taxa}.` : m; })
+  .replace(/(Total no Pix\s+R\$ ([\d.,]+))/i, (m, tudo, valor) => { const b = parseFloat(valor.replace(/\./g, "").replace(",", ".")), o = parcelas(b);
+    return `${tudo} Pagando no Pix você economiza ${o.length > 1 ? `de ${moeda(o[0].total - b)} (cartão à vista) até ${moeda(o[o.length - 1].total - b)} (cartão em ${o[o.length - 1].n}x)` : `${moeda(o[0].total - b)} em taxas do cartão`}.`; });
+const aprovarLink = (l) => typeof l === "string" ? l.replace("catálogo da CP Imports", "catálogo da CP Importados") : l;
+const aprovar = (s) => ({ ...s, antes: aprovarTexto(s.antes), depois: aprovarTexto(s.depois), whatsapp: (s.whatsapp || []).map(aprovarLink) });
 const R = [];
 const reg = (id, titulo, divergencias, detalhes = []) => { R.push({ id, titulo, status: divergencias.length ? "FALHOU" : "PASSOU", detalhes, divergencias: divergencias.slice(0, 25) }); process.stdout.write(id + " "); };
 
@@ -44,6 +55,7 @@ const reg = (id, titulo, divergencias, detalhes = []) => { R.push({ id, titulo, 
     { const { r, c } = await par(N.cards);
       reg("P1", "Cards: 157 produtos com os mesmos dados, selos, parcelas e a mesma imagem (bytes)", diff(r, c, "cards"), [`${c.length} cards comparados sem normalização`]); }
     { const { r, c } = await par(N.navegacao);
+      r.vitrines.contatos = r.vitrines.contatos.replace("Fale com a CP Imports", "Fale com a CP Importados");
       reg("P2", "Categorias, marcas, ordenações, busca e vitrines devolvem os mesmos produtos", diff(norm(r), norm(c), "nav"),
         ["por categoria: " + Object.entries(c.categorias).map(([k, v]) => `${k} ${v.ids.length}`).join(", "), `${Object.keys(c.buscas).length} buscas · ${Object.keys(c.marcas).length - 1} marcas · 5 ordenações`]); }
     { const { r, c } = await par(N.parcelamento);
@@ -53,10 +65,10 @@ const reg = (id, titulo, divergencias, detalhes = []) => { R.push({ id, titulo, 
       reg("P4", "Sacola: mesmos totais, persistência, limite e compatibilidade com sacolas já salvas", diff(norm(r), norm(c), "sacola"), [`total após rotina: ${c.passos.rotina.total} · sacola antiga aberta: ${c.compat.total}`]); }
     { const d = [], det = [];
       for (const nome of Object.keys(N.CENARIOS)) { const { r, c } = await par(N.checkout, nome);
-        const dn = diff(norm(r.chamadas), norm(c.chamadas), "envio"); const dt = diff(norm({ ...r, chamadas: 0 }), norm({ ...c, chamadas: 0 }), "tela");
+        const dn = diff(norm(r.chamadas), norm(c.chamadas), "envio"); const dt = diff(norm({ ...aprovar(r), chamadas: 0 }), norm({ ...c, chamadas: 0 }), "tela");
         det.push(`${nome}: envio ao servidor ${dn.length ? "DIFERENTE" : "idêntico"} · textos da tela ${dt.length ? "diferentes" : "idênticos"}`);
         d.push(...[...dn, ...dt].map((x) => `${nome}: ${x}`)); }
-      reg("P5", "Checkout simulado (16 cenários): o que é enviado ao servidor e os textos da tela não mudam", d, det); }
+      reg("P5", "Checkout simulado (16 cenários): envio ao servidor idêntico; tela igual, exceto as diferenças aprovadas (economia do Pix e nome nas mensagens)", d, det); }
     { const d = [], det = [];
       for (const nome of Object.keys(N.RETORNOS)) { const { r, c } = await par(N.retorno, nome);
         const x = diff(norm(r), norm(c), "retorno"); det.push(`${nome}: ${x.length ? "DIFERENTE" : "idêntico"}`); d.push(...x.map((y) => `${nome}: ${y}`)); }
@@ -72,7 +84,7 @@ const reg = (id, titulo, divergencias, detalhes = []) => { R.push({ id, titulo, 
     } else {
       const st = git(["status", "--porcelain", "--untracked-files=all"]).toString().split("\n").filter(Boolean).map((l) => l.slice(3));
       const html = fs.readFileSync(path.join(__dirname, "index.html"), "utf8");
-      const usa = ["../../assets/app.js", "../../assets/config.js", "../../dados/catalogo.js", "../../assets/qrcode.js", "../../assets/estilo.css"].filter((f) => !html.includes(f));
+      const usa = ["../../assets/app-premium.js", "../../assets/config.js", "../../dados/catalogo.js", "../../assets/qrcode.js", "../../assets/estilo.css"].filter((f) => !html.includes(f));
       reg("P7", "Isolamento: protótipo usa lógica, dados e imagens da loja sem cópia", usa.map((f) => "não referencia o original: " + f), [`alterações pendentes no repositório: ${st.length}`]);
     }
 
@@ -230,6 +242,28 @@ const reg = (id, titulo, divergencias, detalhes = []) => { R.push({ id, titulo, 
       reg("P13", "Páginas de produto: 156 páginas fiéis ao catálogo e integradas à sacola da loja", d, det);
     }
 
+    // P18: cliques REAIS (como um cliente) depois de abrir e fechar painéis — os testes por script não detectam painéis que bloqueiam cliques
+    { const d = [], det = [];
+      for (const [nome, viewport] of [["desktop", { width: 1440, height: 900 }], ["tablet", { width: 1024, height: 768 }], ["celular", { width: 390, height: 844 }]]) {
+        const ctx = await novoContexto(browser, { viewport }); const p = await ctx.newPage(); await p.emulateMedia({ reducedMotion: "reduce" });
+        await p.goto(uProto, { waitUntil: "load" }); await p.evaluate(() => localStorage.clear()); await p.reload({ waitUntil: "load" });
+        const real = async (sel, rotulo) => { try { await p.click(sel, { timeout: 2500 }); return true; } catch { d.push(`${nome}: clique real bloqueado em ${rotulo}`); return false; } };
+        await p.evaluate(() => document.getElementById("catalogo").scrollIntoView()); await p.waitForTimeout(200);
+        if (await real('#grid .pc[data-i="0"] .ph', "card 0")) { await p.waitForTimeout(600); await p.keyboard.press("Escape"); await p.waitForTimeout(700); }
+        const vis = await p.evaluate(() => ({ pv: getComputedStyle(document.getElementById("pv")).visibility, bag: getComputedStyle(document.getElementById("bag")).visibility })); if (vis.pv !== "hidden" || vis.bag !== "hidden") d.push(`${nome}: painéis fechados não estão ocultos ${JSON.stringify(vis)}`);
+        if (await real('#grid .pc[data-i="1"] .ph', "card 1 (depois de fechar o produto)")) { await p.waitForTimeout(600); await p.keyboard.press("Escape"); await p.waitForTimeout(700); }
+        await real('#grid .pc[data-i="2"] [data-add]', "Adicionar do card 2");
+        await real(".bagbtn", "botão da sacola"); await p.waitForTimeout(600);
+        const n = await p.evaluate(() => document.querySelector(".bagbtn .n").textContent); if (n !== "1") d.push(`${nome}: sacola com ${n} itens (esperado 1)`);
+        await real('[data-step="checkout"]', "Finalizar compra"); await p.waitForTimeout(300);
+        await real('[data-pay="card"]', "forma de pagamento");
+        await p.keyboard.press("Escape"); await p.waitForTimeout(700);
+        await real('#grid .pc[data-i="3"] .ph', "card 3 (depois de fechar a sacola)");
+        det.push(`${nome}: abrir produto, fechar, abrir outro, adicionar, sacola, checkout e pagamento com cliques reais — painéis fechados ocultos`);
+        await ctx.close();
+      }
+      reg("P18", "Cliques reais depois de abrir e fechar painéis (defeito do painel invisível que bloqueava a página no desktop)", d, det); }
+
     // P14: miniaturas — arquivos, dimensões, originais preservados e peso do primeiro carregamento no celular
     { const d = [], det = [];
       const dim = (arq) => { const b = fs.readFileSync(arq), t = b.slice(12, 16).toString();
@@ -289,6 +323,55 @@ const reg = (id, titulo, divergencias, detalhes = []) => { R.push({ id, titulo, 
         d.push(...ctx.registro.erros.map((x) => `${nome}: ${x}`)); await ctx.close();
       }
       reg("P15", "Sacola e checkout: indicador de etapas e foco preso no painel, com devolução ao fechar", d, det); }
+
+    // P16 (só a loja): fidelidade do gerador, ajustes da lógica, nome nas mensagens e miniaturas da sacola
+    if (LOJA) {
+      const { montarBase } = require("../../ferramentas/base"), { gerar, TROCAS } = require("../../ferramentas/ajustar-app"), { validar } = require("../../ferramentas/validar-catalogo");
+      const d = [], det = [];
+      if (montarBase({ nome: "CP Imports" }) !== git(["show", `${FASE1}:index.html`]).toString("utf8")) d.push("o gerador de cards não reproduz o index.html da Fase 1");
+      else det.push("gerador de cards reproduz o index.html da Fase 1 byte a byte (157 cards, contagens e textos)");
+      if (gerar() !== fs.readFileSync(path.join(RAIZ, "assets/app-premium.js"), "utf8")) d.push("assets/app-premium.js desatualizado em relação a assets/app.js + ajustes");
+      det.push(`assets/app-premium.js = assets/app.js (intacto, ver P7) + ${TROCAS.length} trocas declaradas: ${TROCAS.map((t) => t.id).join(", ")}`);
+      const v = validar(); d.push(...v.erros); det.push(`travas do catálogo: ${v.erros.length ? "recusado" : "aprovado"} (${v.total} produtos, ${v.base} na trava)`);
+      const antigos = []; const checar = (nome, txt) => { const m = txt.match(/da(?:%20| )CP(?:%20| )Imports|Fale com a CP Imports/g); if (m) antigos.push(`${nome}: ${m.length}`); };
+      checar("index.html", fs.readFileSync(path.join(RAIZ, "index.html"), "utf8")); checar("app-premium.js", fs.readFileSync(path.join(RAIZ, "assets/app-premium.js"), "utf8"));
+      let paginas = 0; for (const dir of fs.readdirSync(path.join(RAIZ, "produto"))) { checar(`produto/${dir}`, fs.readFileSync(path.join(RAIZ, "produto", dir, "index.html"), "utf8")); paginas++; }
+      if (antigos.length) d.push("nome antigo nas mensagens de atendimento: " + antigos.slice(0, 5).join(", "));
+      det.push(`mensagens de WhatsApp estáticas conferidas em index.html e ${paginas} páginas: nenhuma com "CP Imports" (o nome do produto "CP Imports Kit…" vem do catálogo e não foi alterado)`);
+      for (const [nome, viewport] of [["desktop", { width: 1440, height: 900 }], ["celular", { width: 390, height: 844 }]]) {
+        const ctx = await novoContexto(browser, { viewport }); const p = await ctx.newPage(); await p.emulateMedia({ reducedMotion: "reduce" });
+        await p.goto(uProto, { waitUntil: "load" }); await p.evaluate(() => localStorage.clear()); await p.reload({ waitUntil: "load" });
+        const links = await p.evaluate(() => [...document.querySelectorAll('a[href^="https://wa.me"]')].map((a) => decodeURIComponent(a.href)));
+        const ruins = links.filter((l) => /catálogo da CP Imports|da CP Imports e/.test(l)); if (ruins.length) d.push(`${nome}: ${ruins.length} links de WhatsApp da página com o nome antigo`);
+        await p.evaluate(() => document.querySelector('#grid .pc[data-i="0"] .ph').click()); await p.waitForTimeout(400);
+        const duvida = await p.evaluate(() => decodeURIComponent(document.querySelector("#pvBody .wa.ghost").href)); if (!/catálogo da CP Importados e tenho uma dúvida/.test(duvida)) d.push(`${nome}: mensagem de dúvida do painel: ${duvida.slice(0, 80)}`);
+        await p.evaluate(() => { document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" })); document.querySelector('#grid .pc[data-i="0"] [data-add]').click(); document.querySelector('#grid .pc[data-i="88"] [data-add]').click(); document.querySelector(".bagbtn").click(); });
+        await p.waitForTimeout(500);
+        const th = await p.evaluate(async () => { const r = []; for (const i of document.querySelectorAll("#bagBody .li .th img")) { r.push({ src: i.getAttribute("src"), ok: i.complete && i.naturalWidth > 0, w: i.naturalWidth }); } return r; });
+        if (th.length !== 2 || th.some((x) => !/miniaturas\/produtos-320\//.test(x.src) || !x.ok || x.w !== 320)) d.push(`${nome}: fotos da sacola: ${JSON.stringify(th)}`);
+        const rt = await p.evaluate(async () => { await new Promise((ok) => setTimeout(ok, 300)); return [...document.querySelectorAll("#routs .th img")].map((i) => ({ src: i.getAttribute("src"), ok: i.complete && i.naturalWidth > 0 })); });
+        if (!rt.length || rt.some((x) => !/miniaturas\/produtos-320\//.test(x.src))) d.push(`${nome}: fotos das rotinas não usam miniaturas`);
+        await p.evaluate(() => document.querySelector('[data-step="checkout"]').click()); await p.click('[data-pay="card"]'); await p.waitForTimeout(200);
+        const eco = await p.evaluate(() => document.querySelector("#bagBody .eco")?.textContent ?? null);
+        if (!/^economiza R\$ [\d.,]+$/.test(eco || "")) d.push(`${nome}: economia do Pix no cartão ausente (${eco})`);
+        await p.click('[data-pay="pix"]'); await p.waitForTimeout(200);
+        const eco2 = await p.evaluate(() => document.querySelector("#bagBody p.eco")?.textContent ?? null);
+        if (!/^Pagando no Pix você economiza de R\$ [\d.,]+ \(cartão à vista\) até R\$ [\d.,]+ \(cartão em \d+x\)\.$/.test(eco2 || "")) d.push(`${nome}: economia do Pix ausente (${eco2})`);
+        det.push(`${nome}: fotos da sacola e das rotinas = miniaturas de 320 px carregadas · mensagem do painel com "CP Importados" · cartão: "${eco}" · Pix: "${eco2}"`);
+        d.push(...ctx.registro.erros.map((x) => `${nome}: ${x}`)); await ctx.close();
+      }
+      reg("P16", "Ajustes da lógica: gerador fiel à Fase 1, app-premium rastreável, nome CP Importados, economia do Pix e miniaturas na sacola", d, det);
+
+      // P17: ensaio do processo de atualização do catálogo em cópia descartável
+      const e = require("child_process").spawnSync("node", [path.join(__dirname, "atualizacao.js")], { encoding: "utf8", maxBuffer: 64 << 20 });
+      let ens = null; try { ens = JSON.parse(e.stdout); } catch { /* saída inválida */ }
+      if (!ens) reg("P17", "Atualização do catálogo (ensaio em cópia)", ["o ensaio não produziu resultado: " + (e.stderr || "").slice(0, 200)]);
+      else reg("P17", "Atualização do catálogo (ensaio em cópia): reconstrução idêntica, preço e produto novo refletidos, nada além do esperado muda, 11 violações recusadas", ens.erros,
+        [`reconstrução sem alterações: ${ens.parteA.arquivosDiferentes.length} arquivos diferentes, ${ens.parteA.paginasDiferentes} de ${ens.parteA.paginas} páginas diferentes`,
+         `atualização simulada: cards alterados [${ens.parteB.cartoesAlterados}] de ${ens.parteB.cartoes} · produto novo → produto/${ens.parteB.produtoNovo}/ · ${ens.parteB.paginasAlteradas} páginas alteradas (preço e relacionados) · ${ens.parteB.miniaturasNovas} miniatura nova · endereços existentes estáveis: ${ens.parteB.enderecosEstaveis} · fotos originais alteradas: ${ens.parteB.fotosOriginaisAlteradas}`,
+         `travas: ${ens.parteC.filter((c) => c.recusada).length} de ${ens.parteC.length} violações recusadas (${ens.parteC.map((c) => c.violacao).join("; ")})`,
+         `repositório real intacto após o ensaio: ${ens.repositorioIntacto}`]);
+    }
   } finally { await browser.close(); sRef.fechar(); sLoja.fechar(); }
 
   const ic = { PASSOU: "✅ PASSOU", FALHOU: "❌ FALHOU" };

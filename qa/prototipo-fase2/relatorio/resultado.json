@@ -38,7 +38,7 @@
  },
  {
   "id": "P5",
-  "titulo": "Checkout simulado (16 cenários): o que é enviado ao servidor e os textos da tela não mudam",
+  "titulo": "Checkout simulado (16 cenários): envio ao servidor idêntico; tela igual, exceto as diferenças aprovadas (economia do Pix e nome nas mensagens)",
   "status": "PASSOU",
   "detalhes": [
    "C01 Pix · pedido criado com link: envio ao servidor idêntico · textos da tela idênticos",
@@ -78,7 +78,7 @@
   "titulo": "Isolamento: protótipo usa lógica, dados e imagens da loja sem cópia",
   "status": "PASSOU",
   "detalhes": [
-   "alterações pendentes no repositório: 546"
+   "alterações pendentes no repositório: 221"
   ],
   "divergencias": []
  },
@@ -110,11 +110,11 @@
   "titulo": "Imagens carregam, zero erros de JavaScript e zero requisições externas",
   "status": "PASSOU",
   "detalhes": [
-   "desktop: 168 imagens distintas, 0 falhas",
-   "notebook: 168 imagens distintas, 0 falhas",
-   "tablet: 168 imagens distintas, 0 falhas",
-   "celular: 168 imagens distintas, 0 falhas",
-   "celular pequeno: 168 imagens distintas, 0 falhas"
+   "desktop: 175 imagens distintas, 0 falhas",
+   "notebook: 175 imagens distintas, 0 falhas",
+   "tablet: 175 imagens distintas, 0 falhas",
+   "celular: 175 imagens distintas, 0 falhas",
+   "celular pequeno: 175 imagens distintas, 0 falhas"
   ],
   "divergencias": []
  },
@@ -123,7 +123,7 @@
   "titulo": "Contraste do texto dentro do mínimo (4,5:1; 3:1 para texto grande) em início, banners, produto, sacola e checkout",
   "status": "PASSOU",
   "detalhes": [
-   "14039 textos medidos em desktop e celular"
+   "14041 textos medidos em desktop e celular"
   ],
   "divergencias": []
  },
@@ -138,14 +138,25 @@
   "divergencias": []
  },
  {
+  "id": "P18",
+  "titulo": "Cliques reais depois de abrir e fechar painéis (defeito do painel invisível que bloqueava a página no desktop)",
+  "status": "PASSOU",
+  "detalhes": [
+   "desktop: abrir produto, fechar, abrir outro, adicionar, sacola, checkout e pagamento com cliques reais — painéis fechados ocultos",
+   "tablet: abrir produto, fechar, abrir outro, adicionar, sacola, checkout e pagamento com cliques reais — painéis fechados ocultos",
+   "celular: abrir produto, fechar, abrir outro, adicionar, sacola, checkout e pagamento com cliques reais — painéis fechados ocultos"
+  ],
+  "divergencias": []
+ },
+ {
   "id": "P14",
   "titulo": "Miniaturas: 316 arquivos nas dimensões certas, originais preservados e no máximo 1,3 MB de imagens no primeiro acesso no celular",
   "status": "PASSOU",
   "detalhes": [
    "157 fotos × 2 miniaturas e 2 tamanhos do logotipo conferidos · miniatura de 320 px menor que o original em 157 de 157",
    "soma das miniaturas de 320 px: 1884 KB contra 4259 KB dos originais",
-   "celular 1x: 699 KB de imagens em 51 arquivos (38 miniaturas) — antes das miniaturas: 2474 KB",
-   "celular 2x: 938 KB de imagens em 51 arquivos (38 miniaturas) — antes das miniaturas: 2474 KB"
+   "celular 1x: 531 KB de imagens em 44 arquivos (38 miniaturas) — antes das miniaturas: 2474 KB",
+   "celular 2x: 771 KB de imagens em 44 arquivos (38 miniaturas) — antes das miniaturas: 2474 KB"
   ],
   "divergencias": []
  },

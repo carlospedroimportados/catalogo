@@ -111,7 +111,8 @@ async function sacola(browser, url, sacolaExterna) {
   const estado = () => p.evaluate(() => ({ badge: document.querySelector(".bagbtn .n").textContent, total: document.getElementById("barTotal").textContent,
     itens: document.getElementById("barN").textContent, barra: document.getElementById("bar").classList.contains("on"),
     storage: Object.fromEntries(Object.keys(localStorage).filter((k) => k.startsWith("cp3_")).sort().map((k) => [k, localStorage.getItem(k)])) }));
-  const textoSacola = () => p.evaluate(() => ({ titulo: document.getElementById("bagT").textContent, corpo: document.getElementById("bagBody").innerText }));
+  // Espera o painel terminar de abrir: texto de elemento oculto não aparece em innerText (e painel fechado agora é oculto).
+  const textoSacola = async () => { await p.waitForSelector("#bag.on", { timeout: 5000 }); await p.waitForTimeout(350); return p.evaluate(() => ({ titulo: document.getElementById("bagT").textContent, corpo: document.getElementById("bagBody").innerText })); };
   const passos = {};
   passos.inicial = await estado();
   await clicar('#grid .pc[data-i="0"] [data-add]'); passos.add0 = await estado();

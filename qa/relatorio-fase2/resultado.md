@@ -1,6 +1,6 @@
 # Bateria da Fase 2 — loja redesenhada
 
-- 2026-11-12T09:08:42.786Z · referência: loja publicada `89ef168` · candidato: `index.html da raiz`
+- 2026-11-12T10:57:24.268Z · referência: loja publicada `89ef168` · candidato: `index.html da raiz`
 - Servidor de pedidos e pagamento **simulados**; rede externa bloqueada.
 
 | Teste | Status | Descrição |
@@ -9,7 +9,7 @@
 | P2 | ✅ PASSOU | Categorias, marcas, ordenações, busca e vitrines devolvem os mesmos produtos |
 | P3 | ✅ PASSOU | Parcelamento: tabela de cada produto e simulador idênticos |
 | P4 | ✅ PASSOU | Sacola: mesmos totais, persistência, limite e compatibilidade com sacolas já salvas |
-| P5 | ✅ PASSOU | Checkout simulado (16 cenários): o que é enviado ao servidor e os textos da tela não mudam |
+| P5 | ✅ PASSOU | Checkout simulado (16 cenários): envio ao servidor idêntico; tela igual, exceto as diferenças aprovadas (economia do Pix e nome nas mensagens) |
 | P6 | ✅ PASSOU | Retorno do pagamento: confirmação, mensagens e limpeza do endereço idênticos |
 | P7 | ✅ PASSOU | Preservação: catálogo, configuração comercial, lógica, imagens, fontes e painel idênticos à Fase 1 |
 | P8 | ✅ PASSOU | Sem rolagem lateral e painéis dentro da tela em 1440, 1024, 768, 390 e 320 px |
@@ -18,8 +18,11 @@
 | P11 | ✅ PASSOU | Contraste do texto dentro do mínimo (4,5:1; 3:1 para texto grande) em início, banners, produto, sacola e checkout |
 | P12 | ✅ PASSOU | Navegação do catálogo: limpar filtros, apagar busca, voltar ao topo e atalho de teclado |
 | P13 | ✅ PASSOU | Páginas de produto: 156 páginas fiéis ao catálogo e integradas à sacola da loja |
+| P18 | ✅ PASSOU | Cliques reais depois de abrir e fechar painéis (defeito do painel invisível que bloqueava a página no desktop) |
 | P14 | ✅ PASSOU | Miniaturas: 316 arquivos nas dimensões certas, originais preservados e no máximo 1,3 MB de imagens no primeiro acesso no celular |
 | P15 | ✅ PASSOU | Sacola e checkout: indicador de etapas e foco preso no painel, com devolução ao fechar |
+| P16 | ✅ PASSOU | Ajustes da lógica: gerador fiel à Fase 1, app-premium rastreável, nome CP Importados, economia do Pix e miniaturas na sacola |
+| P17 | ✅ PASSOU | Atualização do catálogo (ensaio em cópia): reconstrução idêntica, preço e produto novo refletidos, nada além do esperado muda, 11 violações recusadas |
 
 ## P1 — Cards: 157 produtos com os mesmos dados, selos, parcelas e a mesma imagem (bytes)
 
@@ -46,7 +49,7 @@
 
 - total após rotina: R$ 1.846,00 · sacola antiga aberta: R$ 1.260,00
 
-## P5 — Checkout simulado (16 cenários): o que é enviado ao servidor e os textos da tela não mudam
+## P5 — Checkout simulado (16 cenários): envio ao servidor idêntico; tela igual, exceto as diferenças aprovadas (economia do Pix e nome nas mensagens)
 
 **✅ PASSOU**
 
@@ -105,17 +108,17 @@
 
 **✅ PASSOU**
 
-- desktop: 168 imagens distintas, 0 falhas
-- notebook: 168 imagens distintas, 0 falhas
-- tablet: 168 imagens distintas, 0 falhas
-- celular: 168 imagens distintas, 0 falhas
-- celular pequeno: 168 imagens distintas, 0 falhas
+- desktop: 175 imagens distintas, 0 falhas
+- notebook: 175 imagens distintas, 0 falhas
+- tablet: 175 imagens distintas, 0 falhas
+- celular: 175 imagens distintas, 0 falhas
+- celular pequeno: 175 imagens distintas, 0 falhas
 
 ## P11 — Contraste do texto dentro do mínimo (4,5:1; 3:1 para texto grande) em início, banners, produto, sacola e checkout
 
 **✅ PASSOU**
 
-- 14025 textos medidos em desktop e celular
+- 14027 textos medidos em desktop e celular
 
 ## P12 — Navegação do catálogo: limpar filtros, apagar busca, voltar ao topo e atalho de teclado
 
@@ -132,14 +135,22 @@
 - desktop: página → +2 na sacola → "Comprar agora" → sacola da loja aberta com R$ 690,00; chegada por categoria e busca: 8 de 156 produtos
 - celular: página → +2 na sacola → "Comprar agora" → sacola da loja aberta com R$ 690,00; chegada por categoria e busca: 8 de 156 produtos
 
+## P18 — Cliques reais depois de abrir e fechar painéis (defeito do painel invisível que bloqueava a página no desktop)
+
+**✅ PASSOU**
+
+- desktop: abrir produto, fechar, abrir outro, adicionar, sacola, checkout e pagamento com cliques reais — painéis fechados ocultos
+- tablet: abrir produto, fechar, abrir outro, adicionar, sacola, checkout e pagamento com cliques reais — painéis fechados ocultos
+- celular: abrir produto, fechar, abrir outro, adicionar, sacola, checkout e pagamento com cliques reais — painéis fechados ocultos
+
 ## P14 — Miniaturas: 316 arquivos nas dimensões certas, originais preservados e no máximo 1,3 MB de imagens no primeiro acesso no celular
 
 **✅ PASSOU**
 
 - 157 fotos × 2 miniaturas e 2 tamanhos do logotipo conferidos · miniatura de 320 px menor que o original em 157 de 157
 - soma das miniaturas de 320 px: 1884 KB contra 4259 KB dos originais
-- celular 1x: 656 KB de imagens em 45 arquivos (32 miniaturas) — antes das miniaturas: 2474 KB
-- celular 2x: 961 KB de imagens em 53 arquivos (40 miniaturas) — antes das miniaturas: 2474 KB
+- celular 1x: 547 KB de imagens em 46 arquivos (40 miniaturas) — antes das miniaturas: 2474 KB
+- celular 2x: 794 KB de imagens em 46 arquivos (40 miniaturas) — antes das miniaturas: 2474 KB
 
 ## P15 — Sacola e checkout: indicador de etapas e foco preso no painel, com devolução ao fechar
 
@@ -147,3 +158,23 @@
 
 - desktop: etapas 1 e 2 corretas · 80 Tabs na sacola e 40 no produto sem sair do painel · foco devolvido ao fechar
 - celular: etapas 1 e 2 corretas · 80 Tabs na sacola e 40 no produto sem sair do painel · foco devolvido ao fechar
+
+## P16 — Ajustes da lógica: gerador fiel à Fase 1, app-premium rastreável, nome CP Importados, economia do Pix e miniaturas na sacola
+
+**✅ PASSOU**
+
+- gerador de cards reproduz o index.html da Fase 1 byte a byte (157 cards, contagens e textos)
+- assets/app-premium.js = assets/app.js (intacto, ver P7) + 7 trocas declaradas: whatsapp-pedido, whatsapp-duvida, economia-cartao, economia-pix, miniatura-definicao, miniatura-sacola, miniatura-rotina
+- travas do catálogo: aprovado (157 produtos, 157 na trava)
+- mensagens de WhatsApp estáticas conferidas em index.html e 156 páginas: nenhuma com "CP Imports" (o nome do produto "CP Imports Kit…" vem do catálogo e não foi alterado)
+- desktop: fotos da sacola e das rotinas = miniaturas de 320 px carregadas · mensagem do painel com "CP Importados" · cartão: "economiza R$ 123,60" · Pix: "Pagando no Pix você economiza de R$ 27,10 (cartão à vista) até R$ 123,60 (cartão em 12x)."
+- celular: fotos da sacola e das rotinas = miniaturas de 320 px carregadas · mensagem do painel com "CP Importados" · cartão: "economiza R$ 123,60" · Pix: "Pagando no Pix você economiza de R$ 27,10 (cartão à vista) até R$ 123,60 (cartão em 12x)."
+
+## P17 — Atualização do catálogo (ensaio em cópia): reconstrução idêntica, preço e produto novo refletidos, nada além do esperado muda, 11 violações recusadas
+
+**✅ PASSOU**
+
+- reconstrução sem alterações: 0 arquivos diferentes, 0 de 156 páginas diferentes
+- atualização simulada: cards alterados [3] de 158 · produto novo → produto/armaf-produto-de-simulacao/ · 13 páginas alteradas (preço e relacionados) · 1 miniatura nova · endereços existentes estáveis: true · fotos originais alteradas: 0
+- travas: 11 de 11 violações recusadas (reordenar dois produtos; trocar o produto de uma posição; remover o último produto; produto novo sem foto; foto fora do padrão (300×375); foto que não é WebP; preço zerado; preço "de" menor que o preço; marca inexistente; posição fora de sequência; mais vendidos apontando para produto inexistente)
+- repositório real intacto após o ensaio: true
