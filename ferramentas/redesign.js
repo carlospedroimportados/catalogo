@@ -12,7 +12,8 @@ const path = require("path");
 const crypto = require("crypto");
 
 const RAIZ = path.resolve(__dirname, "..");
-const SITE = "https://carlospedroimportados.github.io/catalogo/";
+// Endereço público da loja (canônico, compartilhamento, sitemap, página 404). Para outro endereço: CP_SITE=https://exemplo.com/ node ferramentas/construir.js
+const SITE = process.env.CP_SITE || "https://carlospedroimportados.github.io/catalogo/";
 const versao = (rel) => crypto.createHash("sha256").update(fs.readFileSync(path.join(RAIZ, rel))).digest("hex").slice(0, 10);
 
 function transformar(fase1, { prefixo = "", prototipo = false } = {}) {
@@ -34,7 +35,7 @@ function transformar(fase1, { prefixo = "", prototipo = false } = {}) {
   const css = fs.readFileSync(path.join(RAIZ, "assets", "estilo.css"), "utf8");
   const fonte = (nome) => { const u = (css.match(new RegExp(`url\\(\\.\\./(fonts/${nome}\\.woff2[^)]*)\\)`)) || [])[1]; if (!u) throw new Error("fonte não encontrada: " + nome); return `<link rel="preload" as="font" type="font/woff2" crossorigin href="${P}${u}">`; };
   trocar(/<title>[^<]*<\/title>/, prototipo ? '<title>CP Importados · Protótipo Fase 2</title><meta name="robots" content="noindex">' : "<title>CP Importados · Perfumes importados, skincare coreano e cabelos</title>", "title");
-  trocar("</head>", `<link rel="stylesheet" href="${ativo("assets/premium.css")}">${fonte("cormorant-garamond-500-normal")}${fonte("montserrat-500-normal")}<link rel="icon" href="${P}admin/icon-192.png"><link rel="apple-touch-icon" href="${P}admin/icon-180.png">${prototipo ? "" : seo()}</head>`, "head");
+  trocar("</head>", `<link rel="stylesheet" href="${ativo("assets/premium.css")}">${["cormorant-garamond-500-normal", "cormorant-garamond-500-italic", "montserrat-500-normal", "montserrat-600-normal", "montserrat-700-normal"].map(fonte).join("")}<link rel="icon" href="${P}admin/icon-192.png"><link rel="apple-touch-icon" href="${P}admin/icon-180.png">${prototipo ? "" : seo()}</head>`, "head");
 
   trocar('content="CP Imports — perfumes', 'content="CP Importados — perfumes', "descrição");
 
